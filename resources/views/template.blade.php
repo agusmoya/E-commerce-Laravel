@@ -1,0 +1,223 @@
+<?php
+session_start();
+$user=null;
+
+if(isset($_SESSION["email"])) {
+  $user = $_SESSION["email"];
+  // var_dump($_SESSION);
+}
+if (isset($_COOKIE["userName"])) {
+  $user = $_COOKIE["userName"];
+}
+?>
+
+<!doctype html>
+<html lang="en">
+<head>
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+  {{-- <link rel="stylesheet" href="/css/app.css"> --}}
+  @yield('styleRegistration')
+  <link rel="stylesheet" href="/css/styleHome.css">
+  @yield('styleCatalog')
+  @yield('styleFaq')
+  @yield('styleLogin')
+  @yield('styleUserProfile')
+
+
+  <link href="https://fonts.googleapis.com/css?family=Muli:400,700,800&display=swap" rel="stylesheet">
+  <title> @yield('title') </title>
+</head>
+<body>
+
+  <!-- NOTE: Inicia header -->
+  <header>
+
+    <!-- NOTE: Inicia header -->
+    <script src="https://kit.fontawesome.com/46027ca747.js" crossorigin="anonymous"></script>
+    <!-- NOTE: Nav sacado de bootstrap -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-darkblack">
+      <a class="navbar-brand" href="/home"> <img src="\imagenes\HassenAccesorios\logo redondo.jpg" class="logo" alt="logo Majestic"> <span class="ml-3 pt-2"></span> </a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav ml-auto">
+          <li class="nav-item active">
+            <a class="nav-link" href="/home"> Home <span class="sr-only">(current)</span></a>
+          </li>
+          <li class="nav-item active">
+            <a class="nav-link" href="/catalog"> Catalog <span class="sr-only">(current)</span></a>
+          </li>
+          <?php if (!isset($_SESSION["email"]) && !isset($_COOKIE["userName"])) : ?>
+            <li class="nav-item active">
+              <a class="nav-link" href="/registration">Registration</a>
+            </li>
+          <?php endif;  ?>
+          <li class="nav-item active">
+            <a class="nav-link" href="/myPurchase"> <i class="fas fa-cart-plus"></i> My purchase <span class="sr-only">(current)</span></a>
+          </li>
+          <?php if (!isset($_SESSION["email"]) && !isset($_COOKIE["userName"])) : ?>
+            <li class="nav-item active">
+              <a class="nav-link" href="/login"> Login <span class="sr-only">(current)</span></a>
+            </li>
+          <?php endif;  ?>
+          <li class="nav-item active">
+            <a class="nav-link" href="/faq">F.A.Q.</a>
+          </li>
+
+          <?php if (isset($_SESSION["email"]) || isset($_COOKIE["userName"])) :?>
+            <li class="nav-item dropdown">
+              <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <?= $user ?>
+              </button>
+              <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink" style="background-color:grey; width: 240px;">
+                <a class="dropdown-item" href="perfilUsuario.php" style="color: white;font-weight: bolder;">Profile</a>
+                <a class="dropdown-item" href="logout.php" style="color: white;font-weight: bolder;">Sign Out</a>
+              </div>
+            </li>
+          <?php endif; ?>
+
+        </ul>
+      </div>
+    </nav>
+    <!-- NOTE: Fin nav -->
+  </header>
+  <!-- NOTE: fin header -->
+
+  <?php // NOTE: YIELDS  ?>
+  @yield('userProfile')
+  @yield('home')
+  @yield('catalog')
+  @yield('faq')
+  @yield('login')
+  @yield('registration')
+  @yield('loadedProduct')
+  @yield('productForm')
+  @yield('myPurchase')
+
+
+  <!-- NOTE: inicia footer -->
+  <footer id="footer" class="mt-5 p-4">
+
+    <div class="container">
+      <div class="row text-center text-xs-center text-sm-left text-md-left">
+        <div id="aboutUs" class="col-12 col-sm-4 col-md-4">
+          <h5>About Us</h5>
+          <ul class="list-unstyled quick-links">
+            <li><a href="homee.php"></i>Home</a></li>
+            <li><a href="catalog.php"></i>Catalog</a></li>
+            <li><a href="faq.php"></i>FAQ</a></li>
+          </ul>
+        </div>
+        <div id="socNetworks" class="col-12 col-sm-4 col-md-4">
+          <h5>Social Networks</h5>
+          <ul class="list-unstyled quick-links">
+            <li><a href="https://www.facebook.com/" target="_blank">Facebook</a></li>
+            <li><a href="https://www.instagram.com/" target="_blank"></i>Instagram</a></li>
+            <li><a href="https://www.twitter.com/" target="_blank">Twitter</a></li>
+          </ul>
+        </div>
+        <div id="contactUs" class="col-12 col-sm-4 col-md-4">
+          <h5>Contact us</h5>
+          <ul class="list-unstyled quick-links">
+            <li><a class="nav-link active" href="#" data-toggle="modal" data-target="#formularioModal">Send us your questions</a>
+              <!--- modal formulario --->
+              <div class="modal fade" id="formularioModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h5 class="modal-title" id="exampleModalLabel">CONSULT</h5>
+                      <button type="button" class="close" data-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                      <form id="fomulario">
+                        <div class="row">
+                          <div class="row">
+                            <div class="col-10"><input class="form-control" id="nombre" type="text" placeholder="Name" required="Campo Obligatorio"></div>
+                            <div class="col-10"><input class="form-control" id="apellido" type="text" placeholder="Lastname" required="required"></div>
+                            <div class="col-10"><input class="form-control" id="mail" type="email" placeholder="E-mail" required></div>
+                            <div class="col-10"><input class="form-control" id="tel" type="text" placeholder="Phone"></div>
+                            <div class="col-10"><textarea class="form-control" id="txt" rows="20" type="text" placeholder="Consult" required></textarea></div>
+                          </div>
+                        </div>
+                      </form>
+                    </div>
+                    <div class="modal-footer">
+                      <button type="submit" class="btn btn-secondary">Send Message</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </li>
+            <!--- fin modal formulario --->
+            <!--- modal ubicacion -->
+            <li>
+              <a id="linkLocation" class="nav-link" href="#" data-toggle="modal" data-target="#ubicacion">Location</a>
+              <div class="modal fade" id="ubicacion" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h5 class="modal-title" id="exampleModalLabel">LOCATION</h5>
+                    </div>
+                    <div class="modal-body">
+                      <div id="ubicacion"><iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3348.947019831442!2d-68.84629968482672!3d-32.925997980927264!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMzLCsDU1JzMzLjYiUyA2OMKwNTAnMzguOCJX!5e0!3m2!1ses-419!2sar!4v1560388576285!5m2!1ses-419!2sar" width="100%" height="150" frameborder="0" style="border:0" allowfullscreen></iframe></div>
+                    </div>
+                    <div class="modal-footer">
+                      <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </li>
+            <!-- fin modal ubicacion --->
+            <li>
+              <a class="nav-link" href="#" data-toggle="modal" data-target="#info">Info</a>
+              <!-- modal info --->
+              <div class="modal fade" id="info" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h5 class="modal-title" id="exampleModalLabel">INFO</h5>
+                    </div>
+                    <div class="modal-body">
+                      <p id="datos">Opening hours: Monday - Friday from 8 to 18 h. Saturday from 8 to 14 h.</p>
+                      <p id="datos">Phones: 0261-4525878 / 261-5789633</p>
+                      <p id="datos">E-mail: consultas@tienda-online.com</p>
+                    </div>
+                    <div class="modal-footer">
+                      <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <!-- finmodal info --->
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-12 col-sm-12 col-md-12 mt-2 mt-sm-2 text-center text-white">
+          <p><a href="https://www.digitalhouse.com/">Digital House - Web Full Stack</a> Mendoza, Argentina.</p>
+          <p class="h6">&copy All right Reversed.<a class="text-blue ml-2" href="#" target="_blank">Luis Romano - Agustín Moya</a></p>
+        </div>
+
+      </div>
+    </div>
+
+  </footer>
+  <!-- NOTE: fin footer -->
+
+  <!-- Optional JavaScript -->
+  <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+  <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+</body>
+</html>

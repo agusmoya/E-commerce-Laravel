@@ -1,0 +1,15 @@
+div.container {
+  color: white;
+}
+
+div.container h1{
+  font-weight: 800;
+}
+
+div.container .respuestas h3{
+  font-weight: 700;
+}
+
+div.container .respuestas p{
+  font-weight: 400;
+}

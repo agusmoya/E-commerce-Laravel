@@ -16,22 +16,13 @@ class TrademarkController extends Controller
     $arrayTrademarks = Trademark::all();
     $arrayCategories = Category::all();
     $arrayProducts = Product::all();
-    // if (isset($form['trademark_id'])) {
-    //   $trademark = Trademark::find($form['trademark_id']);
-    //   $relatedCategories = $trademark->categories;
-    //   return view('productForm', compact('arrayTrademarks', 'arrayCategories', 'arrayProducts', 'relatedCategories'));
-    // } else {
-    //   $relatedCategories = [];
-    //   return view('productForm', compact('arrayTrademarks', 'arrayCategories', 'arrayProducts', 'relatedCategories'));
-    // }
 
-    // dd($arrayTrademarksAndCategories);
-    foreach ($arrayTrademarks as $trademark) {
-      $relatedTrademarkCategories[] = array('related_trademark_name'=>$trademark->name, 'categories_name'=>$trademark->categories);
-    }
+    // foreach ($arrayTrademarks as $trademark) {
+    //   $relatedTrademarkCategories[] = array('related_trademark_name'=>$trademark->name, 'categories_name'=>$trademark->categories);
+    // }
     // dd($relatedTrademarkCategories);
 
-    return view('productForm', compact('arrayTrademarks', 'arrayCategories', 'arrayProducts', 'relatedTrademarkCategories'));
+    return view('productForm', compact('arrayTrademarks', 'arrayCategories', 'arrayProducts'));
 
   }
 

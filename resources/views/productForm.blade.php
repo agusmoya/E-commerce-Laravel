@@ -216,7 +216,7 @@
       <div class="form-group">
         <h4 class="mt-3">Eliminar producto:</h4>
         <p>Seleccione un producto de la lista a continuación, y haga click en el botón "Eliminar Producto".</p>
-        <select class="form-control" id="exampleFormControlSelect1" name="id_producto" >
+        <select class="form-control" id="exampleFormControlSelect1" name="product_id" >
           <option value="">Productos...</option>
           @forelse ($arrayProducts as $product)
             <option value="{{$product->id}}"> {{ $product->name }} </option>

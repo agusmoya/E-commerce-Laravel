@@ -17,13 +17,7 @@ class TrademarkController extends Controller
     $arrayCategories = Category::all();
     $arrayProducts = Product::all();
 
-    // foreach ($arrayTrademarks as $trademark) {
-    //   $relatedTrademarkCategories[] = array('related_trademark_name'=>$trademark->name, 'categories_name'=>$trademark->categories);
-    // }
-    // dd($relatedTrademarkCategories);
-
     return view('productForm', compact('arrayTrademarks', 'arrayCategories', 'arrayProducts'));
-
   }
 
   public function insertTrademark(Request $form){

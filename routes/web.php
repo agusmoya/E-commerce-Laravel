@@ -15,6 +15,31 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+Route::get('/home', function () {
+    return view('home');
+});
+
+Route::get('/catalog', function () {
+    return view('catalog');
+});
+
+Route::get('/registration', function () {
+    return view('registration');
+});
+
+Route::get('/myPurchase', function () {
+    return view('myPurchase');
+});
+
+Route::get('/login', function () {
+    return view('login');
+});
+
+Route::get('/faq', function () {
+    return view('faq');
+});
+
+// ****************FORMULARIO DE GESTION DE PRODUCTOS****************
 //MOSTRAR MARCAS, CATEGORIAS y PRODUCTOS --- //TAMBIEN MUESTRO LAS CATEGORIAS ASOCIADAS A UNA MARCA
 Route::get('/productForm', 'TrademarkController@getTrademarksAndCategoriesAndProducts');
 //CARGAR MARCA
@@ -39,3 +64,4 @@ Route::delete('/productForm/deleteCategoryAndTrademark', 'CategoryTrademarkContr
 Route::post('/productForm/registerProduct', 'ProductController@insertProduct');
 // BORRAR PRODUCTO
 Route::delete('/productForm/deleteProduct', 'ProductController@deleteProduct');
+// ****************FIN FORMULARIO DE GESTION DE PRODUCTOS****************

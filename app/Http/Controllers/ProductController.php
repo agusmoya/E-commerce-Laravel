@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 
 use App\Product;
 use App\Category;
-
+use App\Trademark;
 
 class ProductController extends Controller
 {
@@ -34,6 +34,8 @@ class ProductController extends Controller
     //Del formulario me llega una cadena separada por coma delid de trademark y de category
     $result = explode(',', $form["trademarkId_categoryId"]);
     $newProduct->trademark_id = $result[0];
+    $nameTrademark = Trademark::find($newProduct->trademark_id)->name;
+    $nameCategory = Category::find($newProduct->category_id)->name;
     $newProduct->category_id = $result[1];
     $newProduct->name = $form["name_product"];
     $newProduct->price = $form["price"];
@@ -42,9 +44,16 @@ class ProductController extends Controller
     $nombreArchivo = basename($ruta);
     $newProduct->photo = $nombreArchivo;
     $newProduct->save();
-
-    return redirect('/productForm');
-
+    $productDetail = array("objProduct"=>$newProduct, "nameTrademark"=>$nameTrademark, "nameCategory"=>$nameCategory);
+    return view('loadedProductPreview', compact('productDetail'));
   }
+
+  public function deleteProduct(Request $form){
+    $product = Product::find($form['product_id']);
+    $product -> delete();
+    return redirect('/productForm');
+  }
+
+
 
 }

@@ -171,61 +171,37 @@
       @csrf
       <h2 class="mt-4"> <b>Producto:</b> </h2>
       <h5> Categorías disponibles por Marca: </h5>
-<div class="row">
-  <div class="col">
-    <div class="form-check">
-      <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1" value="option1" checked>
-      <label class="form-check-label" for="exampleRadios1">
-        Default radio
-      </label>
-    </div>
-    <div class="form-check">
-      <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios2" value="option2">
-      <label class="form-check-label" for="exampleRadios2">
-        Second default radio
-      </label>
-    </div>
-  </div>
-  <div class="col">
-    <div class="form-check">
-      <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios3" value="option1">
-      <label class="form-check-label" for="exampleRadios3">
-        Default radio
-      </label>
-    </div>
-    <div class="form-check">
-      <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios4" value="option2">
-      <label class="form-check-label" for="exampleRadios4">
-        Second default radio
-      </label>
-    </div>
-  </div>
-</div>
-
+      <div class="row">
+        @forelse ($arrayTrademarks as $trademark)
+          <div class="col-6">
+            <label class="my-1 mx-2" for="inlineFormCustomSelectPref"><strong><h4><i>{{$trademark->name . ":"}}</i></h4></strong></label>
+            @forelse ($trademark->categories as $category)
+              <div class="form-check">
+                <input class="form-check-input" type="radio" name="trademarkId_categoryId" id="{{$trademark->name . $category->name}}" value="{{$trademark->id . ',' .$category->id}}">
+                <label class="form-check-label" for="{{$trademark->name . $category->name}}">
+                  {{$category->name}}
+                </label>
+              </div>
+            @empty
+              {{"No hay categorías relacinadas a la marca $trademark->name!"}}
+            @endforelse
+          </div>
+        @empty
+          {{"No hay marcas relacionadas a categorias en el sistema!"}}
+        @endforelse
+      </div>
 
       <div class="form-group">
-        <label for="exampleFormControlInput1"><i> Ingrese el nombre: </i></label>
+        <label for="exampleFormControlInput1" class="mt-3"><i> Ingrese el nombre: </i></label>
         <input name="name_product" type="text" class="form-control" id="exampleFormControlInput1" placeholder="Nombre del producto..."  value="{{old('name_product')}}">
-        <label for="exampleFormControlInput1" class="mt-2"><i> Ingrese el precio: </i></label>
+        <label for="exampleFormControlInput1" class="mt-3"><i> Ingrese el precio: </i></label>
         <input name="price" type="text" class="form-control" id="exampleFormControlInput1" placeholder="Precio del producto..."  value="{{old('price')}}">
       </div>
+      <!-- CARGAR IMAGEN -->
       <div class="form-group">
-        <label for="exampleFormControlInput1"><i> Elija una imagen para el producto: </i></label>
-        <!-- CARGAR IMAGEN -->
-        <div class="input-group">
-          <div class="custom-file">
-            <input type="file" name="photo" class="custom-file-input" id="inputGroupFile04" aria-describedby="inputGroupFileAddon04">
-            <label class="custom-file-label" for="inputGroupFile04">Choose file</label>
-          </div>
-        </div>
-        <span style="color: red;"class="help-block" id="error"><i><b></b></i></span>
+        <label for="exampleFormControlFile1"><i> Elija una imagen para el producto: </i></label>
+        <input name="photo" type="file" class="form-control-file" id="exampleFormControlFile1">
       </div>
-      <form>
-        <div class="form-group">
-          <label for="exampleFormControlFile1">Example file input</label>
-          <input type="file" class="form-control-file" id="exampleFormControlFile1">
-        </div>
-      </form>
       <!-- FIN CARGAR IMAGEN -->
       <div class="form-group text-center">
         <button type="submit" name="register_producto" class="btn btn-dark btn-lg mt-4 mb-5">Crear Producto</button>

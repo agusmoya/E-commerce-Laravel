@@ -11,19 +11,12 @@ use App\Category;
 
 class ProductController extends Controller
 {
-  public function getCategoriesOfTrademark(Request $form){
-
-    $categoriesOfTrademark = Category::where();
-
-  }
-
   public function insertProduct(Request $form){
     $rules = [
-      "category_id" => "required",
-      "trademark_id" => "required|unique:products,photo",
+      "trademarkId_categoryId" => "required",
       "name_product" => "required|alpha|min:3|max:30|unique:categories,name",
-      "price" => "required|numeric|unique:products,photo",
-      "photo" => "required|unique:products,photo"
+      "price" => "required|numeric",
+      "photo" => "required|unique:products,photo|mimes:jpg,jpeg,png"
     ];
 
     $messages = [
@@ -32,19 +25,22 @@ class ProductController extends Controller
       "unique" => "El campo :attribute ya ha sido ingresado",
       "min" => "El campo :attribute no puede tener menos de :min caracteres",
       "max" => "El campo :attribute no puede tener mas de :max caracteres",
-      "numeric" => "El campo :attribute debe ser un número"
+      "numeric" => "El campo :attribute debe ser un número",
+      "mimes" => "El campo :attribute debe ser de tipo .jpg, .jpeg o .png"
     ];
     $this->validate($form, $rules, $messages);
 
     $newProduct = new Product();
-    $newProduct->category_id = $form["category_id"];
-    $newProduct->trademark_id = $form["trademark_id"];
+    //Del formulario me llega una cadena separada por coma delid de trademark y de category
+    $result = explode(',', $form["trademarkId_categoryId"]);
+    $newProduct->trademark_id = $result[0];
+    $newProduct->category_id = $result[1];
     $newProduct->name = $form["name_product"];
     $newProduct->price = $form["price"];
-    $newProduct->photo = $form["photo"];
 
-
-
+    $ruta = $form->file('photo')->store('public/imagenes/imgProductos');
+    $nombreArchivo = basename($ruta);
+    $newProduct->photo = $nombreArchivo;
     $newProduct->save();
 
     return redirect('/productForm');

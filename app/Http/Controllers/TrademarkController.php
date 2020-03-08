@@ -16,7 +16,7 @@ class TrademarkController extends Controller
     $arrayTrademarks = Trademark::all();
     $arrayCategories = Category::all();
     $arrayProducts = Product::all();
-
+    
     return view('productForm', compact('arrayTrademarks', 'arrayCategories', 'arrayProducts'));
   }
 

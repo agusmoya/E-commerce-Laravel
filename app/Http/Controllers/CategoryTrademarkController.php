@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\CategoryTrademark;
+
 class CategoryTrademarkController extends Controller
 {
     public function insertCategoryTrademark(Request $form){
@@ -26,5 +27,13 @@ class CategoryTrademarkController extends Controller
       $newCategoryTrademark->save();
 
       return redirect('/productForm');
+    }
+
+    public function deleteCategoryTrademark(Request $form){
+      $arrayCategoryIdAndTrademarkId=explode($form["category_trademark_id"]);
+      $categoryTrademark = CategoryTrademark::find();
+
+
+
     }
 }

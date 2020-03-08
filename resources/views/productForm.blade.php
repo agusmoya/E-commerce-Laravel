@@ -161,8 +161,37 @@
         </select>
       </div>
       <button type="submit" name="register_category_trademark" class="btn btn-dark mb-3">Relacionar Marca con Categoría</button>
+
     </form>
     <!-- FIN FORM RELACION CATEGORIA/MARCA EN BD -->
+
+    <!-- INICIA FORM ELIMINAR CATEGORIA/MARCA EN BD -->
+
+    <form class="delete_related_trademark_category" action="/productForm/deleteCategoryTrademark" method="post">
+      @csrf
+      @method('DELETE')
+      <div class="form-group">
+        <h4 class="mt-3">Eliminar relación entre una categoría y su marca:</h4>
+        <p>Seleccione la relación <i>categorí-marca</i> de la lista a continuación, y haga click en el botón "Eliminar Relación".</p>
+        <select class="form-control" id="exampleFormControlSelect1" name="category_trademark_id" >
+          <option value="">Categoría-Marca...</option>
+          @forelse ($arrayTrademarks as $trademark)
+            @forelse ($trademark->categories as $category)
+              <option value="{{$trademark->id . "," . $category->id}}"> {{ $trademark->name . "/" . $category->name}} </option>
+            @empty
+              <option value="" selected>No hay categorías relacionadas a la marca en el sistema!</option>
+            @endforelse
+          @empty
+            {{"No se ha cargado ninguna relacion entre marcas y categorías!"}}
+          @endforelse
+        </select>
+        <span style="color: red;"class="help-block" id="error"><i></i></span>
+      </div>
+      <div class="form-group">
+        <button type="submit" name="delete_category" class="btn btn-danger mb-3">Eliminar Relación</button>
+      </div>
+    </form>
+    <!-- FIN FORM ELIMINAR CATEGORIA/MARCA EN BD -->
 
     <!-- INICIO FORMS PRODUCTO -->
     <!-- INICIA FORM ALTA PRODUCTOS EN BD-->

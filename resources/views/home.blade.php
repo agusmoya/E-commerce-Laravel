@@ -47,41 +47,13 @@
     <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 row-cols-xl-5 mt-2">
 
       <div class="col mb-4">
-        <div class="card">
-          <img src="..\..\imagenes\HassenAccesorios\collar-1.jpg" class="card-img-top" alt="...">
+        <div class="card text-center">
+          <a href="vistaProducto.php"> <img src="..\..\imagenes\HassenAccesorios\collar-1.jpg" class="card-img-top" alt="..."> </a>
           <div class="card-body">
-            <h5 class="card-title">Card title</h5>
-            <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-          </div>
-        </div>
-      </div>
-
-      <div class="col mb-4">
-        <div class="card">
-          <img src="..\..\imagenes\HassenAccesorios\collar-2.jpg" class="card-img-top" alt="...">
-          <div class="card-body">
-            <h5 class="card-title">Card title</h5>
-            <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-          </div>
-        </div>
-      </div>
-
-      <div class="col mb-4">
-        <div class="card">
-          <img src="..\..\imagenes\HassenAccesorios\collar-3.jpg" class="card-img-top" alt="...">
-          <div class="card-body">
-            <h5 class="card-title">Card title</h5>
-            <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content.</p>
-          </div>
-        </div>
-      </div>
-
-      <div class="col mb-4">
-        <div class="card">
-          <img src="..\..\imagenes\HassenAccesorios\collar-3.jpg" class="card-img-top" alt="...">
-          <div class="card-body">
-            <h5 class="card-title">Card title</h5>
-            <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+            <h5 class="card-title">Collar 1</h5>
+            <p class="card-text">Material: Fantasía</p>
+            <p class="card-text">$300</p>
+            <p class="card-text">Efectivo/Mercado Pago</p>
           </div>
         </div>
       </div>

@@ -8,4 +8,16 @@ class Product extends Model
 {
     public $guarded=[];
 
+    public function shoppingCarts(){
+      return $this->belongsToMany('App\ShoppinCart', 'product_shoppingCart', 'product_id', 'shoppingCart_id');
+    }
+
+    // public function trademark(){
+    //   $this->hasOne('App\Trademark');
+    // }
+    //
+    // public function categoriy(){
+    //   $this->hasOne('App\Category');
+    // }
+
 }

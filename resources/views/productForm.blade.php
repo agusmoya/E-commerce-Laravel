@@ -6,7 +6,7 @@
 
 @section('productForm')
   <div class="container" style="background-color:white;">
-    <h1 class="text-center my-4 p-5"><b>Gestión de Productos</b></h1>
+    <h1 class="text-center my-4 p-5" style="color:black;"><b>Gestión de Productos</b></h1>
 
     {{-- ARRAY DE ERRORES --}}
     <ul class="errors" style="color:red;">
@@ -53,8 +53,6 @@
     <!-- FIN FORM CARGAR MARCA EN BD -->
     <!-- INICIA FORM ELIMINAR MARCA EN BD -->
     <form class="delete_trademark" action="/productForm/deleteTrademark" method="post">
-      {{-- {{csrf_field()}}
-      {{method_field('DELETE')}} --}}
       @method('delete')
       @csrf
       <h4 class="mt-3">Eliminar marca:</h4>
@@ -166,23 +164,22 @@
     <!-- FIN FORM RELACION CATEGORIA/MARCA EN BD -->
 
     <!-- INICIA FORM ELIMINAR CATEGORIA/MARCA EN BD -->
-
     <form class="delete_related_trademark_category" action="/productForm/deleteCategoryTrademark" method="post">
       @csrf
       @method('DELETE')
       <div class="form-group">
         <h4 class="mt-3">Eliminar relación entre una categoría y su marca:</h4>
-        <p>Seleccione la relación <i>categorí-marca</i> de la lista a continuación, y haga click en el botón "Eliminar Relación".</p>
-        <select class="form-control" id="exampleFormControlSelect1" name="category_trademark_id" >
-          <option value="">Categoría-Marca...</option>
+        <p>Seleccione la relación <i>categoría-marca</i> de la lista a continuación, y haga click en el botón "Eliminar Relación".</p>
+        <select class="form-control" id="exampleFormControlSelect1" name="trademark_id_category_id" >
+          <option value="" selected>Categoría-Marca...</option>
           @forelse ($arrayTrademarks as $trademark)
             @forelse ($trademark->categories as $category)
               <option value="{{$trademark->id . "," . $category->id}}"> {{ $trademark->name . "/" . $category->name}} </option>
             @empty
-              <option value="" selected>No hay categorías relacionadas a la marca en el sistema!</option>
+              {{-- <option value="" class="ml-2">No hay categorías relacionadas a {{$trademark->name}} en el sistema!</option> --}}
             @endforelse
           @empty
-            {{"No se ha cargado ninguna relacion entre marcas y categorías!"}}
+            {{"No se ha cargado ninguna relación entre marcas y categorías!"}}
           @endforelse
         </select>
         <span style="color: red;"class="help-block" id="error"><i></i></span>
@@ -216,7 +213,10 @@
             @endforelse
           </div>
         @empty
-          {{"No hay marcas relacionadas a categorias en el sistema!"}}
+          <p class="ml-3"> <strong> <i>¡¡No hay marcas relacionadas a categorias en el sistema!!</i> </strong> </p>
+          <div class="alert alert-warning" role="alert">
+            <strong>Nota: </strong>Si no existe ninguna relación entre marcas y categorias no podrá cargar ningún producto!
+          </div>
         @endforelse
       </div>
 
@@ -225,6 +225,10 @@
         <input name="name_product" type="text" class="form-control" id="exampleFormControlInput1" placeholder="Nombre del producto..."  value="{{old('name_product')}}">
         <label for="exampleFormControlInput1" class="mt-3"><i> Ingrese el precio: </i></label>
         <input name="price" type="text" class="form-control" id="exampleFormControlInput1" placeholder="Precio del producto..."  value="{{old('price')}}">
+        <label for="exampleFormControlInput1" class="mt-3"><i> Ingrese descripción: </i></label>
+        <input name="description" type="text" class="form-control" id="exampleFormControlInput1" placeholder="Descripción..."  value="{{old('description')}}">
+        <label for="exampleFormControlInput1" class="mt-3"><i> Ingrese el stock disponible: </i></label>
+        <input name="stock" type="text" class="form-control" id="exampleFormControlInput1" placeholder="Stock del producto..."  value="{{old('stock')}}">
       </div>
       <!-- CARGAR IMAGEN -->
       <div class="form-group">

@@ -16,6 +16,8 @@ class ProductController extends Controller
       "trademarkId_categoryId" => "required",
       "name_product" => "required|alpha|min:3|max:30|unique:categories,name",
       "price" => "required|numeric",
+      "description" => "required|string|min:3",
+      "stock" => "integer|required",
       "photo" => "required|unique:products,photo|mimes:jpg,jpeg,png"
     ];
 
@@ -26,7 +28,10 @@ class ProductController extends Controller
       "min" => "El campo :attribute no puede tener menos de :min caracteres",
       "max" => "El campo :attribute no puede tener mas de :max caracteres",
       "numeric" => "El campo :attribute debe ser un número",
-      "mimes" => "El campo :attribute debe ser de tipo .jpg, .jpeg o .png"
+      "mimes" => "El campo :attribute debe ser de tipo .jpg, .jpeg o .png",
+      "string" => "El campo :attribute debe ser texto",
+      "integer" => "El campo :attribute debe ser un numero entero",
+
     ];
     $this->validate($form, $rules, $messages);
 
@@ -35,10 +40,12 @@ class ProductController extends Controller
     $result = explode(',', $form["trademarkId_categoryId"]);
     $newProduct->trademark_id = $result[0];
     $nameTrademark = Trademark::find($newProduct->trademark_id)->name;
-    $nameCategory = Category::find($newProduct->category_id)->name;
     $newProduct->category_id = $result[1];
+    $nameCategory = Category::find($newProduct->category_id)->name;
     $newProduct->name = $form["name_product"];
     $newProduct->price = $form["price"];
+    $newProduct->description = $form["description"];
+    $newProduct->stock = $form["stock"];
 
     $ruta = $form->file('photo')->store('public/imagenes/imgProductos');
     $nombreArchivo = basename($ruta);

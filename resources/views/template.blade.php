@@ -20,13 +20,13 @@ if (isset($_COOKIE["userName"])) {
 
   <!-- Bootstrap CSS -->
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-  {{-- <link rel="stylesheet" href="/css/app.css"> --}}
-  @yield('styleRegistration')
   <link rel="stylesheet" href="/css/styleHome.css">
-  @yield('styleCatalog')
-  @yield('styleFaq')
-  @yield('styleLogin')
-  @yield('styleUserProfile')
+  {{-- @yield('styleLogin') --}}
+  {{-- <link rel="stylesheet" href="/css/app.css"> --}}
+  {{-- @yield('styleRegistration') --}}
+  {{-- @yield('styleCatalog')
+  @yield('styleFaq') --}}
+  {{-- @yield('styleUserProfile') --}}
 
 
   <link href="https://fonts.googleapis.com/css?family=Muli:400,700,800&display=swap" rel="stylesheet">
@@ -40,30 +40,23 @@ if (isset($_COOKIE["userName"])) {
     <!-- NOTE: Inicia header -->
     <script src="https://kit.fontawesome.com/46027ca747.js" crossorigin="anonymous"></script>
     <!-- NOTE: Nav sacado de bootstrap -->
-    <nav class="navbar navbar-expand-lg navbar-dark bg-darkblack">
-
-      <a class="navbar-brand" href="/home"> <img src="\imagenes\HassenAccesorios\logo redondo.jpg" class="logo" alt="logo Hassen"></a>
+    <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
-      </button>
-
-      <form class="form-inline">
-        <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-        <button class="btn btn-outline-light my-2 my-sm-0" type="submit">Search</button>
-      </form>
+        </button>
+      <a class="navbar-brand" href="/home"> <img src="\imagenes\HassenAccesorios\logoWeb.jpg" class="logo" alt="logo Hassen"></a>
 
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav ml-auto">
           <li class="nav-item active">
-            <a class="nav-link" href="/home"> Home <span class="sr-only">(current)</span></a>
+            <a class="nav-link" style="color:black;" href="/home"> Home <span class="sr-only">(current)</span></a>
           </li>
 
           <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" style="color:white;" href="" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <a class="nav-link dropdown-toggle" href="" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
               Catalog
             </a>
-            <div class="dropdown-menu" style="background-color:lightgrey;" aria-labelledby="navbarDropdown">
-              <div class="dropdown-divider"></div>
+            <div class="dropdown-menu" style="background-color:white;" aria-labelledby="navbarDropdown">
               <a class="dropdown-item" href="/products">Products</a>
               <div class="dropdown-divider"></div>
               <a class="dropdown-item" href="#">Aros</a>
@@ -74,7 +67,7 @@ if (isset($_COOKIE["userName"])) {
 
           <?php if (!isset($_SESSION["email"]) && !isset($_COOKIE["userName"])) : ?>
             <li class="nav-item active">
-              <a class="nav-link" href="/registration">Registration</a>
+              <a class="nav-link" href="/register">Register</a>
             </li>
           <?php endif;  ?>
           <li class="nav-item active">
@@ -128,17 +121,17 @@ if (isset($_COOKIE["userName"])) {
         <div id="aboutUs" class="col-12 col-sm-4 col-md-4">
           <h5>About Us</h5>
           <ul class="list-unstyled quick-links">
-            <li><a href="homee.php"></i>Home</a></li>
-            <li><a href="catalog.php"></i>Catalog</a></li>
-            <li><a href="faq.php"></i>FAQ</a></li>
+            <li><a href="home"></i>Home</a></li>
+            <li><a href="products"></i>Catalog</a></li>
+            <li><a href="faq"></i>FAQ</a></li>
           </ul>
         </div>
         <div id="socNetworks" class="col-12 col-sm-4 col-md-4">
           <h5>Social Networks</h5>
           <ul class="list-unstyled quick-links">
-            <li><a href="https://www.facebook.com/" target="_blank">Facebook</a></li>
-            <li><a href="https://www.instagram.com/" target="_blank"></i>Instagram</a></li>
-            <li><a href="https://www.twitter.com/" target="_blank">Twitter</a></li>
+            <li><a href="https://www.facebook.com/" target="_blank"><i class="fab fa-facebook-square mr-1" style="font-size: 25px;"></i>Facebook</a></li>
+            <li><a href="https://www.instagram.com/" target="_blank"><i class="fab fa-instagram mr-1" style="font-size: 25px;"></i>Instagram</a></li>
+            <li><a href="https://www.twitter.com/" target="_blank"><i class="fab fa-twitter-square mr-1" style="font-size: 25px;" ></i>Twitter</a></li>
           </ul>
         </div>
         <div id="contactUs" class="col-12 col-sm-4 col-md-4">
@@ -221,7 +214,7 @@ if (isset($_COOKIE["userName"])) {
       </div>
 
       <div class="row">
-        <div class="col-12 col-sm-12 col-md-12 mt-2 mt-sm-2 text-center text-white">
+        <div class="col-12 col-sm-12 col-md-12 mt-2 mt-sm-2 text-center text-black">
           <p><a href="https://www.digitalhouse.com/">Digital House - Web Full Stack</a> Mendoza, Argentina.</p>
           <p class="h6">&copy All right Reversed.<a class="text-blue ml-2" href="#" target="_blank">Luis Romano - Agustín Moya</a></p>
         </div>

@@ -15,7 +15,11 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/home', function () {
+Route::get('/homeHassen', function () {
+    return view('homeHassen');
+});
+
+Route::get('/home', function () { //auth
     return view('home');
 });
 
@@ -23,15 +27,19 @@ Route::get('/products', function () {
     return view('products');
 });
 
-Route::get('/registration', function () {
-    return view('registration');
+Route::get('/register', function () { //auth
+    return view('register');
 });
 
 Route::get('/myPurchase', function () {
     return view('myPurchase');
 });
 
-Route::get('/login', function () {
+Route::get('/loginHassen', function () {
+    return view('loginHassen');
+});
+
+Route::get('/login', function () { //auth
     return view('login');
 });
 
@@ -55,7 +63,7 @@ Route::delete('/productForm/deleteCategory', 'CategoryController@deleteCategory'
 //CARGAR MARCA-CATEGORIA
 Route::post('/productForm/registerCategoryAndTrademark', 'CategoryTrademarkController@insertCategoryTrademark');
 // BORRAR MARCA-CATEGORIA
-Route::delete('/productForm/deleteCategoryAndTrademark', 'CategoryTrademarkController@deleteCategoryTrademark');
+Route::delete('/productForm/deleteCategoryTrademark', 'CategoryTrademarkController@deleteCategoryTrademark');
 
 
 // Route::get('productForm/showTrademarkCategories','TrademarkController@getTrademarkCategories');
@@ -65,3 +73,7 @@ Route::post('/productForm/registerProduct', 'ProductController@insertProduct');
 // BORRAR PRODUCTO
 Route::delete('/productForm/deleteProduct', 'ProductController@deleteProduct');
 // ****************FIN FORMULARIO DE GESTION DE PRODUCTOS****************
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');

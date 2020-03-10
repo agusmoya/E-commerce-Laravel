@@ -30,10 +30,14 @@ class CategoryTrademarkController extends Controller
     }
 
     public function deleteCategoryTrademark(Request $form){
-      $arrayCategoryIdAndTrademarkId=explode($form["category_trademark_id"]);
-      $categoryTrademark = CategoryTrademark::find();
+      $arrayCategoryIdAndTrademarkId=explode(',', $form["trademark_id_category_id"]);
+      $trademarkId = $arrayCategoryIdAndTrademarkId[0];
+      $categoryId = $arrayCategoryIdAndTrademarkId[1];
+      $categoryTrademark = CategoryTrademark::where([
+        ['trademark_id', '=', $trademarkId],
+        ['category_id', '=', $categoryId],
+      ])->delete();
 
-
-
+      return redirect('/productForm');
     }
 }

@@ -16,7 +16,17 @@ class TrademarkController extends Controller
     $arrayTrademarks = Trademark::all();
     $arrayCategories = Category::all();
     $arrayProducts = Product::all();
-    
+
+    // if (!isset($arrayTrademarks)) {
+    //   $arrayTrademarks = [];
+    // }
+    // if (!isset($arrayCategories)) {
+    //   $arrayCategories = [];
+    // }
+    // if (!isset($arrayProducts)) {
+    //   $arrayProducts = [];
+    // }
+
     return view('productForm', compact('arrayTrademarks', 'arrayCategories', 'arrayProducts'));
   }
 

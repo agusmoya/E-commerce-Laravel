@@ -6,7 +6,6 @@ use Illuminate\Database\Eloquent\Model;
 
 class Trademark extends Model
 {
-  // public $table="trademarks";
   public $guarded=[];
 
   public function categories(){

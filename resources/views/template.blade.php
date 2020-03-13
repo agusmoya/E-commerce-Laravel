@@ -21,13 +21,6 @@ if (isset($_COOKIE["userName"])) {
   <!-- Bootstrap CSS -->
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
   <link rel="stylesheet" href="/css/styleHome.css">
-  {{-- @yield('styleLogin') --}}
-  {{-- <link rel="stylesheet" href="/css/app.css"> --}}
-  {{-- @yield('styleRegistration') --}}
-  {{-- @yield('styleCatalog')
-  @yield('styleFaq') --}}
-  {{-- @yield('styleUserProfile') --}}
-
 
   <link href="https://fonts.googleapis.com/css?family=Muli:400,700,800&display=swap" rel="stylesheet">
   <title> @yield('title') </title>
@@ -109,9 +102,11 @@ if (isset($_COOKIE["userName"])) {
   @yield('login')
   @yield('registration')
   @yield('loadedProduct')
-  @yield('productForm')
   @yield('myPurchase')
-
+  @yield('crudTrademarks')
+  @yield('crudCategories')
+  @yield('crudCategoryTrademark')
+  @yield('crudProducts')
 
   <!-- NOTE: inicia footer -->
   <footer id="footer" class="mt-5 p-4">

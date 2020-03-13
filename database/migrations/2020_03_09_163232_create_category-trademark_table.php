@@ -17,13 +17,14 @@ class CreateCategoryTrademarkTable extends Migration
           $table->timestamps();
           $table->bigInteger('category_id')->unsigned();
           $table->bigInteger('trademark_id')->unsigned();
-          $table->foreign('category_id')
-          ->references('id')->on('categories')
-          ->onDelete('cascade');
-          $table->foreign('trademark_id')
-          ->references('id')->on('trademarks')
-          ->onDelete('cascade');
           $table->primary(['category_id', 'trademark_id']);
+          $table->foreign('category_id')
+          ->references('id')->on('categories');
+          // ->onDelete('cascade');
+          $table->foreign('trademark_id')
+          ->references('id')->on('trademarks');
+          // ->onDelete('cascade');
+          $table->boolean('status')->default($value = true);
         });
 
 

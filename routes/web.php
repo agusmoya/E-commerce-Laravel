@@ -12,67 +12,90 @@
 */
 
 Route::get('/', function () {
-    return view('welcome');
+  return view('welcome');
 });
 
 Route::get('/homeHassen', function () {
-    return view('homeHassen');
+  return view('homeHassen');
 });
 
 Route::get('/home', function () { //auth
-    return view('home');
+  return view('home');
 });
 
 Route::get('/products', function () {
-    return view('products');
+  return view('products');
+});
+
+Route::get('/registration', function () { //auth
+  return view('registration');
 });
 
 Route::get('/register', function () { //auth
-    return view('register');
+  return view('register');
 });
 
 Route::get('/myPurchase', function () {
-    return view('myPurchase');
+  return view('myPurchase');
 });
 
 Route::get('/loginHassen', function () {
-    return view('loginHassen');
+  return view('loginHassen');
 });
 
 Route::get('/login', function () { //auth
-    return view('login');
+  return view('login');
 });
 
 Route::get('/faq', function () {
-    return view('faq');
+  return view('faq');
 });
 
-// ****************FORMULARIO DE GESTION DE PRODUCTOS****************
-//MOSTRAR MARCAS, CATEGORIAS y PRODUCTOS --- //TAMBIEN MUESTRO LAS CATEGORIAS ASOCIADAS A UNA MARCA
-Route::get('/productForm', 'TrademarkController@getTrademarksAndCategoriesAndProducts');
-//CARGAR MARCA
-Route::post('/productForm/registerTrademark', 'TrademarkController@insertTrademark');
-// BORRAR MARCA
-Route::delete('/productForm/deleteTrademark', 'TrademarkController@deleteTrademark');
+// ****************FORMULARIO CRUD TRADEMARKS****************
+Route::get('/productManagment/crudTrademarks', 'TrademarkController@showTrademarks');
 
-//CARGAR CATEGORIA
-Route::post('/productForm/registerCategory', 'CategoryController@insertCategory');
-// BORRAR CATEGORIA
-Route::delete('/productForm/deleteCategory', 'CategoryController@deleteCategory');
+Route::post('/productManagment/createTrademark', 'TrademarkController@createTrademark');
 
-//CARGAR MARCA-CATEGORIA
-Route::post('/productForm/registerCategoryAndTrademark', 'CategoryTrademarkController@insertCategoryTrademark');
-// BORRAR MARCA-CATEGORIA
-Route::delete('/productForm/deleteCategoryTrademark', 'CategoryTrademarkController@deleteCategoryTrademark');
+Route::get('/productManagment/updateTrademark/{id}', 'TrademarkController@showUpdateGetTrademark');
 
+Route::put('/productManagment/updateTrademark', 'TrademarkController@updateTrademark');
 
-// Route::get('productForm/showTrademarkCategories','TrademarkController@getTrademarkCategories');
+Route::delete('/productManagment/deleteTrademark', 'TrademarkController@deleteTrademark');
 
-//CARGAR PRODUCTO
-Route::post('/productForm/registerProduct', 'ProductController@insertProduct');
-// BORRAR PRODUCTO
-Route::delete('/productForm/deleteProduct', 'ProductController@deleteProduct');
-// ****************FIN FORMULARIO DE GESTION DE PRODUCTOS****************
+// ****************FORMULARIO CRUD TRADEMARKS****************
+
+// ****************FORMULARIO CRUD CATEGORIES****************
+
+Route::get('/productManagment/crudCategories', 'CategoryController@showCategories');
+
+Route::post('/productManagment/createCategory', 'CategoryController@createCategory');
+
+Route::get('/productManagment/updateCategory/{id}', 'CategoryController@showUpdateCategory');
+
+Route::put('/productManagment/updateCategory', 'CategoryController@updateCategory');
+
+Route::delete('/productManagment/deleteCategory', 'CategoryController@deleteCategory');
+// ****************FORMULARIO CRUD CATEGORIES****************
+
+// ****************FORMULARIO CRUD RELATIONSHIP CATEGORY TRADEMARK****************
+Route::get('/productManagment/crudCategoryTrademark', 'CategoryTrademarkController@showCategoryTrademark');
+
+Route::post('/productManagment/createCategoryTrademark', 'CategoryTrademarkController@createCategoryTrademark');
+
+Route::delete('/productManagment/deleteCategoryTrademark', 'CategoryTrademarkController@deleteCategoryTrademark');
+// ****************FORMULARIO CRUD RELATIONSHIP CATEGORY TRADEMARK****************
+
+// ****************FORMULARIO CRUD PRODUCTS****************
+Route::get('/productManagment/crudProducts', 'ProductController@showProducts');
+
+Route::get('/productManagment/updateProduct/{id}', 'ProductController@showUpdateProduct');
+
+Route::put('/productManagment/updateProduct', 'ProductController@updateProduct');
+
+Route::post('/productManagment/createProduct', 'ProductController@createProduct');
+
+Route::delete('/productManagment/deleteProduct', 'ProductController@deleteProduct');
+// ****************FORMULARIO CRUD PRODUCTS****************
 
 Auth::routes();
 

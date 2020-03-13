@@ -28,7 +28,9 @@ class LoginController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = '/home';
+    // protected $redirectTo = '/home'; Esta opcion es la que pone laravel despues de make:auth
+    protected $redirectTo = '/homeHassen'; //modifico para que me redireccione a mi home
+    
 
     /**
      * Create a new controller instance.

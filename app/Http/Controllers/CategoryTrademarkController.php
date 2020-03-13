@@ -4,11 +4,25 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\CategoryTrademark;
+use App\Category;
+use App\Trademark;
 
 class CategoryTrademarkController extends Controller
 {
-    public function insertCategoryTrademark(Request $form){
+    public function showCategoryTrademark(){
 
+      $arrayCategories = Category::all();
+      $arrayTrademarks = Trademark::all();
+
+      $arrayCategoryTrademark = CategoryTrademark::join('categories', 'category_id', '=', 'categories.id')
+      ->join('trademarks', 'trademark_id', '=', 'trademarks.id')
+      ->select('category_trademark.*', 'categories.name as name_category', 'trademarks.name as name_trademark')
+      ->where('category_trademark.status', 1)
+      ->get();
+      return view('crudCategoryTrademark', compact('arrayCategoryTrademark','arrayCategories', 'arrayTrademarks'));
+    }
+
+    public function createCategoryTrademark(Request $form){
       $rules = [
         "category_id" => "numeric|required",
         "trademark_id" => "numeric|required"
@@ -26,18 +40,14 @@ class CategoryTrademarkController extends Controller
       $newCategoryTrademark->trademark_id = $form["trademark_id"];
       $newCategoryTrademark->save();
 
-      return redirect('/productForm');
+      return redirect('/productManagment/crudCategoryTrademark');
     }
 
     public function deleteCategoryTrademark(Request $form){
-      $arrayCategoryIdAndTrademarkId=explode(',', $form["trademark_id_category_id"]);
-      $trademarkId = $arrayCategoryIdAndTrademarkId[0];
-      $categoryId = $arrayCategoryIdAndTrademarkId[1];
       $categoryTrademark = CategoryTrademark::where([
-        ['trademark_id', '=', $trademarkId],
-        ['category_id', '=', $categoryId],
+        ['trademark_id', '=', $form["trademark_id"]],
+        ['category_id', '=', $form["category_id"]],
       ])->delete();
-
-      return redirect('/productForm');
+      return redirect('/productManagment/crudCategoryTrademark');
     }
 }

@@ -28,6 +28,7 @@
             <p class="card-text">{{"Stock: " . $productDetail["objProduct"]->stock . " unidades"}}</p>
             <p class="card-text">Material: Fantasía</p>
             <p class="card-text">Efectivo/Mercado Pago</p>
+            <p> <a href="/productManagment/crudProducts"><strong>Volver al formulario...</strong> </a> </p>
             {{-- <a href="#" class="btn btn-dark">Add to my purchase</a> --}}
           </div>
         </div>

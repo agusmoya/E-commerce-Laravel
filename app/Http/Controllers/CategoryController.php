@@ -5,12 +5,21 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 
 use App\Category;
-use App\Trademark;
-use App\CategoryTrademark;
 
 class CategoryController extends Controller
 {
-  public function insertCategory(Request $form){
+
+  public function showCategories(){
+    $arrayCategories = Category::where('status', 1)->orderBy('name')->get();
+    return view('crudCategories', compact('arrayCategories'));
+  }
+
+  public function showUpdateCategory($id){
+    $category = Category::find($id);
+    return view('updateCategory', compact('category'));
+  }
+
+  public function createCategory(Request $form){
     $rules = [
       "name_category" => "required|alpha|min:3|max:30|unique:categories,name"
     ];
@@ -23,27 +32,49 @@ class CategoryController extends Controller
       "max" => "El campo :attribute no puede tener mas de :max caracteres"
     ];
 
-    $this->validate($form, $rules, $messages);
-    $newCategory = new Category();
-    $newCategory->name = $form["name_category"];
-    $newCategory->save();
-    return redirect('/productForm');
+    $arrayCategories = Category::all();
+    $foundCategory = null;
+    foreach ($arrayCategories as $category) {
+      if($category["name"] == $form["name_category"]){
+        $foundCategory = $category;
+        break;
+      }
+    }
+
+    if(isset($foundCategory)) {
+      $foundCategory->status = true;
+      $foundCategory->save();
+      return redirect('/productManagment/crudCategories');
+    } else {
+      $this->validate($form, $rules, $messages);
+      $newCategory = new Category();
+      $newCategory->name = $form["name_category"];
+      $newCategory->save();
+      return redirect('/productManagment/crudCategories');
+    }
+  }
+
+  public function updateCategory(Request $form){
+    $category = Category::find($form["category_id"]);
+    $category->name = $form["name_category"];
+    $category->save();
+    return redirect('/productManagment/crudCategories');
   }
 
   public function deleteCategory(Request $form){
-    $category = Category::find($form["id_category_delete"]);
-
+    $category = Category::find($form["category_id"]);
     if ($category==null) {
       $rules = [
-        "id_category_delete" => "required"
+        "category_id" => "required"
       ];
       $messages = [
         "required" => "Debe seleccionar una categoría para eliminarla!"
       ];
       $this->validate($form, $rules, $messages);
     } else {
-      $category->delete();
-      return redirect('/productForm');
+      $category->status = 0;
+      $category->save();
+      return redirect('/productManagment/crudCategories');
     }
   }
 

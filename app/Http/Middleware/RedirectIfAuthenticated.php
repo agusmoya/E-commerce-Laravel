@@ -18,7 +18,8 @@ class RedirectIfAuthenticated
     public function handle($request, Closure $next, $guard = null)
     {
         if (Auth::guard($guard)->check()) {
-            return redirect('/home');
+            // return redirect('/home'); asi estaba por defecto
+            return redirect('/homeHassen');
         }
 
         return $next($request);

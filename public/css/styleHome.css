@@ -125,7 +125,11 @@ form h2{
    color: black;
  }
 
- .register_trademark{
+ .create_trademark{
+   color:black;
+ }
+
+ .update_trademark{
    color:black;
  }
 
@@ -137,7 +141,7 @@ form h2{
    color: black;
  }
 
- .register_category{
+ .create_category{
    color: black;
  }
 
@@ -150,6 +154,10 @@ form h2{
  }
 
  .delete_related_trademark_category{
+   color: black;
+ }
+
+ .update_product{
    color: black;
  }
 

@@ -19,9 +19,12 @@ class CreateProductShoppingCartTable extends Migration
           $table->bigInteger('product_id')->unsigned();
           $table->bigInteger('shoppingCart_id')->unsigned();
           $table->foreign('product_id')
-          ->references('id')->on('products')->onDelete('cascade');
+          ->references('id')->on('products');
+          // ->onDelete('cascade');
           $table->foreign('shoppingCart_id')
-          ->references('id')->on('shoppingCarts')->onDelete('cascade');
+          ->references('id')->on('shoppingCarts');
+          // ->onDelete('cascade');
+          $table->boolean('status')->default($value = true);          
         });
     }
 

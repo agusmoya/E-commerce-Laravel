@@ -19,11 +19,12 @@ class CreatePurchasesTable extends Migration
             $table->bigInteger('user_id')->unsigned();
             $table->string('payment_method', 50);
             $table->foreign('user_id')
-            ->references('id')->on('users')
-            ->onDelete('cascade');
+            ->references('id')->on('users');
+            // ->onDelete('cascade');
             $table->foreign('shoppingCart_id')
-            ->references('id')->on('shoppingCarts')
-            ->onDelete('cascade');
+            ->references('id')->on('shoppingCarts');
+            // ->onDelete('cascade');
+            $table->boolean('status')->default($value = true);
         });
     }
 

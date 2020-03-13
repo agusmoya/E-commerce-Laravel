@@ -21,8 +21,9 @@ class CreateShoppingCartsTable extends Migration
             $table->float('subtotal', 8, 2);
             $table->float('total', 8, 2);
             $table->foreign('user_id')
-            ->references('id')->on('users')
-            ->onDelete('cascade');
+            ->references('id')->on('users');
+            // ->onDelete('cascade');
+            $table->boolean('status')->default($value = true);            
         });
     }
 

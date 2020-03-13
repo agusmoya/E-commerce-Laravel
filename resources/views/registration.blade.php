@@ -23,7 +23,7 @@
             <div class="form-group col-lg-6">
               <div class="input-group">
                 <div class="input-group-addon"><span class="glyphicon glyphicon-lock"></span></div>
-                <input name="name" id="name" type="text" class="form-control" placeholder="Name" required value='<?= $name ?>'>
+                <input name="name" id="name" type="text" class="form-control" placeholder="Name" required value=''>
               </div>
               <span class="help-block" id="error">
                 <?php
@@ -39,7 +39,7 @@
             <div class="form-group col-lg-6">
               <div class="input-group">
                 <div class="input-group-addon"><span class="glyphicon glyphicon-lock"></span></div>
-                <input name="lastname" type="text" class="form-control" placeholder="Lastname" required value='<?= $lastname ?>'>
+                <input name="lastname" type="text" class="form-control" placeholder="Lastname" required value=''>
               </div>
               <span class="help-block" id="error">
                 <?php
@@ -57,7 +57,7 @@
             <div class="form-group col-lg-6">
               <div class="input-group">
                 <div class="input-group-addon"><span class="glyphicon glyphicon-lock"></span></div>
-                <input name="dni" id="dni" type="text" class="form-control" placeholder="DNI" value='<?= $dni ?>'>
+                <input name="dni" id="dni" type="text" class="form-control" placeholder="DNI" value=''>
               </div>
               <span class="help-block" id="error">
                 <?php
@@ -70,7 +70,7 @@
             <div class="form-group col-lg-6">
               <div class="input-group">
                 <div class="input-group-addon"><span class="glyphicon glyphicon-lock"></span></div>
-                <input name="phone" type="text" class="form-control" placeholder="Phone" value='<?= $phone ?>'>
+                <input name="phone" type="text" class="form-control" placeholder="Phone" value=''>
               </div>
               <span class="help-block" id="error">
                 <?php
@@ -85,7 +85,7 @@
             <div class="form-group col-lg-6">
               <div class="input-group">
                 <div class="input-group-addon"><span class="glyphicon glyphicon-lock"></span></div>
-                <input name="city" id="city" type="text" class="form-control" placeholder="City" value='<?= $city ?>'>
+                <input name="city" id="city" type="text" class="form-control" placeholder="City" value=''>
               </div>
               <span class="help-block" id="error">
                 <?php
@@ -98,7 +98,7 @@
             <div class="form-group col-lg-6">
               <div class="input-group">
                 <div class="input-group-addon"><span class="glyphicon glyphicon-lock"></span></div>
-                <input name="country" type="text" class="form-control" placeholder="Country" value='<?= $country ?>'>
+                <input name="country" type="text" class="form-control" placeholder="Country" value=''>
               </div>
               <span class="help-block" id="error">
                 <?php
@@ -112,7 +112,7 @@
           <div class="form-group">
             <div class="input-group">
               <div class="input-group-addon"><span class="glyphicon glyphicon-user"></span></div>
-              <input name="username" type="text" class="form-control" placeholder="Username" required value='<?= $username ?>'>
+              <input name="username" type="text" class="form-control" placeholder="Username" required value=''>
             </div>
             <span class="help-block" id="error">
               <?php
@@ -131,7 +131,7 @@
           <div class="form-group">
             <div class="input-group">
               <div class="input-group-addon"><span class="glyphicon glyphicon-envelope"></span></div>
-              <input name="email" type="text" class="form-control" placeholder="Email" required value='<?= $email ?>'>
+              <input name="email" type="text" class="form-control" placeholder="Email" required value=''>
             </div>
             <span class="help-block" id="error">
               <?php

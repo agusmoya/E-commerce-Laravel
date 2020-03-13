@@ -5,34 +5,22 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 
 use App\Trademark;
-use App\Category;
-use App\Product;
-use App\CategoryTrademark;
-
 
 class TrademarkController extends Controller
 {
-  public function getTrademarksAndCategoriesAndProducts(Request $form){
-    $arrayTrademarks = Trademark::all();
-    $arrayCategories = Category::all();
-    $arrayProducts = Product::all();
-
-    // if (!isset($arrayTrademarks)) {
-    //   $arrayTrademarks = [];
-    // }
-    // if (!isset($arrayCategories)) {
-    //   $arrayCategories = [];
-    // }
-    // if (!isset($arrayProducts)) {
-    //   $arrayProducts = [];
-    // }
-
-    return view('productForm', compact('arrayTrademarks', 'arrayCategories', 'arrayProducts'));
+  public function showTrademarks(){
+    $arrayTrademarks = Trademark::where('status', 1)->orderBy('name')->get();
+    return view('crudTrademarks', compact('arrayTrademarks'));
   }
 
-  public function insertTrademark(Request $form){
+  public function showUpdateGetTrademark($id){
+    $trademark = Trademark::find($id);
+    return view('updateTrademark', compact('trademark'));
+  }
+
+  public function createTrademark(Request $form){
     $rules = [
-      "name_trademark" => "required|alpha|min:3|max:30|unique:trademarks,name"
+      "name_trademark" => "required|alpha|min:3|max:30"
     ];
 
     $messages = [
@@ -43,15 +31,37 @@ class TrademarkController extends Controller
       "required" => "El campo :attribute no puede estar vacío"
     ];
 
-    $this->validate($form, $rules, $messages);
-    $newTrademark = new Trademark();
-    $newTrademark->name = $form["name_trademark"];
-    $newTrademark->save();
-    return redirect('/productForm');
+    $arrayTrademarks = Trademark::all();
+    $trademarkFound = null;
+    foreach ($arrayTrademarks as $trademark) {
+      if($trademark['name']==$form['name_trademark']){
+        $trademarkFound = $trademark;
+        break;
+      }
+    }
+
+    if (isset($trademarkFound)) {
+      $trademarkFound->status = true;
+      $trademarkFound->save();
+      return redirect('/productManagment/crudTrademarks');
+    } else {
+      $this->validate($form, $rules, $messages);
+      $newTrademark = new Trademark();
+      $newTrademark->name = $form["name_trademark"];
+      $newTrademark->save();
+      return redirect('/productManagment/crudTrademarks');
+    }
+  }
+
+  public function updateTrademark(Request $form){
+    $trademark = Trademark::find($form["update_trademark_id"]);
+    $trademark->name = $form["name_trademark"];
+    $trademark->save();
+    return redirect('/productManagment/crudTrademarks');
   }
 
   public function deleteTrademark(Request $form){
-    $trademark = Trademark::find($form["id_trademark_delete"]);
+    $trademark = Trademark::find($form["trademark_id"]);
     if ($trademark==null) {
       $rules = [
         "id_trademark_delete" => "required"
@@ -61,10 +71,10 @@ class TrademarkController extends Controller
       ];
       $this->validate($form, $rules, $messages);
     } else {
-      $trademark->delete();
-      return redirect('/productForm');
+      $trademark->status = 0;
+      $trademark->save();
+      return redirect('/productManagment/crudTrademarks');
     }
-
   }
 
 }

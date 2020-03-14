@@ -13,7 +13,7 @@ class HomeController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('auth');
+        $this->middleware('auth'); //esto es paar que solo podamos acceder a los metodas de abajo si estamos autenticados!
     }
 
     /**

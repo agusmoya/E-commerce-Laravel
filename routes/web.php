@@ -19,15 +19,15 @@ Route::get('/homeHassen', function () {
   return view('homeHassen');
 });
 
-Route::get('/home', function () { //auth
-  return view('home');
-});
+// Route::get('/home', function () { //auth
+//   return view('home');
+// });
 
 Route::get('/products', function () {
   return view('products');
 });
 
-Route::get('/registration', function () { //auth
+Route::get('/registration', function () {
   return view('registration');
 });
 
@@ -97,10 +97,24 @@ Route::post('/productManagment/createProduct', 'ProductController@createProduct'
 Route::delete('/productManagment/deleteProduct', 'ProductController@deleteProduct');
 // ****************FORMULARIO CRUD PRODUCTS****************
 
+Route::get('/productPreview/{productId}', 'ProductController@showProductPreview');
+
+// ****************USUARIO****************
+
+// Route::get('/userProfile', 'HomeController@showUserProfile');
+
+Route::get('/userProfile', function(){
+  return view('userProfile');
+});
+
+// ****************USUARIO****************
+
+
+
 // ****************Generados con makeauth****************
 // ****************Personalizando mi auth****************
 
-// Auth::routes(); Lo que figura en "PERSONALIZANDO MI AUTH" reemplaza esta línea
+// Auth::routes(); Lo que figura debajo reemplaza esta línea
 
 // Authentication Routes...
 Route::get('login', 'Auth\LoginController@showLoginForm')->name('login');
@@ -117,5 +131,8 @@ Route::post('password/email', 'Auth\ForgotPasswordController@sendResetLinkEmail'
 Route::get('password/reset/{token}', 'Auth\ResetPasswordController@showResetForm')->name('password.reset');
 Route::post('password/reset', 'Auth\ResetPasswordController@reset')->name('password.update');
 
-Route::get('/home', 'HomeController@index')->name('home');
+// Route::get('/home', 'HomeController@index')->name('home');
 // ****************Generados con makeauth****************
+
+Route::get('/homeHassen', 'HomeController@index')->name('homeHassen');
+

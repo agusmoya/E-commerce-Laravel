@@ -68,9 +68,8 @@ class RegisterController extends Controller
     protected function create(array $data)
     {      
       $form = app('request');
-      $ruta = $form->file('profilePhoto')->store('public/imagenes/imgProductos');
+      $ruta = $form->file('profilePhoto')->store('public/imagenes/imgUsers');
       $nombreArchivo = basename($ruta);
-      // $newProduct->photo = $nombreArchivo;
 
         return User::create([
             'name' => $data['name'],

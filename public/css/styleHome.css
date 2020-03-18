@@ -169,6 +169,30 @@ form h2{
    color: black;
  }
 
+ .jumbotron{
+   display: flexbox;
+  overflow: hidden;
+  margin-top: 50px;
+ }
+
+ .profile_user .title-info{
+  color: white;
+  float:left;
+  vertical-align: middle;
+ }
+
+ .profile_user .form-header h1, h2{
+   color: white;
+ }
+
+ .profile_user .form-header .image-Profile img{
+  width: 30%;
+  margin: 0;
+  float: right;
+  margin-bottom: 70px;
+
+ }
+
  /* NOTE: style loadedProductPreview */
  #loaded_product_preview{
    color: black;

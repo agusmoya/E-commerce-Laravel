@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Product;
 
 class HomeController extends Controller
 {
@@ -13,7 +14,7 @@ class HomeController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('auth'); //esto es paar que solo podamos acceder a los metodas de abajo si estamos autenticados!
+        // $this->middleware('auth'); //esto es para que solo podamos acceder a los metodas de abajo si estamos autenticados!
     }
 
     /**
@@ -22,7 +23,18 @@ class HomeController extends Controller
      * @return \Illuminate\Contracts\Support\Renderable
      */
     public function index()
-    {
-        return view('home');
+    {           
+        $arrayProducts = Product::join('categories', 'category_id', '=', 'categories.id')
+    ->join('trademarks', 'trademark_id', '=', 'trademarks.id')
+    ->select('products.*', 'categories.name as name_category', 'trademarks.name as name_trademark')
+    ->where('products.status', 1)->orderBy('name')
+    ->get();
+        return view('homeHassen', compact('arrayProducts'));
     }
+
+    // public function showUserProfile(){
+    //     $user = Auth::user();
+    //     return view('userProfile', compact('user'));
+    // }
+
 }

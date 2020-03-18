@@ -12,6 +12,19 @@ use App\Category;
 class ProductController extends Controller
 {
 
+  public function showProductPreview($productId){
+    $product = Product::join('categories', 'category_id', '=', 'categories.id')
+    ->join('trademarks', 'trademark_id', '=', 'trademarks.id')
+    ->select('products.*', 'categories.name as name_category', 'trademarks.name as name_trademark')
+    ->where([
+      ['products.status', 1], 
+      ['products.id', $productId] 
+      ])->get();
+      // dd($product);
+    return view('loadedProductPreview', compact('product'));
+
+  }
+
   public function showProducts(){
 
     $arrayProducts = Product::join('categories', 'category_id', '=', 'categories.id')
@@ -20,7 +33,6 @@ class ProductController extends Controller
     ->where('products.status', 1)
     ->get();
 
-    // $arrayProducts = Product::where('status', 1)->orderBy('name')->get();
     $arrayTrademarks = Trademark::where('status', 1)->orderBy('name')->get();
     $arrayCategories = Category::where('status', 1)->orderBy('name')->get();
     return view('crudProducts', compact('arrayProducts', 'arrayTrademarks', 'arrayCategories'));

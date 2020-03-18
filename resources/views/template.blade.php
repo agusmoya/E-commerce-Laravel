@@ -1,16 +1,3 @@
-<?php
-session_start();
-$user=null;
-
-if(isset($_SESSION["email"])) {
-  $user = $_SESSION["email"];
-  // var_dump($_SESSION);
-}
-if (isset($_COOKIE["userName"])) {
-  $user = $_COOKIE["userName"];
-}
-?>
-
 <!doctype html>
 <html lang="en">
 <head>
@@ -37,12 +24,12 @@ if (isset($_COOKIE["userName"])) {
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
         </button>
-      <a class="navbar-brand" href="/home"> <img src="\imagenes\HassenAccesorios\logoWeb.jpg" class="logo" alt="logo Hassen"></a>
+      <a class="navbar-brand" href="/homeHassen"> <img src="\imagenes\HassenAccesorios\logoWeb.jpg" class="logo" alt="logo Hassen"></a>
 
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav ml-auto">
           <li class="nav-item active">
-            <a class="nav-link" style="color:black;" href="/home"> Home <span class="sr-only">(current)</span></a>
+            <a class="nav-link" style="color:black;" href="/homeHassen"> Home <span class="sr-only">(current)</span></a>
           </li>
 
           <li class="nav-item dropdown">
@@ -52,40 +39,60 @@ if (isset($_COOKIE["userName"])) {
             <div class="dropdown-menu" style="background-color:white;" aria-labelledby="navbarDropdown">
               <a class="dropdown-item" href="/products">Products</a>
               <div class="dropdown-divider"></div>
-              <a class="dropdown-item" href="#">Aros</a>
-              <a class="dropdown-item" href="#">Collares</a>
-              <a class="dropdown-item" href="#">Pulseras</a>
+              {{-- @forelse ($arrayProducts as $product)
+            <a class="dropdown-item" href="#">{{$product->name_category}}</a>
+                  
+              @empty
+              <a class="dropdown-item" href="#">No hay productos cargados!</a>
+                  
+              @endforelse --}}
+              {{-- <a class="dropdown-item" href="#">Pulseras</a> --}}
             </div>
           </li>
 
-          <?php if (!isset($_SESSION["email"]) && !isset($_COOKIE["userName"])) : ?>
+          @if (!Auth::check())
             <li class="nav-item active">
               <a class="nav-link" href="/register">Register</a>
             </li>
-          <?php endif;  ?>
-          <li class="nav-item active">
-            <a class="nav-link" href="/myPurchase"> <i class="fas fa-cart-plus"></i> My purchase <span class="sr-only">(current)</span></a>
-          </li>
-          <?php if (!isset($_SESSION["email"]) && !isset($_COOKIE["userName"])) : ?>
+          @endif
+          @if (!Auth::check())
             <li class="nav-item active">
               <a class="nav-link" href="/login"> Login <span class="sr-only">(current)</span></a>
             </li>
-          <?php endif;  ?>
+          @endif
+          @if (Auth::check() && Auth::user()->type == 1 && Auth::user()->status==1)
+            <li class="nav-item active">
+              <a class="nav-link" href="/productManagment/crudTrademarks"> Managment Product <span class="sr-only">(current)</span></a>
+            </li>
+          @endif
+          <li class="nav-item active">
+            <a class="nav-link" href="/myPurchase"> <i class="fas fa-cart-plus"></i> My purchase <span class="sr-only">(current)</span></a>
+          </li>
+
+            @if (Auth::check())
+            <div class="dropdown show">
+              <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+               {{ Auth::user() ->name }}
+              </a>
+            
+              <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                <a class="dropdown-item" href="/userProfile">Profile</a>
+                <a class="dropdown-item" href="{{ route('logout') }}"
+                     onclick="event.preventDefault();
+                                   document.getElementById('logout-form').submit();">
+                      {{ __('Logout') }}
+                  </a>
+
+                  <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                      @csrf
+                  </form>
+              </div>
+              </div>
+            @endif
+
           <li class="nav-item active">
             <a class="nav-link" href="/faq">F.A.Q.</a>
           </li>
-
-          <?php if (isset($_SESSION["email"]) || isset($_COOKIE["userName"])) :?>
-            <li class="nav-item dropdown">
-              <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                <?= $user ?>
-              </button>
-              <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink" style="background-color:grey; width: 240px;">
-                <a class="dropdown-item" href="perfilUsuario.php" style="color: white;font-weight: bolder;">Profile</a>
-                <a class="dropdown-item" href="logout.php" style="color: white;font-weight: bolder;">Sign Out</a>
-              </div>
-            </li>
-          <?php endif; ?>
 
         </ul>
       </div>
@@ -94,7 +101,6 @@ if (isset($_COOKIE["userName"])) {
   </header>
   <!-- NOTE: fin header -->
 
-  <?php // NOTE: YIELDS  ?>
   @yield('userProfile')
   @yield('home')
   @yield('catalog')

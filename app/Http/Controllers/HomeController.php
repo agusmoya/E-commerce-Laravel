@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Product;
+use App\Category;
+
 
 class HomeController extends Controller
 {
@@ -23,18 +25,18 @@ class HomeController extends Controller
      * @return \Illuminate\Contracts\Support\Renderable
      */
     public function index()
-    {           
+    {
         $arrayProducts = Product::join('categories', 'category_id', '=', 'categories.id')
-    ->join('trademarks', 'trademark_id', '=', 'trademarks.id')
-    ->select('products.*', 'categories.name as name_category', 'trademarks.name as name_trademark')
-    ->where('products.status', 1)->orderBy('name')
-    ->get();
-        return view('homeHassen', compact('arrayProducts'));
+        ->join('trademarks', 'trademark_id', '=', 'trademarks.id')
+        ->select('products.*', 'categories.name as name_category', 'trademarks.name as name_trademark')
+        ->where('products.status', 1)->orderBy('name')
+        ->get();
+
+        $arrayCategories = Category::orderBy('name')->get();
+        return view('homeHassen', compact('arrayProducts', 'arrayCategories'));
+
     }
 
-    // public function showUserProfile(){
-    //     $user = Auth::user();
-    //     return view('userProfile', compact('user'));
-    // }
+
 
 }

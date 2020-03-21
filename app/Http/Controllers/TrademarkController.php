@@ -5,10 +5,16 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 
 use App\Trademark;
+use Auth;
 
 class TrademarkController extends Controller
 {
+
+  // if (Auth::check() && Auth::user()->type==0) {
+  //   return redirect('/homeHassen');
+  // }
   public function showTrademarks(){
+
     $arrayTrademarks = Trademark::where('status', 1)->orderBy('name')->get();
     return view('crudTrademarks', compact('arrayTrademarks'));
   }
@@ -76,5 +82,6 @@ class TrademarkController extends Controller
       return redirect('/productManagment/crudTrademarks');
     }
   }
+
 
 }

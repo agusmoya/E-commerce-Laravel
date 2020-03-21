@@ -29,7 +29,7 @@ class RegisterController extends Controller
      * @var string
      */
     // protected $redirectTo = '/home';  Esta opcion es la que pone laravel despues de make:auth
-    protected $redirectTo = '/homeHassen'; //modifico para que me redireccione a mi home
+    protected $redirectTo = '/userProfile'; //modifico para que me redireccione a mi home
 
 
     /**
@@ -66,7 +66,7 @@ class RegisterController extends Controller
      * @return \App\User
      */
     protected function create(array $data)
-    {      
+    {
       $form = app('request');
       $ruta = $form->file('profilePhoto')->store('public/imagenes/imgUsers');
       $nombreArchivo = basename($ruta);

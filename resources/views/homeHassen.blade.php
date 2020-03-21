@@ -4,6 +4,28 @@
 
 @section('home')
   <!-- NOTE: div jumbo PRESENTACION para describir quienes somos!-->
+  <nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <a class="navbar-brand" href="#">Navbar</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarNav">
+    <ul class="navbar-nav">
+      <li class="nav-item active">
+        <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#">Features</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#">Pricing</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link disabled" href="#">Disabled</a>
+      </li>
+    </ul>
+  </div>
+</nav>
   <div class="container-fluid ">
     <div class="jumbotron jumbotron-fluid mt-4 pl-5 pr-5">
       @if (Auth::check())
@@ -20,19 +42,19 @@
     <div id="carouselExampleFade" class="carousel slide carousel-fade" data-ride="carousel">
       <div class="carousel-inner">
         <div class="carousel-item active">
-          <img src="..\..\imagenes\bannerHome\banner1.jpg" class="d-block w-100" alt="banner1">
+          <img src="..\..\imagenes\bannerHome\banner1.jpg" class="d-md-block w-100" alt="banner1">
         </div>
         <div class="carousel-item">
-          <img src="..\..\imagenes\bannerHome\banner2.jpg" class="d-block w-100" alt="banner2">
+          <img src="..\..\imagenes\bannerHome\banner2.jpg" class="d-md-block w-100" alt="banner2">
         </div>
         <div class="carousel-item">
-          <img src="..\..\imagenes\bannerHome\banner3.jpg" class="d-block w-100" alt="banner3">
+          <img src="..\..\imagenes\bannerHome\banner3.jpg" class="d-md-block w-100" alt="banner3">
         </div>
         <div class="carousel-item">
-          <img src="..\..\imagenes\bannerHome\banner4.jpg" class="d-block w-100" alt="banner4">
+          <img src="..\..\imagenes\bannerHome\banner4.jpg" class="d-md-block w-100" alt="banner4">
         </div>
         <div class="carousel-item">
-          <img src="..\..\imagenes\bannerHome\banner5.jpg" class="d-block w-100" alt="banner5">
+          <img src="..\..\imagenes\bannerHome\banner5.jpg" class="d-md-block w-100" alt="banner5">
         </div>
       </div>
       <a class="carousel-control-prev" href="#carouselExampleFade" role="button" data-slide="prev">
@@ -69,9 +91,9 @@
           <p class="card-text">Efectivo/Mercado Pago</p>
           </div>
         </div>
-      </div>          
+      </div>
       @empty
-      <div class="alert alert-warning" role="alert">
+      <div class="alert alert-warning mt-4"  style="margin: 0 auto;" role="alert">
         No hay productos cargados en el sistema!
       </div>
       @endforelse

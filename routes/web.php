@@ -52,11 +52,11 @@ Route::get('/faq', function () {
 });
 
 // ****************FORMULARIO CRUD TRADEMARKS****************
-Route::get('/productManagment/crudTrademarks', 'TrademarkController@showTrademarks');
+Route::get('/productManagment/crudTrademarks', 'TrademarkController@showTrademarks')->middleware('roleUser');
 
 Route::post('/productManagment/createTrademark', 'TrademarkController@createTrademark');
 
-Route::get('/productManagment/updateTrademark/{id}', 'TrademarkController@showUpdateGetTrademark');
+Route::get('/productManagment/updateTrademark/{id}', 'TrademarkController@showUpdateGetTrademark')->middleware('roleUser');
 
 Route::put('/productManagment/updateTrademark', 'TrademarkController@updateTrademark');
 
@@ -66,11 +66,11 @@ Route::delete('/productManagment/deleteTrademark', 'TrademarkController@deleteTr
 
 // ****************FORMULARIO CRUD CATEGORIES****************
 
-Route::get('/productManagment/crudCategories', 'CategoryController@showCategories');
+Route::get('/productManagment/crudCategories', 'CategoryController@showCategories')->middleware('roleUser');
 
 Route::post('/productManagment/createCategory', 'CategoryController@createCategory');
 
-Route::get('/productManagment/updateCategory/{id}', 'CategoryController@showUpdateCategory');
+Route::get('/productManagment/updateCategory/{id}', 'CategoryController@showUpdateCategory')->middleware('roleUser');
 
 Route::put('/productManagment/updateCategory', 'CategoryController@updateCategory');
 
@@ -78,7 +78,7 @@ Route::delete('/productManagment/deleteCategory', 'CategoryController@deleteCate
 // ****************FORMULARIO CRUD CATEGORIES****************
 
 // ****************FORMULARIO CRUD RELATIONSHIP CATEGORY TRADEMARK****************
-Route::get('/productManagment/crudCategoryTrademark', 'CategoryTrademarkController@showCategoryTrademark');
+Route::get('/productManagment/crudCategoryTrademark', 'CategoryTrademarkController@showCategoryTrademark')->middleware('roleUser');
 
 Route::post('/productManagment/createCategoryTrademark', 'CategoryTrademarkController@createCategoryTrademark');
 
@@ -86,9 +86,9 @@ Route::delete('/productManagment/deleteCategoryTrademark', 'CategoryTrademarkCon
 // ****************FORMULARIO CRUD RELATIONSHIP CATEGORY TRADEMARK****************
 
 // ****************FORMULARIO CRUD PRODUCTS****************
-Route::get('/productManagment/crudProducts', 'ProductController@showProducts');
+Route::get('/productManagment/crudProducts', 'ProductController@showProducts')->middleware('roleUser');
 
-Route::get('/productManagment/updateProduct/{id}', 'ProductController@showUpdateProduct');
+Route::get('/productManagment/updateProduct/{id}', 'ProductController@showUpdateProduct')->middleware('roleUser');
 
 Route::put('/productManagment/updateProduct', 'ProductController@updateProduct');
 
@@ -108,7 +108,6 @@ Route::get('/userProfile', function(){
 });
 
 // ****************USUARIO****************
-
 
 
 // ****************Generados con makeauth****************
@@ -135,4 +134,3 @@ Route::post('password/reset', 'Auth\ResetPasswordController@reset')->name('passw
 // ****************Generados con makeauth****************
 
 Route::get('/homeHassen', 'HomeController@index')->name('homeHassen');
-

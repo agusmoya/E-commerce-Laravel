@@ -13,15 +13,14 @@ class ProductController extends Controller
 {
 
   public function showProductPreview($productId){
-    $product = Product::join('categories', 'category_id', '=', 'categories.id')
+    $productForShow = Product::join('categories', 'category_id', '=', 'categories.id')
     ->join('trademarks', 'trademark_id', '=', 'trademarks.id')
     ->select('products.*', 'categories.name as name_category', 'trademarks.name as name_trademark')
     ->where([
-      ['products.status', 1], 
-      ['products.id', $productId] 
-      ])->get();
-      // dd($product);
-    return view('loadedProductPreview', compact('product'));
+      ['products.status', 1],
+      ['products.id', $productId]
+      ])->first();
+    return view('loadedProductPreview', compact('productForShow'));
 
   }
 
@@ -68,12 +67,13 @@ class ProductController extends Controller
     ];
 
     $arrayProducts = Product::all();
+    //Del formulario me llega una cadena separada por coma del id de trademark y de category
     $result = explode(',', $form["trademarkId_categoryId"]);
-    $trademark_id = $result[0];
-    $category_id = $result[1];
+    $trademarkId = $result[0];
+    $categoryId = $result[1];
     $foundProduct = null;
     foreach ($arrayProducts as $product) {
-      if($product["name"] == $form["name_product"] && $product["category_id"] == $category_id && $product["trademark_id"] == $trademark_id && $product["status"] == false){
+      if($product["name"] == $form["name_product"] && $product["category_id"] == $categoryId && $product["trademark_id"] == $trademarkId && $product["status"] == false){
         $foundProduct = $product;
         break;
       }
@@ -85,17 +85,18 @@ class ProductController extends Controller
       $foundProduct->price = $form["price"];
       $foundProduct->description = $form["description"];
       $foundProduct->stock = $form["stock"];
+
+      $ruta = $form->file('photo')->store('public/imagenes/imgProductos');
+      $nombreArchivo = basename($ruta);
+      $foundProduct->photo = $nombreArchivo;
       $foundProduct->save();
-      return redirect('/productManagment/crudProducts');
+      $productPreview = $foundProduct;
+
     } else {
       $this->validate($form, $rules, $messages);
       $newProduct = new Product();
-      //Del formulario me llega una cadena separada por coma del id de trademark y de category
-      $result = explode(',', $form["trademarkId_categoryId"]);
-      $newProduct->trademark_id = $result[0];
-      $nameTrademark = Trademark::find($newProduct->trademark_id)->name;
-      $newProduct->category_id = $result[1];
-      $nameCategory = Category::find($newProduct->category_id)->name;
+      $newProduct->trademark_id = $trademarkId;
+      $newProduct->category_id = $categoryId;
       $newProduct->name = $form["name_product"];
       $newProduct->price = $form["price"];
       $newProduct->description = $form["description"];
@@ -105,9 +106,19 @@ class ProductController extends Controller
       $nombreArchivo = basename($ruta);
       $newProduct->photo = $nombreArchivo;
       $newProduct->save();
-      $productDetail = array("objProduct"=>$newProduct, "nameTrademark"=>$nameTrademark, "nameCategory"=>$nameCategory);
-      return view('loadedProductPreview', compact('productDetail'));
+
+      $productPreview = $newProduct;
     }
+
+    $productForShow = Product::join('categories', 'category_id', '=', 'categories.id')
+    ->join('trademarks', 'trademark_id', '=', 'trademarks.id')
+    ->select('products.*', 'categories.name as name_category', 'trademarks.name as name_trademark')
+    ->where([
+      ['products.status', 1],
+      ['products.id', $productPreview->id]
+      ])
+    ->first();
+    return view('loadedProductPreview', compact('productForShow'));
   }
 
   public function updateProduct(Request $form){
@@ -146,8 +157,16 @@ class ProductController extends Controller
     $nombreArchivo = basename($ruta);
     $product->photo = $nombreArchivo;
     $product->save();
-    $productDetail = array("objProduct"=>$product, "nameTrademark"=>$nameTrademark, "nameCategory"=>$nameCategory);
-    return view('loadedProductPreview', compact('productDetail'));
+
+    $productForShow = Product::join('categories', 'category_id', '=', 'categories.id')
+    ->join('trademarks', 'trademark_id', '=', 'trademarks.id')
+    ->select('products.*', 'categories.name as name_category', 'trademarks.name as name_trademark')
+    ->where([
+      ['products.status', 1],
+      ['products.id', $product->id]
+      ])
+    ->first();
+    return view('loadedProductPreview', compact('productForShow'));
   }
 
   public function deleteProduct(Request $form){
@@ -156,7 +175,5 @@ class ProductController extends Controller
     $product->save();
     return redirect('/productManagment/crudProducts');
   }
-
-
 
 }

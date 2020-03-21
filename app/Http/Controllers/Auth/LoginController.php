@@ -30,7 +30,7 @@ class LoginController extends Controller
      */
     // protected $redirectTo = '/home'; Esta opcion es la que pone laravel despues de make:auth
     protected $redirectTo = '/homeHassen'; //modifico para que me redireccione a mi home
-    
+
 
     /**
      * Create a new controller instance.
@@ -44,14 +44,23 @@ class LoginController extends Controller
 
     public function authenticate(Request $request){ //agregado por mi segun documentacion
       $credentials = $request->only('email', 'password');
-    
+
       if(Auth::attempt($credentials)){
         //Authentication passed...
         // return redirect()->intended('dashboard');
         return redirect()->intended('homeHassen');
 
       }
-    
+
+    }
+
+    public function logout(Request $request) //Me traigo esto de AuthenticatesUsers
+    {
+        $this->guard()->logout();
+
+        $request->session()->invalidate();
+
+        return $this->loggedOut($request) ?: redirect('/homeHassen');
     }
 
 }

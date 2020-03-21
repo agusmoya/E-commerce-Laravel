@@ -6,7 +6,7 @@
 
 @section('crudProducts')
 
-  <div class="container" style="background-color:white;">
+  <div id="container_crud_products" class="container-fluid" style="background-color:white;">
     <h1 class="text-center my-4 p-5" style="color:black;"><b>Gestión de Productos</b></h1>
 
     {{-- ARRAY DE ERRORES --}}
@@ -22,13 +22,23 @@
 
       <div class="section">
 
-          <h2 class="mt-4"> <b>Productos en el sistema:</b> </h2>
+          <h3 class="mt-4" style="color:black"> <b>Productos en el sistema:</b> </h3>
 
-          <table class="table table-hover">
+          <table class="table table-hover table-bordered">
             <thead class="thead-dark">
               <tr>
-                <th scope="col"> ID </th> <th scope="col">Nombre</th> <th scope="col">Precio</th> <th scope="col">Descripción</th> <th scope="col">Fecha de Alta</th> <th scope="col">Fecha de Modificación</th> <th scope="col">Stock</th>
-                <th scope="col">Actualizar</th> <th scope="col">Eliminar</th>
+                <th class="text-center" scope="col"> ID </th>
+                <th class="text-center" scope="col">Nombre</th>
+                <th class="text-center" scope="col">Precio</th>
+                <th class="text-center" scope="col">Categoría</th>
+                <th class="text-center" scope="col">Marca</th>
+                <th class="text-center" scope="col">Descripción</th>
+                <th class="text-center" scope="col">Fecha de Alta</th>
+                <th class="text-center" scope="col">Fecha de Modificación</th>
+                <th class="text-center" scope="col">Stock</th>
+                <th class="text-center" scope="col">Ver</th>
+                <th class="text-center" scope="col">Actualizar</th>
+                <th class="text-center" scope="col">Eliminar</th>
               </tr>
             </thead>
             <tbody>
@@ -37,13 +47,21 @@
               @endphp
               @forelse ($arrayProducts as $product)
                 <tr>
-                  <th scope="row"> {{$contador++}} </th> <td>{{$product->name}}</td> <td>{{$product->price}}</td> <td>{{$product->description}}</td>
-                  <td>{{$product->created_at}}</td> <td>{{ \Carbon\Carbon::parse($product->created_at)->format('d/m/Y')}}</td> <td>{{$product->stock}}</td>
-                  <td> <button type="button" class="btn btn-link"> <a href="/productManagment/updateProduct/{{$product->id}}"> <i class="fas fa-pencil-alt"></i> Editar </a> </button> </td>
-                  <td> <form class="" action="/productManagment/deleteProduct" method="post">
+                  <th class="text-center" scope="row"> {{$contador++}} </th>
+                  <td class="text-center">{{$product->name}}</td>
+                  <td class="text-center">{{$product->price}}</td>
+                  <td class="text-center">{{$product->name_trademark}}</td>
+                  <td class="text-center">{{$product->name_category}}</td>
+                  <td class="text-center">{{$product->description}}</td>
+                  <td class="text-center">{{$product->created_at}}</td>
+                  <td class="text-center">{{ \Carbon\Carbon::parse($product->created_at)->format('d/m/Y')}}</td>
+                  <td class="text-center">{{$product->stock}}</td>
+                  <td class="text-center"> <a href="/productPreview/{{$product->id}}" class= "btn btn-link" style="color:#0f4c75; "> <i class="fas fa-eye"></i> Ver </a> </td>
+                  <td class="text-center"> <a href="/productManagment/updateProduct/{{$product->id}}" class= "btn btn-link" style="color:#64b2cd; "> <i class="fas fa-pencil-alt"></i> Editar </a> </td>
+                  <td class="text-center"> <form class="" action="/productManagment/deleteProduct" method="post">
                     @csrf
                     @method('delete')
-                    <input type="hidden" name="product_id" value="{{$product->id}}"> <button type="submit" class="btn btn-link"> <i class="far fa-trash-alt"> </i> Eliminar </button>
+                    <input type="hidden" name="product_id" value="{{$product->id}}"> <button type="submit" class="btn btn-link" style="color:#e32249;"> <i class="far fa-trash-alt"> </i> Eliminar </button>
                   </form> </td>
                 </tr>
               @empty
@@ -77,9 +95,9 @@
               @endforelse
             </div>
           @empty
-            <p class="ml-3"> <strong> <i>¡¡No hay marcas relacionadas a categorias en el sistema!!</i> </strong> </p>
+            <p class="ml-3"> <strong> <i>¡¡No hay marcas relacionadas a categorías en el sistema!!</i> </strong> </p>
             <div class="alert alert-warning" role="alert">
-              <strong>Nota: </strong>Si no existe ninguna relación entre marcas y categorias no podrá cargar ningún producto!
+              <strong>Nota: </strong>Si no existe ninguna relación entre marcas y categorías no podrá cargar ningún producto!
             </div>
           @endforelse
         </div>

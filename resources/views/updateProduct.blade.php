@@ -6,7 +6,7 @@
 
 @section('crudProducts')
   <div class="container my-5" style="background-color:white;">
-    <h1 class="text-center py-5" style="color:black;"><b>Actualizar Producto</b></h1>
+    <h1 class="text-center py-4 " style="color:black;"><b>Actualizar Producto</b></h1>
 
     {{-- ARRAY DE ERRORES --}}
     <ul class="errors" style="color:red;">
@@ -19,8 +19,10 @@
       @csrf
       @method('put')
 
-      <h4 class="ml-3" style="color:black;"> <b><i>Aquí podrá modificar el producto:</i></b> </h4>
       <div class="form-group">
+        <div class="col-md-3 m-auto">
+          <img src="{{asset('/storage/imagenes/imgProductos/'.$product->photo)}}" class="card-img" alt="presentacionProducto">
+        </div>
         <input type="hidden" name="product_id" value="{{$product->id}}">
         <label for="exampleFormControlInput1" class="mt-3"><i> Ingrese el nombre: </i></label>
         <input name="name_product" type="text" class="form-control" id="exampleFormControlInput1" value="{{$product->name}}">
@@ -40,7 +42,7 @@
       <div class="form-group text-center">
         <button type="submit" name="register_producto" class="btn btn-danger btn-lg mt-4 mb-5">Actualizar Producto</button>
       </div>
-      <a class="btn btn-secondary mb-2" style="text-decoration: none;color:white;" href="/productManagment/crudCategories"> <strong>Volver a Categoría</strong> </a>
+      <a class="btn btn-dark mb-2" style="text-decoration: none;color:white;" href="/productManagment/crudCategories"> <strong>Volver a Categoría</strong> </a>
     </form>
 
   </div>

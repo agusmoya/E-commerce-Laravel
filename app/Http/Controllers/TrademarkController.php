@@ -15,7 +15,9 @@ class TrademarkController extends Controller
   // }
   public function showTrademarks(){
 
-    $arrayTrademarks = Trademark::where('status', 1)->orderBy('name')->get();
+    $arrayTrademarks = Trademark::where('status', 1)
+    ->orderBy('name')
+    ->paginate(4);
     return view('crudTrademarks', compact('arrayTrademarks'));
   }
 

@@ -10,7 +10,9 @@ class CategoryController extends Controller
 {
 
   public function showCategories(){
-    $arrayCategories = Category::where('status', 1)->orderBy('name')->get();
+    $arrayCategories = Category::where('status', 1)
+    ->orderBy('name')
+    ->paginate(4);
     return view('crudCategories', compact('arrayCategories'));
   }
 

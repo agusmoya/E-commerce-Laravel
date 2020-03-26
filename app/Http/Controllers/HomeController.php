@@ -29,9 +29,10 @@ class HomeController extends Controller
         $arrayProducts = Product::join('categories', 'category_id', '=', 'categories.id')
         ->join('trademarks', 'trademark_id', '=', 'trademarks.id')
         ->select('products.*', 'categories.name as name_category', 'trademarks.name as name_trademark')
-        ->where('products.status', 1)->orderBy('name')
+        ->where('products.status', 1)        
+        ->limit(5)
+        ->inRandomOrder()
         ->get();
-
         $arrayCategories = Category::orderBy('name')->get();
         return view('homeHassen', compact('arrayProducts', 'arrayCategories'));
 

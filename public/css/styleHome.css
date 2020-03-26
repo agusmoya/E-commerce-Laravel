@@ -28,6 +28,18 @@ header a {
   font-weight: bolder;
 }
 
+#breadcrumb {
+  background-color: #1b262c;
+}
+
+#breadcrumb ol {
+  background-color: #1b262c;
+}
+
+#breadcrumb ol li a{
+color: lightgrey;
+}
+
 .jumbotron {
  background-color: #84142d;
  color: white;

@@ -24,30 +24,14 @@
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <i class="fas fa-bars" style="color:#fff; font-size:28px;"></i>
       </button>
-      <a class="navbar-brand" href="/homeHassen"> <img src="\imagenes\HassenAccesorios\logoWebBlack.png" class="logo" alt="logo Hassen"></a>
-
+          <a class="navbar-brand" href="/homeHassen"> <img src="{{asset('/storage/imagenes/HassenAccesorios/logoWebBlack.png')}}" class="logo" alt="logo Hassen"></a>
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
+
         <ul class="navbar-nav ml-auto">
           <li class="nav-item active">
             <a class="nav-link" href="/homeHassen"> Home <span class="sr-only">(current)</span></a>
           </li>
 
-          {{-- <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-              Catalog
-            </a>
-            <div class="dropdown-menu" style="background-color:white;" aria-labelledby="navbarDropdown">
-              <a class="dropdown-item" style="color:black;" href="/products">Products</a>
-              <div class="dropdown-divider" style="color:black;"> Categorías... </div>
-              @forelse ($arrayCategories as $category)
-                <a class="dropdown-item" href="#">{{$category->name}}</a>
-
-              @empty
-                <a class="dropdown-item" href="#">No hay productos cargados!</a>
-
-              @endforelse
-            </div>
-          </li> --}}
           {{-- El metodo check() devuelve true o false dependiendo de si el user está logueado o no
           y el metodo user() me trae al usuario logueado en ese momento
           AMBOS LOS SACAMOS DE LA CLASE Auth--}}
@@ -124,16 +108,16 @@
       <div id="aboutUs" class="col-12 col-sm-4 col-md-4">
         <h5>About Us</h5>
         <ul class="list-unstyled quick-links">
-          <li><a href="home"></i>Home</a></li>
-          <li><a href="products"></i>Catalog</a></li>
-          <li><a href="faq"></i>FAQ</a></li>
+          <li><a href="/homeHassen"></i>Home</a></li>
+          <li><a href="/homeHassen/availableProducts"></i>Catalog</a></li>
+          <li><a href="/faq"></i>FAQ</a></li>
         </ul>
       </div>
       <div id="socNetworks" class="col-12 col-sm-4 col-md-4">
         <h5>Social Networks</h5>
         <ul class="list-unstyled quick-links">
-          <li><a href="https://www.facebook.com/" target="_blank"><i class="fab fa-facebook-square mr-1" style="font-size: 25px;"></i>Facebook</a></li>
-          <li><a href="https://www.instagram.com/" target="_blank"><i class="fab fa-instagram mr-1" style="font-size: 25px;"></i>Instagram</a></li>
+          <li><a href="https://www.facebook.com/fb.me/hassenaccesorios" target="_blank"><i class="fab fa-facebook-square mr-1" style="font-size: 25px;"></i>Facebook</a></li>
+          <li><a href="https://instagram.com/hassen_accesorios?igshid=12tcsxg35b87r" target="_blank"><i class="fab fa-instagram mr-1" style="font-size: 25px;"></i>Instagram</a></li>
           <li><a href="https://www.twitter.com/" target="_blank"><i class="fab fa-twitter-square mr-1" style="font-size: 25px;" ></i>Twitter</a></li>
         </ul>
       </div>

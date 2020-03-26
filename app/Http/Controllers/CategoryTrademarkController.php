@@ -18,7 +18,8 @@ class CategoryTrademarkController extends Controller
       ->join('trademarks', 'trademark_id', '=', 'trademarks.id')
       ->select('category_trademark.*', 'categories.name as name_category', 'trademarks.name as name_trademark')
       ->where('category_trademark.status', 1)
-      ->get();
+      ->orderBy('name_trademark')
+      ->paginate(4);
       return view('crudCategoryTrademark', compact('arrayCategoryTrademark','arrayCategories', 'arrayTrademarks'));
     }
 

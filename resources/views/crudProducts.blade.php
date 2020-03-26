@@ -6,6 +6,17 @@
 
 @section('crudProducts')
 
+
+  <nav id="breadcrumb" aria-label="breadcrumb">
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item"><a href="/homeHassen">Home</a></li>
+      <li class="breadcrumb-item"><a href="/productManagment/crudTrademarks">CRUD Trademark</a></li>
+      <li class="breadcrumb-item"><a href="/productManagment/crudCategories">CRUD Category</a></li>
+      <li class="breadcrumb-item"><a href="/productManagment/crudCategoryTrademark">CRUD Trademark|Category</a></li>
+      <li class="breadcrumb-item active" aria-current="page">CRUD Products</li>
+    </ol>
+  </nav>
+
   <div id="container_crud_products" class="container-fluid" style="background-color:white;">
     <h1 class="text-center my-4 p-5" style="color:black;"><b>Gestión de Productos</b></h1>
 
@@ -20,18 +31,17 @@
       <!-- INICIO FORMS PRODUCTO -->
       <!-- INICIA FORM ALTA PRODUCTOS EN BD-->
 
-      <div class="section">
+      <div class="table-responsive">
 
           <h3 class="mt-4" style="color:black"> <b>Productos en el sistema:</b> </h3>
-
           <table class="table table-hover table-bordered">
             <thead class="thead-dark">
               <tr>
                 <th class="text-center" scope="col"> ID </th>
                 <th class="text-center" scope="col">Nombre</th>
                 <th class="text-center" scope="col">Precio</th>
-                <th class="text-center" scope="col">Categoría</th>
                 <th class="text-center" scope="col">Marca</th>
+                <th class="text-center" scope="col">Categoría</th>
                 <th class="text-center" scope="col">Descripción</th>
                 <th class="text-center" scope="col">Fecha de Alta</th>
                 <th class="text-center" scope="col">Fecha de Modificación</th>
@@ -71,13 +81,15 @@
               @endforelse
             </tbody>
           </table>
-
+          <div class="pagination justify-content-center">
+            <p>{{$arrayProducts->links()}}</p>
+          </div>
       </div>
 
       <form class="register_product" action="/productManagment/createProduct" method="post" enctype="multipart/form-data">
         {{-- @method() --}}
         @csrf
-        <h2 class="mt-4"> <b>Producto:</b> </h2>
+        <h2 class="mt-4" style="color:black;"> <b>Producto:</b> </h2>
         <h5> Categorías disponibles por Marca: </h5>
         <div class="row">
           @forelse ($arrayTrademarks as $trademark)
@@ -127,7 +139,6 @@
 
     <div class="form-group p-3 text-right">
       <a class="btn btn-secondary" style="text-decoration: none;color:white;" href="/productManagment/crudCategories"> <strong>Volver a Categoría</strong> </a>
-      <a class="btn btn-danger" style="text-decoration: none;color:white;" href="/productManagment/crudProducts"> <strong>Continuar a Producto</strong> </a>
     </div>
   </div>
 @endsection

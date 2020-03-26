@@ -5,6 +5,15 @@
 @endsection
 
 @section('crudCategoryTrademark')
+  <nav id="breadcrumb" aria-label="breadcrumb">
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item" aria-label="breadcrumb"><a href="/homeHassen">Home</a></li>
+      <li class="breadcrumb-item"><a href="/productManagment/crudTrademarks">CRUD Trademark</a></li>
+      <li class="breadcrumb-item"><a href="/productManagment/crudCategories">CRUD Category</a></li>
+      <li class="breadcrumb-item active" aria-current="page">CRUD Trademark|Category</a></li>
+      {{-- <li class="breadcrumb-item"><a href="/productManagment/crudProducts">CRUD Products</li> --}}
+    </ol>
+  </nav>
 
   <div class="container" style="background-color:white;">
     <h1 class="text-center my-4 p-5" style="color:black;"><b>Relación Marca/Categoría</b></h1>
@@ -19,9 +28,10 @@
 
     <!-- INICIA FORMS MARCAS -->
     <!-- INICIA FORM CONSULTA MARCAS EN BD -->
-      <div class="section">
-        <div class="form-group">
-          <h2 class="mt-4"> <b>Relaciones Marca/Categorías en el sistema:</b> </h2>
+    <div class="section">
+      <div class="form-group">
+        <h3 class="mt-4" style="color:black;"> <b>Relaciones Marca/Categorías en el sistema:</b> </h3>
+        <div class="table-responsive">
 
           <table class="table table-hover">
             <thead class="thead-dark">
@@ -50,46 +60,49 @@
                 </tr>
               @endforelse
             </tbody>
-          </table>
+        </table>
+        <div class="pagination justify-content-center">
+          {{$arrayCategoryTrademark->links()}}
+        </div>
+      </div>
+      </div>
+
+      <!-- INICIA FORM RELACION CATEGORIA/MARCA EN BD -->
+      <form class="show_categories_trademarks" action="/productManagment/createCategoryTrademark" method="post">
+        @csrf
+        <div class="form-group">
+          <h3 class="mt-4"> <b>Listado de Categorías:</b> </h3>
+          <label class="mt-3" for="exampleFormControlSelect1"><i>Listado de categorías cargadas en el sistema: </i></label>
+          <select class="form-control" id="exampleFormControlSelect1" name="category_id" >
+            <option value="">Seleccione una categoría...</option>
+            @forelse ($arrayCategories as $category)
+              <option value="{{$category->id}}"> {{ $category->name }} </option>
+            @empty
+              <option value="" selected>No hay categorías cargadas en el sistema!</option>
+            @endforelse
+          </select>
+          <span style="color: red;"class="help-block" id="error"><i></i></span>
         </div>
 
-        <!-- INICIA FORM RELACION CATEGORIA/MARCA EN BD -->
-        <form class="show_categories_trademarks" action="/productManagment/createCategoryTrademark" method="post">
-          @csrf
-          <h2 class="mt-4"> <b>Relación Categoría/Marca:</b> </h2>
-          <div class="form-group">
-            <h3 class="mt-4"> <b>Listado de Categorías:</b> </h3>
-            <label class="mt-3" for="exampleFormControlSelect1"><i>Listado de categorías cargadas en el sistema: </i></label>
-            <select class="form-control" id="exampleFormControlSelect1" name="category_id" >
-              <option value="">Seleccione una categoría...</option>
-              @forelse ($arrayCategories as $category)
-                <option value="{{$category->id}}"> {{ $category->name }} </option>
-              @empty
-                <option value="" selected>No hay categorías cargadas en el sistema!</option>
-              @endforelse
-            </select>
-            <span style="color: red;"class="help-block" id="error"><i></i></span>
-          </div>
+        <div class="form-group">
+          <h3 class="mt-4"> <b>Listado de Marcas:</b> </h3>
+          <label class="mt-3" for="exampleFormControlSelect1"><i>Listado de marcas cargadas en el sistema:</i> </label>
+          <select class="form-control" id="exampleFormControlSelect1" name="trademark_id" >
+            <option value="">Seleccione una marca...</option>
+            @forelse ($arrayTrademarks as $trademark)
+              <option value="{{$trademark->id}}"> {{ $trademark->name }} </option>
+            @empty
+              <option value="" selected>No hay marcas cargadas en el sistema!</option>
+            @endforelse
+          </select>
+        </div>
+        <button type="submit" name="register_category_trademark" class="btn btn-dark mb-3">Relacionar Marca con Categoría</button>
 
-          <div class="form-group">
-            <h3 class="mt-4"> <b>Listado de Marcas:</b> </h3>
-            <label class="mt-3" for="exampleFormControlSelect1"><i>Listado de marcas cargadas en el sistema:</i> </label>
-            <select class="form-control" id="exampleFormControlSelect1" name="trademark_id" >
-              <option value="">Seleccione una marca...</option>
-              @forelse ($arrayTrademarks as $trademark)
-                <option value="{{$trademark->id}}"> {{ $trademark->name }} </option>
-              @empty
-                <option value="" selected>No hay marcas cargadas en el sistema!</option>
-              @endforelse
-            </select>
-          </div>
-          <button type="submit" name="register_category_trademark" class="btn btn-dark mb-3">Relacionar Marca con Categoría</button>
-
-        </form>
-        <!-- FIN FORM RELACION CATEGORIA/MARCA EN BD -->
+      </form>
+      <!-- FIN FORM RELACION CATEGORIA/MARCA EN BD -->
 
 
-      </div>
+    </div>
 
     <div class="form-group p-3 text-right">
       <a class="btn btn-secondary" style="text-decoration: none;color:white;" href="/productManagment/crudCategories"> <strong>Volver a Categoría</strong> </a>

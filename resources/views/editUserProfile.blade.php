@@ -12,121 +12,99 @@
 @endsection
 
 @section('userProfile')
+
+  <nav id="breadcrumb" aria-label="breadcrumb">
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item"><a href="/homeHassen">Home</a></li>
+      <li class="breadcrumb-item active"> <a href="/userProfile">User Profile</a></li>
+      <li class="breadcrumb-item active" aria-current="page">Update User Profile</li>
+
+    </ol>
+  </nav>
+
   <div class="container" >
     <div class="signup-form-container">
 
       <!-- NOTE: Inicia registracion -->
-      <form role="form" id="register-form" autocomplete="off" action="" method="post" enctype="multipart/form-data">
+      <form class="profile_user" role="form" id="register-form" action="/userProfile/updateUserProfile" method="post" enctype="multipart/form-data">
+        @csrf
+
         <div class="form-header">
 
-          @if (isset($user->profilePhoto))
           <div class="container mb-5">
-            <div class="jumbotron">
-              <div class="title-info">
-                <h1> Welcome {{$user->$name . " " . $surname . "!"}} </h1>
-                <p>Has logrado registrarte exitosamente!!!</p>
+            <div class="jumbotron p-3 m-3">
+              <div class="title-info text-center">
+                <h1> {{Auth::user()->name}} </h1>
+                <p>¡Here you can edit your profile!</p>
               </div>
-              <div class="image-Profile">
-              <img src="{{asset('/storage/imagenes/imgUsers/'.$user->profilePhoto)}}" class="card-img mt-1" alt="profile-photo">
-              </div>
-              <?php // NOTE: <p><a class="btn btn-secondary btn-md" href="registration.php" role="button">Edit Profile</a></p> ?>
+              @if (isset(Auth::user()->profilePhoto))
+                <div class="col-6 col-md-6 m-auto">
+                  <img class="img-fluid img-thumbnail" src="{{asset('/storage/imagenes/imgUsers/'. Auth::user()->profilePhoto)}}" class="card-img" alt="profile-photo">
+                </div>
+              @else
+                <h2 class="form-title mt-4 mb-4"><i class="fa fa-user"> </i>  My Profile</h2>
+                <div class="col-6 col-md-6 m-auto">
+                  <span style="font-size: 48px; color: Dodgerblue;">
+                    <i class="fas fa-user-alt"></i>
+                  </span>
+                </div>
+              @endif
             </div>
           </div>
-        <?php else:?>
-          <h2 class="form-title mt-4 mb-4"><i class="fa fa-user"></i>  My Profile</h2>
-        <?php endif;?>
 
-      </div>
-      <div class="form-body">
+        </div>
+        <div class="form-body">
+          <div class="row" >
+            <div class="form-group col-lg-6">
+              <label for="exampleInputEmail1">Name:</label>
+              <div class="input-group">
+                <div class="input-group-addon"><span class="glyphicon glyphicon-lock"></span></div>
+                <input name="name" id="name" type="text" class="form-control" placeholder="Name" value="{{Auth::user()->name}}">
+                <input name="id" id="name" type="hidden" class="form-control" value="{{Auth::user()->id}}">
+
+              </div>
+              <span class="help-block" id="error"></span>
+            </div>
+            <div class="form-group col-lg-6">
+              <label for="exampleInputEmail1">Surname:</label>
+              <div class="input-group">
+                <div class="input-group-addon"><span class="glyphicon glyphicon-lock"></span></div>
+                <input name="surname" type="text" class="form-control" placeholder="Lastname" value="{{Auth::user()->surname}}">
+              </div>
+              <span class="help-block" id="error"></span>
+            </div>
+          </div>
+
+          <div class="row" >
+          <div class="form-group col-12">
+            <label for="exampleInputEmail1">Email:</label>
+            <div class="input-group">
+              <div class="input-group-addon"><span class="glyphicon glyphicon-envelope"></span></div>
+              <input name="email" type="text" class="form-control" placeholder="Email" value="{{Auth::user()->email}}" readonly>
+            </div>
+            <span class="help-block" id="error"></span>
+          </div>
+        </div>
+
         <div class="row" >
-          <div class="form-group col-lg-6">
-            <div class="input-group">
-              <div class="input-group-addon"><span class="glyphicon glyphicon-lock"></span></div>
-              <input name="name" id="name" type="text" class="form-control" placeholder="Name" value="<?= $name ?>">
-            </div>
-            <span class="help-block" id="error"></span>
-          </div>
-          <div class="form-group col-lg-6">
-            <div class="input-group">
-              <div class="input-group-addon"><span class="glyphicon glyphicon-lock"></span></div>
-              <input name="lastname" type="text" class="form-control" placeholder="Lastname" value="<?= $lastname ?>">
-            </div>
-            <span class="help-block" id="error"></span>
-          </div>
-        </div>
-
-        <div class="row">
-          <div class="form-group col-lg-6">
-            <div class="input-group">
-              <div class="input-group-addon"><span class="glyphicon glyphicon-lock"></span></div>
-              <input name="dni" id="dni" type="text" class="form-control" placeholder="DNI" value="<?= $dni ?>">
-            </div>
-            <span class="help-block" id="error"></span>
-          </div>
-          <div class="form-group col-lg-6">
-            <div class="input-group">
-              <div class="input-group-addon"><span class="glyphicon glyphicon-lock"></span></div>
-              <input name="phone" type="text" class="form-control" placeholder="Phone" value="<?= $phone ?>">
-            </div>
-            <span class="help-block" id="error"></span>
-          </div>
-        </div>
-
-        <div class="row">
-          <div class="form-group col-lg-6">
-            <div class="input-group">
-              <div class="input-group-addon"><span class="glyphicon glyphicon-lock"></span></div>
-              <input name="city" id="city" type="text" class="form-control" placeholder="City" value="<?= $city ?>">
-            </div>
-            <span class="help-block" id="error"></span>
-          </div>
-          <div class="form-group col-lg-6">
-            <div class="input-group">
-              <div class="input-group-addon"><span class="glyphicon glyphicon-lock"></span></div>
-              <input name="country" type="text" class="form-control" placeholder="Country" value="<?= $country ?>">
-            </div>
-            <span class="help-block" id="error"></span>
-          </div>
-        </div>
-
-        <div class="form-group">
-          <div class="input-group">
-            <div class="input-group-addon"><span class="glyphicon glyphicon-user"></span></div>
-            <input name="username" type="text" class="form-control" placeholder="Username" value="<?= $username ?>">
-          </div>
-          <span class="help-block" id="error"></span>
-        </div>
-        <div class="form-group">
+        <div class="form-group col-6">
+          <label for="exampleInputEmail1">Profile photo:</label>
           <div class="input-group">
             <div class="input-group-addon"><span class="glyphicon glyphicon-envelope"></span></div>
-            <input name="email" type="text" class="form-control" placeholder="Email" value="<?= $email ?>">
+            <input name="profilePhoto" type="file" class="form-control">
           </div>
           <span class="help-block" id="error"></span>
         </div>
-        <div class="row">
-          <div class="form-group col-lg-6">
-            <div class="input-group">
-              <div class="input-group-addon"><span class="glyphicon glyphicon-lock"></span></div>
-              <input name="password" id="password" type="password" class="form-control" placeholder="Password">
-            </div>
-            <span class="help-block" id="error"></span>
-          </div>
-          <div class="form-group col-lg-6">
-            <div class="input-group">
-              <div class="input-group-addon"><span class="glyphicon glyphicon-lock"></span></div>
-              <input name="repassword" type="password" class="form-control" placeholder="Retype Password">
-            </div>
-            <span class="help-block" id="error"></span>
-          </div>
+      </div>
+
         </div>
-      </div>
-      <div class="form-footer">
-        <button type="submit" class="btn btn-info">
-          <span class="glyphicon glyphicon-log-in">Edit Profile</span>
-        </button>
-      </div>
-    </form>
-  </div>
+        <div class="form-footer">
+          <button type="submit" class="btn btn-outline-secondary btn-block">
+            <span class="glyphicon glyphicon-log-in">Update Profile</span>
+          </button>
+        </div>
+      </form>
+    </div>
   </div>
 
 @endsection

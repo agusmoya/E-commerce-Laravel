@@ -11,8 +11,14 @@
 |
 */
 
+
+
 Route::get('/', function () {
   return view('welcome');
+});
+
+Route::get('/probandoJS', function () {
+  return view('probandoJS');
 });
 
 Route::get('/homeHassen', function () {
@@ -22,6 +28,8 @@ Route::get('/homeHassen', function () {
 // Route::get('/home', function () { //auth
 //   return view('home');
 // });
+
+// Route::get('/home', 'HomeController@index')->name('home');
 
 Route::get('/products', function () {
   return view('products');
@@ -51,6 +59,22 @@ Route::get('/faq', function () {
   return view('faq');
 });
 
+Route::get('/homeHassen', 'HomeController@index')->name('homeHassen');
+
+Route::get('/homeHassen/availableProducts', 'ProductController@availableProducts');
+
+// ****************FORMULARIO USER****************
+
+// Route::get('/userProfile', 'HomeController@showUserProfile');
+Route::get('/userProfile', function(){
+  return view('userProfile');
+});
+Route::get('/userProfile/updateUserProfile/{id}', 'UserHassenController@showUpdateUserProfile');
+
+Route::post('/userProfile/updateUserProfile', 'UserHassenController@updateUserProfile');
+
+// ****************FORMULARIO USER****************
+
 // ****************FORMULARIO CRUD TRADEMARKS****************
 Route::get('/productManagment/crudTrademarks', 'TrademarkController@showTrademarks')->middleware('roleUser');
 
@@ -61,11 +85,9 @@ Route::get('/productManagment/updateTrademark/{id}', 'TrademarkController@showUp
 Route::put('/productManagment/updateTrademark', 'TrademarkController@updateTrademark');
 
 Route::delete('/productManagment/deleteTrademark', 'TrademarkController@deleteTrademark');
-
 // ****************FORMULARIO CRUD TRADEMARKS****************
 
 // ****************FORMULARIO CRUD CATEGORIES****************
-
 Route::get('/productManagment/crudCategories', 'CategoryController@showCategories')->middleware('roleUser');
 
 Route::post('/productManagment/createCategory', 'CategoryController@createCategory');
@@ -99,22 +121,10 @@ Route::delete('/productManagment/deleteProduct', 'ProductController@deleteProduc
 
 Route::get('/productPreview/{productId}', 'ProductController@showProductPreview');
 
-// ****************USUARIO****************
-
-// Route::get('/userProfile', 'HomeController@showUserProfile');
-
-Route::get('/userProfile', function(){
-  return view('userProfile');
-});
-
-// ****************USUARIO****************
 
 
 // ****************Generados con makeauth****************
-// ****************Personalizando mi auth****************
-
 // Auth::routes(); Lo que figura debajo reemplaza esta línea
-
 // Authentication Routes...
 Route::get('login', 'Auth\LoginController@showLoginForm')->name('login');
 Route::post('login', 'Auth\LoginController@login');
@@ -129,8 +139,3 @@ Route::get('password/reset', 'Auth\ForgotPasswordController@showLinkRequestForm'
 Route::post('password/email', 'Auth\ForgotPasswordController@sendResetLinkEmail')->name('password.email');
 Route::get('password/reset/{token}', 'Auth\ResetPasswordController@showResetForm')->name('password.reset');
 Route::post('password/reset', 'Auth\ResetPasswordController@reset')->name('password.update');
-
-// Route::get('/home', 'HomeController@index')->name('home');
-// ****************Generados con makeauth****************
-
-Route::get('/homeHassen', 'HomeController@index')->name('homeHassen');

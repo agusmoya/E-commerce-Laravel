@@ -6,6 +6,12 @@
 @section('title') Hassen F.A.Q. - Online Store @endsection
 
 @section('faq')
+  <nav id="breadcrumb" aria-label="breadcrumb">
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item" aria-label="breadcrumb"><a href="/homeHassen">Home</a></li>
+      <li class="breadcrumb-item active" aria-current="page">F.A.Q.</li>
+    </ol>
+  </nav>
 
   <div class="container">
     <h1 class="mt-5 mb-4">Frequent questions</h1>

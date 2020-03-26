@@ -12,6 +12,19 @@ use App\Category;
 class ProductController extends Controller
 {
 
+  public function availableProducts(){
+    $arrayProducts = Product::join('categories', 'category_id', '=', 'categories.id')
+    ->join('trademarks', 'trademark_id', '=', 'trademarks.id')
+    ->select('products.*', 'categories.name as name_category', 'trademarks.name as name_trademark')
+    ->where('products.status', 1)
+    ->orderBy('name_trademark')
+    ->orderBy('name_category')
+    ->get();
+
+    $arrayCategories = Category::orderBy('name')->get();
+    return view('availableProducts', compact('arrayProducts', 'arrayCategories'));
+  }
+
   public function showProductPreview($productId){
     $productForShow = Product::join('categories', 'category_id', '=', 'categories.id')
     ->join('trademarks', 'trademark_id', '=', 'trademarks.id')
@@ -25,12 +38,12 @@ class ProductController extends Controller
   }
 
   public function showProducts(){
-
     $arrayProducts = Product::join('categories', 'category_id', '=', 'categories.id')
     ->join('trademarks', 'trademark_id', '=', 'trademarks.id')
     ->select('products.*', 'categories.name as name_category', 'trademarks.name as name_trademark')
     ->where('products.status', 1)
-    ->get();
+    ->orderBy('name_trademark')
+    ->paginate(4);
 
     $arrayTrademarks = Trademark::where('status', 1)->orderBy('name')->get();
     $arrayCategories = Category::where('status', 1)->orderBy('name')->get();

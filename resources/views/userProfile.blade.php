@@ -23,7 +23,6 @@
       <!-- NOTE: Inicia registracion -->
       <form class="profile_user" role="form" id="register-form" action="/userProfile/updateUserProfile/{{Auth::user()->id}}" method="get">
         <div class="form-header">
-
           <div class="container mb-5">
             <div class="jumbotron p-3 m-3">
               <div class="title-info text-center">
@@ -60,7 +59,7 @@
               <label for="exampleInputEmail1">Surname:</label>
               <div class="input-group">
                 <div class="input-group-addon"><span class="glyphicon glyphicon-lock"></span></div>
-                <input name="surname" type="text" class="form-control" placeholder="Lastname" value="{{Auth::user()->surname}}" readonly>
+                <input name="surname" type="text" class="form-control" placeholder="Surname" value="{{Auth::user()->surname}}" readonly>
               </div>
               <span class="help-block" id="error"></span>
             </div>

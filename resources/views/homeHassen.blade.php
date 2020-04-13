@@ -18,13 +18,16 @@
             <div class="dropdown-menu " aria-labelledby="navbarDropdown">
               <a class="dropdown-item" href="/homeHassen/availableProducts"><strong>Products</strong></a>
               <div class="dropdown-divider"></div>
-
-              @forelse ($arrayCategories as $category)
-                <a class="dropdown-item" href="#">{{$category->name}}</a>
-                <div class="dropdown-divider"></div>
-              @empty
-                {{"Sin productos disponibles!"}}
-              @endforelse
+              @if (isset($arrayCategories))
+                @forelse ($arrayCategories as $category)
+                  <a class="dropdown-item" href="#">{{$category->name}}</a>
+                  <div class="dropdown-divider"></div>
+                @empty
+                  {{"Sin productos disponibles!"}}
+                @endforelse
+              @else
+                <li class="nav-item dropdown">{{"Sin productos disponibles!"}}     </li>           
+            @endif
             </div>
           </li>
           <li class="nav-item active">
@@ -37,7 +40,7 @@
             <a class="nav-link" href="#"> Contact <span class="sr-only">(current)</span></a>
           </li>
         </ul>
-        
+
       </div>
     </nav>
 

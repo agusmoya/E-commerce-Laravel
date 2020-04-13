@@ -18,6 +18,7 @@ class CreateUsersTable extends Migration
       $table->bigIncrements('id');
       $table->string('name')->string();
       $table->string('surname')->string();
+      $table->string('province')->nullable();
       $table->string('email')->unique();
       $table->boolean('type')->nullable();
       $table->timestamp('email_verified_at')->nullable();
@@ -25,7 +26,7 @@ class CreateUsersTable extends Migration
       $table->string('profilePhoto', 200);
       $table->rememberToken();
       $table->boolean('status')->default($value = true);
-      
+
     });
   }
 

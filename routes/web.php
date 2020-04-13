@@ -11,14 +11,9 @@
 |
 */
 
-
-
 Route::get('/', function () {
-  return view('welcome');
-});
-
-Route::get('/probandoJS', function () {
-  return view('probandoJS');
+  // return view('welcome');
+  return view('home');
 });
 
 Route::get('/homeHassen', function () {
@@ -39,9 +34,9 @@ Route::get('/registration', function () {
   return view('registration');
 });
 
-Route::get('/register', function () { //auth
-  return view('register');
-});
+// Route::get('/register', function () { //auth
+//   return view('register');
+// });
 
 Route::get('/myPurchase', function () {
   return view('myPurchase');

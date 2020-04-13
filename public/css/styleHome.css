@@ -95,7 +95,6 @@ background-color: #212121;
 }
 
 /* NOTE: style Catalog */
-
 h2{
   color: black;
   font-size: 45px;
@@ -107,7 +106,6 @@ h2{
 }
 
 /* NOTE: style Registration */
-
 .form-header h1 {
   color: black;
   font-weight: 800;
@@ -180,7 +178,6 @@ form h2{
  }
 
  /* NOTE: crud Products */
-
  #container_crud_products{
    width: 85%;
  }
@@ -198,15 +195,10 @@ form h2{
  }
 
  /* NOTE: userProfile */
-
  .jumbotron{
   overflow: hidden;
   margin-top: 50px;
  }
-
-.jumbotron {
-
-}
 
  .profile_user .title-info{
   color: white;
@@ -225,3 +217,8 @@ form h2{
  #loaded_product_preview{
    color: black;
  }
+
+ /* NOTE: style Login */
+#containerMod {
+  color: black;
+}

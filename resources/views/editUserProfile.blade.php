@@ -1,15 +1,6 @@
 @extends('template')
 
-@section('styleUserProfile')
-  <link rel="stylesheet" href="{{asset('css/styleUserProfile.css')}}">
-@endsection
-{{-- @section('styleRegistration')
-  <link rel="stylesheet" href="{{asset('css/styleRegistration.css')}}">
-@endsection --}}
-
-@section('title')
-  Hassen User Profile - Online Store
-@endsection
+@section('title') Hassen User Profile - Online Store @endsection
 
 @section('userProfile')
 
@@ -18,7 +9,6 @@
       <li class="breadcrumb-item"><a href="/homeHassen">Home</a></li>
       <li class="breadcrumb-item active"> <a href="/userProfile">User Profile</a></li>
       <li class="breadcrumb-item active" aria-current="page">Update User Profile</li>
-
     </ol>
   </nav>
 
@@ -76,34 +66,47 @@
           </div>
 
           <div class="row" >
-          <div class="form-group col-12">
-            <label for="exampleInputEmail1">Email:</label>
-            <div class="input-group">
-              <div class="input-group-addon"><span class="glyphicon glyphicon-envelope"></span></div>
-              <input name="email" type="text" class="form-control" placeholder="Email" value="{{Auth::user()->email}}" readonly>
+            <div class="form-group col-12">
+              <label for="exampleInputEmail1">Email:</label>
+              <div class="input-group">
+                <div class="input-group-addon"><span class="glyphicon glyphicon-envelope"></span></div>
+                <input name="email" type="text" class="form-control" placeholder="Email" value="{{Auth::user()->email}}" readonly>
+              </div>
+              <span class="help-block" id="error"></span>
             </div>
-            <span class="help-block" id="error"></span>
           </div>
-        </div>
 
-        <div class="row" >
-        <div class="form-group col-6">
-          <label for="exampleInputEmail1">Profile photo:</label>
-          <div class="input-group">
-            <div class="input-group-addon"><span class="glyphicon glyphicon-envelope"></span></div>
-            <input name="profilePhoto" type="file" class="form-control">
+          <div class="row" >
+            <div class="form-group col-6">
+              <label for="inputFile">Profile photo:</label>
+              <div class="input-group">
+                <div class="input-group-addon"><span class="glyphicon glyphicon-envelope"></span></div>
+                <input id="inputFile" name="profilePhoto" type="file" class="form-control">
+              </div>
+              <span class="help-block" id="error"></span>
+            </div>
+
+            <div class="form-group col-6">
+              <label for="inputFile">Profile photo:</label>
+              <div class="input-group">
+                <div class="input-group-prepend">
+                  <span class="input-group-text">Upload</span>
+                </div>
+                <div class="custom-file">
+                  <input type="file" class="custom-file-input" id="iptFileUpload">
+                  <label id="lblFileUpload" class="custom-file-label" for="fileUpload">Choose file</label>
+                </div>
+              </div>
+            </div>
           </div>
-          <span class="help-block" id="error"></span>
-        </div>
+
+          <div class="form-footer">
+            <button type="submit" class="btn btn-outline-secondary btn-block">
+              <span class="glyphicon glyphicon-log-in">Update Profile</span>
+            </button>
+          </div>
+        </form>
       </div>
-
-        </div>
-        <div class="form-footer">
-          <button type="submit" class="btn btn-outline-secondary btn-block">
-            <span class="glyphicon glyphicon-log-in">Update Profile</span>
-          </button>
-        </div>
-      </form>
     </div>
   </div>
 

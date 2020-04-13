@@ -1,9 +1,14 @@
 <!doctype html>
 <html lang="en">
+
 <head>
   <!-- Required meta tags -->
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <script type="text/javascript" src="/js/paisesAPI.js"></script>
+
+  <!-- CSRF Token -->
+  <meta name="csrf-token" content="{{ csrf_token() }}">
 
   <!-- Bootstrap CSS -->
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
@@ -46,9 +51,9 @@
               <a class="nav-link" href="/login"> Login <span class="sr-only">(current)</span></a>
             </li>
           @endif
-          @if (Auth::check() && Auth::user()->type == 1 && Auth::user()->status==1)
+          @if (Auth::check() && Auth::user()->type == 1 && Auth::user()->status == 1)
             <li class="nav-item active">
-              <a class="nav-link" href="/productManagment/crudTrademarks"> Managment Product <span class="sr-only">(current)</span></a>
+              <a class="nav-link" href="/productManagment/crudTrademarks"> <i class="fas fa-plus-circle"></i> Managment Product <span class="sr-only">(current)</span></a>
             </li>
           @endif
           <li class="nav-item active">
@@ -91,14 +96,14 @@
 @yield('home')
 @yield('catalog')
 @yield('faq')
-@yield('login')
-@yield('registration')
 @yield('loadedProduct')
 @yield('myPurchase')
 @yield('crudTrademarks')
 @yield('crudCategories')
 @yield('crudCategoryTrademark')
 @yield('crudProducts')
+@yield('loginLaravel')
+@yield('registerLaravel')
 
 <!-- NOTE: inicia footer -->
 <footer id="footer" class="mt-5 p-4">

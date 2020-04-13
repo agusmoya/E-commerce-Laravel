@@ -11,7 +11,7 @@ class SeederDeProductos extends Seeder
      */
     public function run()
     {
-        // DB::table("products")->insert(
+        // DB::table("products")->insert( //estoy haciendo insert manual e individual
         //   [
         //     "category_id" => 1,
         //     "trademark_id" => 1,

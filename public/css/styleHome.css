@@ -37,20 +37,24 @@ header a {
 }
 
 #breadcrumb ol li a{
-color: lightgrey;
+  color: lightgrey;
 }
 
 .jumbotron {
- background-color: #84142d;
- color: white;
+  background-color: #84142d;
+  color: white;
 }
 
 .jumbotron h1{
- font-weight: 800;
+  font-weight: 800;
 }
 
 #footer {
-background-color: #212121;
+  background-color: #212121;
+}
+
+#footer .container{
+  margin-top: 30px;
 }
 
 #footer h5 {
@@ -118,107 +122,109 @@ h2{
 #error{
   color: white;
 }
- /* NOTE: style Faq */
- div.container {
-   color: white;
- }
+/* NOTE: style Faq */
+div.container {
+  color: white;
+}
 
- div.container h1{
-   font-weight: 800;
- }
+div.container h1{
+  font-weight: 800;
+}
 
- div.container .respuestas h3{
-   font-weight: 700;
- }
+div.container .respuestas h3{
+  font-weight: 700;
+}
 
- div.container .respuestas p{
-   font-weight: 400;
- }
+div.container .respuestas p{
+  font-weight: 400;
+}
 
- /* NOTE: style productForm */
+/* NOTE: style productForm */
 form h2{
   font-weight: bold;
   font-size: 30px;
 }
 
- .show_trademarks{
-   color: black;
- }
+.show_trademarks{
+  color: black;
+}
 
- .create_trademark{
-   color:black;
- }
+.create_trademark{
+  color:black;
+}
 
- .update_trademark{
-   color:black;
- }
+.update_trademark{
+  color:black;
+}
 
- .delete_trademark{
-   color:black;
- }
+.delete_trademark{
+  color:black;
+}
 
- .show_categories{
-   color: black;
- }
+.show_categories{
+  color: black;
+}
 
- .create_category{
-   color: black;
- }
+.create_category{
+  color: black;
+}
 
- .delete_category{
-   color:black;
- }
+.delete_category{
+  color:black;
+}
 
- .show_categories_trademarks{
-   color: black;
- }
+.show_categories_trademarks{
+  color: black;
+}
 
- .delete_related_trademark_category{
-   color: black;
- }
+.delete_related_trademark_category{
+  color: black;
+}
 
- /* NOTE: crud Products */
- #container_crud_products{
-   width: 85%;
- }
+/* NOTE: crud Products */
+#container_crud_products{
+  width: 85%;
+}
 
- .update_product{
-   color: black;
- }
+.update_product{
+  color: black;
+}
 
- .register_product{
-   color: black;
- }
+.register_product{
+  color: black;
+}
 
- .delete_product{
-   color: black;
- }
+.delete_product{
+  color: black;
+}
 
- /* NOTE: userProfile */
- .jumbotron{
+/* NOTE: userProfile */
+.jumbotron{
   overflow: hidden;
   margin-top: 50px;
- }
+}
 
- .profile_user .title-info{
+.profile_user .title-info{
   color: white;
   vertical-align: middle;
- }
+}
 
- .profile_user .form-header h1, h2{
-   color: white;
- }
+.profile_user .form-header h1, h2{
+  color: white;
+}
 
- .profile_user .form-header .image-Profile img{
+.profile_user .form-header img #center{
+  width:100%;
+  max-width:300px;
 
- }
+}
 
- /* NOTE: style loadedProductPreview */
- #loaded_product_preview{
-   color: black;
- }
+/* NOTE: style loadedProductPreview */
+#loaded_product_preview{
+  color: black;
+}
 
- /* NOTE: style Login */
+/* NOTE: style Login */
 #containerMod {
   color: black;
 }

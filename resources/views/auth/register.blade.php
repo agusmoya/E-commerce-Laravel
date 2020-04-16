@@ -10,6 +10,21 @@
                 <div class="card-header">{{ __('Register') }}</div>
 
                 <div class="card-body">
+
+                  {{-- ARRAY DE ERRORES --}}
+                  @if (count($errors) > 0)
+                    <div class="alert alert-danger">
+                      <p style="color:black">{{"Please correct the following errors:"}}</p>
+                      <ul class="errors" style="color:red;">
+                        @foreach ($errors->all() as $error)
+                          <li style="color:#900c3f">{{$error}}</li>
+                        @endforeach
+                      </ul>
+                    </div>
+
+                  @endif
+                  {{-- ARRAY DE ERRORES --}}
+
                     <form id="formRegister" method="POST" action="{{ route('register') }}" enctype="multipart/form-data">
                         @csrf
                         <div class="form-group row">
@@ -39,26 +54,26 @@
                                         <strong>{{ $message }}</strong>
                                     </span>
                                 @enderror
+                                <small id="alert" class="form-text " style="color:red"></small>
                                 <small id="error_surname" class="form-text " style="color:red"></small>
 
                             </div>
                         </div>
 
                         <div class="form-group row">
-                          <label for="province" class="col-md-4 col-form-label text-md-right">{{ __('Province') }}</label>
-                          <div class="col-md-6">
-                            <select id="provincesAPI" class="form-control" name="province" required>
-                              <option value="empty">Seleccione un país...</option>
+                            <label for="province" class="col-md-4 col-form-label text-md-right">{{ __('Province') }}</label>
+                            <div class="col-md-6">
+                            <select id="provincesAPI" class="form-control" name="province">
+                              <option value="">Seleccione un país...</option>
                             </select>
                             <small id="alert" class="form-text " style="color:red"></small>
+                            <small id="errorProv" class="form-text provHelp" style="color:red" role="alert"></small>
                           </div>
 
-                          {{-- <span id="errorProv" class="invalid-feedback" role="alert"></span> --}}
                           @error('province')
                               <span class="invalid-feedback" role="alert">
                                   <strong>{{ $message }}</strong>
                               </span>
-                              <small id="province" class="form-text " style="color:red"></small>
                           @enderror
                         </div>
 
@@ -72,7 +87,7 @@
                                         <strong>{{ $message }}</strong>
                                     </span>
                                 @enderror
-                                <small id="error_email" class="form-text " style="color:red"></small>
+                                <small id="error_email" class="form-text" style="color:red"></small>
 
                             </div>
                         </div>
@@ -98,7 +113,7 @@
 
                             <div class="col-md-6">
                                 <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required autocomplete="new-password">
-                                <small id="error_password_confirmation" class="form-text provHelp" style="color:red"></small>
+                                <small id="error_password_confirmation" class="form-text " style="color:red"></small>
 
                             </div>
                         </div>

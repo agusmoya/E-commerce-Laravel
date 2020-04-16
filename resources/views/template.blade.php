@@ -29,7 +29,7 @@
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <i class="fas fa-bars" style="color:#fff; font-size:28px;"></i>
       </button>
-          <a class="navbar-brand" href="/homeHassen"> <img src="{{asset('/storage/imagenes/HassenAccesorios/logoWebBlack.png')}}" class="logo" alt="logo Hassen"></a>
+          <a class="navbar" href="/homeHassen"> <img src="{{asset('/storage/imagenes/HassenAccesorios/logoWebBlack.png')}}" class="logo" alt="logo Hassen"></a>
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
 
         <ul class="navbar-nav ml-auto">

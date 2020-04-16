@@ -11,18 +11,22 @@
 |
 */
 
+Route::get('/colapso', function () {
+  return view('probandoColapso');
+});
+
 Route::get('/', function () {
-  // return view('welcome');
-  return view('home');
+  return view('welcome');
+  // return view('home');
 });
 
 Route::get('/homeHassen', function () {
   return view('homeHassen');
 });
 
-// Route::get('/home', function () { //auth
-//   return view('home');
-// });
+Route::get('/home', function () { //auth
+  return view('home');
+});
 
 // Route::get('/home', 'HomeController@index')->name('home');
 
@@ -34,9 +38,9 @@ Route::get('/registration', function () {
   return view('registration');
 });
 
-// Route::get('/register', function () { //auth
-//   return view('register');
-// });
+Route::get('/register', function () { //auth
+  return view('register');
+});
 
 Route::get('/myPurchase', function () {
   return view('myPurchase');
@@ -63,6 +67,9 @@ Route::get('/homeHassen/availableProducts', 'ProductController@availableProducts
 // Route::get('/userProfile', 'HomeController@showUserProfile');
 Route::get('/userProfile', function(){
   return view('userProfile');
+});
+Route::get('/editUserProfile', function(){
+  return view('editUserProfile');
 });
 Route::get('/userProfile/updateUserProfile/{id}', 'UserHassenController@showUpdateUserProfile');
 

@@ -52,12 +52,12 @@ class RegisterController extends Controller
     {
       // dd($data);
         return Validator::make($data, [
-            'name' => ['required', 'string','min:3', 'max:255'],
+            'name' => ['required', 'alpha', 'string','min:3', 'max:255'],
             'surname' => ['required', 'string','min:3', 'max:255'],
-            'province' => ['required'],
-            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
+            'province' => ['required', 'string', 'alpha'],
+            'email' => ['required', 'string', 'email', 'max:255', 'unique:users,email'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
-            'profilePhoto' => ['required', 'mimes:jpg,jpeg,png']
+            'profilePhoto' => ['mimes:jpg,jpeg,png']
         ]);
     }
 
@@ -69,11 +69,27 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
-      // dd('estoy en create' , $data);
+      // $form = app('request');
+      // $ruta = $form->file('profilePhoto')->store('public/imagenes/imgUsers');
+      // $nombreArchivo = basename($ruta);
+      //
+      //   return User::create([
+      //       'name' => $data['name'],
+      //       'surname' => $data['surname'],
+      //       'email' => $data['email'],
+      //       'province' => $data['province'],
+      //       'profilePhoto' => $nombreArchivo,
+      //       'password' => Hash::make($data['password']),
+      //   ]);
 
       $form = app('request');
-      $ruta = $form->file('profilePhoto')->store('public/imagenes/imgUsers');
-      $nombreArchivo = basename($ruta);
+      if (!isset($data['profilePhoto'])) {
+        $ruta = 'public/imagenes/imgUsers/userRandom.jpg';
+        $nombreArchivo = basename($ruta);
+      } else {
+        $ruta = $form->file('profilePhoto')->store('public/imagenes/imgUsers');
+        $nombreArchivo = basename($ruta);
+      }
 
         return User::create([
             'name' => $data['name'],

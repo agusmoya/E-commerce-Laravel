@@ -77,11 +77,10 @@ window.addEventListener('load', function() {
       var inputFile = document.getElementById('iptFileUpload');
       inputFile.addEventListener('change', function(){
         if (document.getElementById('iptFileUpload').files[0]) {
-
           var contInputFile = document.getElementById('iptFileUpload').files[0].name;
-          // console.log('hola');
+          console.log('hola');
           var txtInputFile = document.getElementById('lblFileUpload');
-          // console.log(txtInputFile.firstChild.data);
+          console.log(txtInputFile.firstChild.data);
           txtInputFile.firstChild.data = contInputFile;
         }
       });
@@ -89,6 +88,6 @@ window.addEventListener('load', function() {
   }
   //JS PARA REGISTER USER
 
-  
+
 
 })

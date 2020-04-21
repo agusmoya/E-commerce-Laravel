@@ -1,6 +1,6 @@
 @extends('template')
 
-@section('title') Hassen User Profile - Online Store @endsection
+@section('title') Hassen Edit User Profile - Online Store @endsection
 
   @section('userProfile')
 

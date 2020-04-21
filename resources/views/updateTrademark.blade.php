@@ -6,7 +6,7 @@
 
 @section('crudTrademarks')
   <div class="container my-5" style="background-color:white;">
-    <h1 class="text-center " style="color:black;"><b>Actualizar Marca</b></h1>
+    <h1 class="text-center my-5 py-5" style="color:black;"><b>Actualizar Marca</b></h1>
 
     {{-- ARRAY DE ERRORES --}}
     <ul class="errors" style="color:red;">
@@ -22,8 +22,8 @@
       @csrf
       @method('put')
 
-      <div class="form-group">
-        <h4 class="ml-5" style="color:black;"> <b><i>Aquí podrá modificar el nombre de la marca:</i></b> </h4>
+      <div class="form-group mb-4">
+        <h4 class="ml-4 pb-3" style="color:black;"> <b><i>Aquí podrá modificar el nombre de la marca:</i></b> </h4>
 
         <div class="input-group m-2 p-2">
           <input type="hidden" name="update_trademark_id" value="{{$trademark->id}}">

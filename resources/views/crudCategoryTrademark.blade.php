@@ -35,8 +35,8 @@
 
           <table class="table table-hover">
             <thead class="thead-dark">
-              <tr>
-                <th scope="col"> Relación ID</th> <th scope="col">Nombre Marca</th> <th scope="col">Nombre Categoría</th> <th scope="col">Fecha de Alta</th> <th scope="col">Eliminar</th>
+              <tr class="text-center">
+                <th scope="col">ID</th> <th scope="col">Nombre Marca</th> <th scope="col">Nombre Categoría</th> <th scope="col">Fecha de Alta</th> <th scope="col">Eliminar</th>
               </tr>
             </thead>
             <tbody>
@@ -44,7 +44,7 @@
               $contador=1;
               @endphp
               @forelse ($arrayCategoryTrademark as $categoryTrademark)
-                <tr>
+                <tr class="text-center">
                   <th scope="row"> {{$contador++}} </th> <td>{{$categoryTrademark->name_trademark}}</td> <td>{{$categoryTrademark->name_category}}</td> <td>{{$categoryTrademark->created_at}}</td>
                   <td> <form class="" action="/productManagment/deleteCategoryTrademark" method="post">
                     @csrf
@@ -97,13 +97,9 @@
           </select>
         </div>
         <button type="submit" name="register_category_trademark" class="btn btn-dark mb-3">Relacionar Marca con Categoría</button>
-
       </form>
       <!-- FIN FORM RELACION CATEGORIA/MARCA EN BD -->
-
-
     </div>
-
     <div class="form-group p-3 text-right">
       <a class="btn btn-secondary" style="text-decoration: none;color:white;" href="/productManagment/crudCategories"> <strong>Volver a Categoría</strong> </a>
       <a class="btn btn-danger" style="text-decoration: none;color:white;" href="/productManagment/crudProducts"> <strong>Continuar a Producto</strong> </a>

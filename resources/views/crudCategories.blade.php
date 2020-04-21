@@ -36,8 +36,8 @@
 
           <table class="table table-hover">
             <thead class="thead-dark">
-              <tr>
-                <th scope="col"> Categoría ID</th> <th scope="col">Nombre Categoría</th> <th scope="col">Fecha de Alta</th> <th scope="col">Fecha de Modificación</th> <th scope="col">Actualizar</th> <th scope="col">Eliminar</th>
+              <tr class="text-center">
+                <th scope="col">ID</th> <th scope="col">Nombre</th> <th scope="col">Fecha de Alta</th> <th scope="col">Fecha de Modificación</th> <th scope="col">Actualizar</th> <th scope="col">Eliminar</th>
               </tr>
             </thead>
             <tbody>
@@ -45,7 +45,7 @@
               $contador=1;
               @endphp
               @forelse ($arrayCategories as $category)
-                <tr>
+                <tr class="text-center">
                   <th scope="row"> {{$contador++}} </th> <td>{{$category->name}}</td> <td>{{$category->created_at}}</td> <td>{{$category->updated_at}}</td>
                   <td> <button type="button" class="btn btn-link"> <a href="/productManagment/updateCategory/{{$category->id}}"> <i class="fas fa-pencil-alt"></i> Editar </a> </button> </td>
                   <td> <form class="" action="/productManagment/deleteCategory" method="post">
@@ -55,7 +55,7 @@
                   </form> </td>
                 </tr>
               @empty
-                <tr>
+                <tr class="text-center">
                   <th scope="row"> ** </th> <td> <i>NO HAY CATEGORIAS CARGADAS EN SISTEMA...</i> </td>
                 </tr>
               @endforelse

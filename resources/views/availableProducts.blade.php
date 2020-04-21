@@ -1,9 +1,5 @@
 @extends('template')
 
-{{-- @section('styleCatalog')
-<link rel="stylesheet" href="{{asset('css/styleCatalog.css')}}">
-@endsection --}}
-
 @section('title')
   Hassen Catalog - Online Store
 @endsection
@@ -17,29 +13,44 @@
       </ol>
     </nav>
 
-    <form class="form-inline my-2 my-lg-0 ml-5">
+    <form class="form-inline my-2 my-lg-0 ml-5" action="/homeHassen/availableProducts" method="post">
+      @csrf
       <div class="form-group">
         <label class="mr-2" for="exampleFormControlSelect1" style="color:white;">Order by:</label>
-        <select class="form-control" id="exampleFormControlSelect1">
-          <option>Precio de Menor a Mayor</option>
-          <option>Precio de Mayor a Menor</option>
-          <option>A - Z</option>
-          <option>Z - A</option>
-          <option>Más nuevo al más viejo</option>
-          <option>Más viejo al más nuevo</option>
+        <select name="order" class="form-control" id="exampleFormControlSelect1">
+          <option>Select an option...</option>
+          <option value="1">Precio de Menor a Mayor</option>
+          <option value="2">Precio de Mayor a Menor</option>
+          <option value="3">A - Z</option>
+          <option value="4">Z - A</option>
+          <option value="5">Más nuevo al más viejo</option>
+          <option value="6">Más viejo al más nuevo</option>
         </select>
       </div>
-      {{-- <button class="btn btn-outline-warning my-2 my-sm-0" type="submit">Search</button> --}}
+      <button class="btn btn-outline-secondary m-2" type="submit">Search</button>
     </form>
+    {{-- <form class="form-inline my-2 my-lg-0 ml-5">
+      <div class="form-group">
+        <label class="mr-2" for="exampleFormControlSelect1" style="color:white;">Order by:</label>
+        <ul>
+          <a href="/homeHassen/availableProducts/{{1}}">Precio de Menor a Mayor</a>
+          <a href="/homeHassen/availableProducts/{{2}}">Precio de Mayor a Menor</a>
+          <a href="/homeHassen/availableProducts/{{3}}">A - Z</a> </option>
+          <a href="/homeHassen/availableProducts/{{4}}">Z - A</a> </option>
+          <a href="/homeHassen/availableProducts/{{5}}">Más nuevo al más viejo</a>
+          <a href="/homeHassen/availableProducts/{{6}}">Más viejo al más nuevo</a>
+        </ul>
+      </div>
+    </form> --}}
 
   </div>
 
   <div class="container-fluid">
 
-    <?php // NOTE: en home la grilla funciona como: row-cols-md-3 --> 3 objetos por fila en pantallas con medida md. El numero indica literalmente cuantos productos entran por fila. Es mas mantenible que el de catalogo" ?>
+    <?php // NOTE: la grilla funciona como: row-cols-md-3 --> 3 objetos por fila en pantallas con medida md. El numero indica literalmente cuantos productos entran por fila. Es mas mantenible que el de catalogo" ?>
     @foreach ($arrayCategories as $category)
       <h2>{{$category->name}}</h2>
-      <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-6 row-cols-xl-6 mt-2">
+      <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 row-cols-xl-5 mt-2">
 
         @forelse ($arrayProducts as $product)
           @if ($product->name_category == $category->name)
@@ -47,26 +58,26 @@
             <div class="col mb-4">
               <div class="card text-center">
                 <a href="/productPreview/{{$product->id}}"> <img height="100%" src="{{asset('/storage/imagenes/imgProductos/'.$product->photo)}}" class="card-img-top" alt="img_product"> </a>
-                <div class="card-body">
-                  <h3 style="font-weight: bolder" class="card-title">{{$product->name}}</h3>
-                  <p>{{$product->name_category . " - " . $product->name_trademark}}</p>
-                  <p class="card-text"><i>{{$product->description}}</i></p>
-                  @if ($product->stock >= 10)
+                <div class="card-body" >
+                  <h3 style="font-weight: bolder; color:black;" class="card-title">{{$product->name}}</h3>
+                  {{-- <p>{{$product->name_category . " - " . $product->name_trademark}}</p> --}}
+                  {{-- <p class="card-text"><i>{{$product->description}}</i></p> --}}
+                  {{-- @if ($product->stock >= 10)
                     <p class="card-text" style="color:#21bf73; font-weight: bold;"> Stock: Alto </p>
                   @elseif($product->stock < 10 && $product->stock >= 5)
                     <p class="card-text" style="color:#ffe196; font-weight: bold;"> Stock: Medio </p>
                   @else
                     <p class="card-text" style="color:#fd5e53; font-weight: bold;"> Stock: Bajo </p>
-                  @endif
+                  @endif --}}
                   <p class="card-text">Material: Fantasía</p>
                   <p class="card-text">Precio: ${{$product->price}}</p>
-                  <p class="card-text">Efectivo/Mercado Pago</p>
+                  {{-- <p class="card-text">Efectivo/Mercado Pago</p> --}}
                 </div>
               </div>
             </div>
           @endif
         @empty
-          <div class="alert alert-warning mt-4"  style="margin: 0 auto;" role="alert">
+          <div class="alert alert-warning mt-4 d-block text-center my-5 p-4"  style="font-size: 3vw;margin: 0 auto; width: 80%;" role="alert">
             No hay productos cargados en el sistema!
           </div>
         @endforelse

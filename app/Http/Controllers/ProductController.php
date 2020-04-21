@@ -12,11 +12,66 @@ use App\Category;
 class ProductController extends Controller
 {
 
+    public function availableCategory($category){
+      $arrayProductsByCategory = Product::join('categories', 'category_id', '=', 'categories.id')
+      ->join('trademarks', 'trademark_id', '=', 'trademarks.id')
+      ->select('products.*', 'categories.name as name_category', 'trademarks.name as name_trademark')
+      ->where('products.status', 1)
+      ->where('trademarks.status', 1)
+      ->where('categories.status', 1)
+      ->where('categories.name', $category)
+      ->orderBy('name_trademark')
+      ->orderBy('name_category')
+      ->get();
+
+      return view('availableCategory', compact('arrayProductsByCategory'));
+    }
+
   public function availableProducts(){
     $arrayProducts = Product::join('categories', 'category_id', '=', 'categories.id')
     ->join('trademarks', 'trademark_id', '=', 'trademarks.id')
     ->select('products.*', 'categories.name as name_category', 'trademarks.name as name_trademark')
     ->where('products.status', 1)
+    ->where('trademarks.status', 1)
+    ->where('categories.status', 1)
+    ->orderBy('name_trademark')
+    ->orderBy('name_category')
+    ->get();
+
+    $arrayCategories = Category::orderBy('name')->get();
+    return view('availableProducts', compact('arrayProducts', 'arrayCategories'));
+  }
+
+  public function availableProductsOrder($order){
+// Request $form
+$form["order"]=$order;
+    if ($form["order"] == 1) {
+      $order = 'price';
+      $cond = 'ASC';
+    } elseif ($form["order"] == 2) {
+      $order = 'price';
+      $cond = 'DESC';
+    } elseif ($form["order"] == 3) {
+      $order = 'name';
+      $cond = 'ASC';
+    } elseif ($form["order"] == 4) {
+      $order = 'name';
+      $cond = 'DESC';
+    } elseif ($form["order"] == 5) {
+      $order = 'created_at';
+      $cond = 'ASC';
+    } else {
+      $order = 'created_at';
+      $cond = 'DESC';
+    }
+
+    $arrayProducts = Product::join('categories', 'category_id', '=', 'categories.id')
+    ->join('trademarks', 'trademark_id', '=', 'trademarks.id')
+    ->select('products.*', 'categories.name as name_category', 'trademarks.name as name_trademark')
+    ->where('products.status', 1)
+    ->where('trademarks.status', 1)
+    ->where('categories.status', 1)
+    ->orderBy($order, $cond)
     ->orderBy('name_trademark')
     ->orderBy('name_category')
     ->get();

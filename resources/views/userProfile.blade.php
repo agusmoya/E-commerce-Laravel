@@ -95,7 +95,7 @@
               <label for="exampleInputEmail1">Province:</label>
               <div class="input-group">
                 <input name="province" type="text" class="form-control" placeholder="Province" value="{{Auth::user()->province}}" readonly>
-                
+
               </div>
               <span class="help-block" id="error"></span>
             </div>

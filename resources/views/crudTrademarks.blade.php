@@ -34,25 +34,27 @@
 
           <table class="table table-hover">
             <thead class="thead-dark">
-              <tr>
-                <th scope="col"> Marca ID</th> <th scope="col">Nombre Marca</th> <th scope="col">Fecha de Alta</th> <th scope="col">Fecha de Modificación</th> <th scope="col">Actualizar</th> <th scope="col">Eliminar</th>            </tr>
+              <tr class="text-center">
+                <th scope="col"> Marca ID</th> <th scope="col">Nombre Marca</th> <th scope="col">Fecha de Alta</th>
+                <th scope="col">Fecha de Modificación</th> <th scope="col">Actualizar</th> <th scope="col">Eliminar</th>
+              </tr>
               </thead>
               <tbody>
                 @php
                 $contador=1;
                 @endphp
                 @forelse ($arrayTrademarks as $trademark)
-                  <tr>
+                  <tr class="text-center">
                     <th scope="row"> {{$contador++}} </th> <td>{{$trademark->name}}</td> <td>{{$trademark->created_at}}</td> <td>{{$trademark->updated_at}}</td>
-                    <td> <button type="button" class="btn btn-link"> <a href="/productManagment/updateTrademark/{{$trademark->id}}"> <i class="fas fa-pencil-alt"></i> Editar </a> </button> </td>
+                    <td> <button type="button" class="btn btn-link btn-sm"> <a href="/productManagment/updateTrademark/{{$trademark->id}}"> <i class="fas fa-pencil-alt"></i> <b>Editar</b> </a> </button> </td>
                     <td> <form class="" action="/productManagment/deleteTrademark" method="post">
                       @csrf
                       @method('delete')
-                      <input type="hidden" name="trademark_id" value="{{$trademark->id}}"> <button type="submit" class="btn btn-link"> <i class="far fa-trash-alt"> </i> Eliminar </button>
+                      <input type="hidden" name="trademark_id" value="{{$trademark->id}}"> <button type="submit" class="btn btn-link btn-sm"> <i class="far fa-trash-alt"> </i> <b>Eliminar</b> </button>
                     </form> </td>
                   </tr>
                 @empty
-                  <tr>
+                  <tr class="text-center">
                     <th scope="row"> ** </th> <td> <i>NO HAY MARCAS CARGADAS EN SISTEMA...</i> </td>
                   </tr>
                 @endforelse

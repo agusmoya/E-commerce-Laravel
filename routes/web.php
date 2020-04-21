@@ -11,24 +11,21 @@
 |
 */
 
-Route::get('/colapso', function () {
-  return view('probandoColapso');
-});
-
 Route::get('/', function () {
   return view('welcome');
-  // return view('home');
 });
+
 
 Route::get('/homeHassen', function () {
   return view('homeHassen');
 });
 
-Route::get('/home', function () { //auth
-  return view('home');
-});
-
-// Route::get('/home', 'HomeController@index')->name('home');
+// Route::get('/home', function () { //auth
+//   return view('home');
+// });
+// Auth::routes(['verify' => true]);
+//
+// Route::get('/home', 'HomeController@index')->name('home')->middleware('verified ');
 
 Route::get('/products', function () {
   return view('products');
@@ -58,23 +55,29 @@ Route::get('/faq', function () {
   return view('faq');
 });
 
+Route::get('/homeHassen/infoHelp', 'HomeController@goInfoHelp')->name('infoHelp');
+Route::get('/homeHassen/accesoriesCare', 'HomeController@goAccesoriesCare')->name('accesoriesCare');
+
+
 Route::get('/homeHassen', 'HomeController@index')->name('homeHassen');
 
 Route::get('/homeHassen/availableProducts', 'ProductController@availableProducts');
+Route::post('/homeHassen/availableProducts', 'ProductController@availableProductsOrder');
+// Route::get('/homeHassen/availableProducts/{order}', 'ProductController@availableProductsOrder');
+Route::get('/homeHassen/availableCategory/{category}', 'ProductController@availableCategory');
+
+Route::get('/productPreview/{productId}', 'ProductController@showProductPreview');
 
 // ****************FORMULARIO USER****************
+Route::get('/homeHassen/managmentUsers', 'UserHassenController@showAvailableUsers');
+Route::post('/homeHassen/editPrivileges', 'UserHassenController@editPrivileges');
+Route::post('/homeHassen/editUserStatus', 'UserHassenController@editStatus');
+Route::delete('/managmentUsers/deleteUser', 'UserHassenController@deleteUser');
 
-// Route::get('/userProfile', 'HomeController@showUserProfile');
-Route::get('/userProfile', function(){
-  return view('userProfile');
-});
-Route::get('/editUserProfile', function(){
-  return view('editUserProfile');
-});
+Route::get('/userProfile', 'UserHassenController@showUserProfile');
+Route::get('/editUserProfile', 'UserHassenController@showEditUserProfile');
 Route::get('/userProfile/updateUserProfile/{id}', 'UserHassenController@showUpdateUserProfile');
-
 Route::post('/userProfile/updateUserProfile', 'UserHassenController@updateUserProfile');
-
 // ****************FORMULARIO USER****************
 
 // ****************FORMULARIO CRUD TRADEMARKS****************
@@ -121,7 +124,10 @@ Route::post('/productManagment/createProduct', 'ProductController@createProduct'
 Route::delete('/productManagment/deleteProduct', 'ProductController@deleteProduct');
 // ****************FORMULARIO CRUD PRODUCTS****************
 
-Route::get('/productPreview/{productId}', 'ProductController@showProductPreview');
+
+
+
+
 
 
 

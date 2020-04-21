@@ -5,7 +5,7 @@
   <!-- Required meta tags -->
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <script type="text/javascript" src="/js/paisesAPI.js"></script>
+
 
   <!-- CSRF Token -->
   <meta name="csrf-token" content="{{ csrf_token() }}">
@@ -22,80 +22,89 @@
   <!-- NOTE: Inicia header -->
   <header>
 
-    <!-- NOTE: Inicia header -->
-    <script src="https://kit.fontawesome.com/46027ca747.js" crossorigin="anonymous"></script>
-    <!-- NOTE: Nav sacado de bootstrap -->
-    <nav class="navbar navbar-expand-md navbar-light">
-      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-        <i class="fas fa-bars" style="color:#fff; font-size:28px;"></i>
-      </button>
-          <a class="navbar" href="/homeHassen"> <img src="{{asset('/storage/imagenes/HassenAccesorios/logoWebBlack.png')}}" class="logo" alt="logo Hassen"></a>
+    <nav class="navbar navbar-expand-lg navbar-dark">
+      <div class="container-fluid mx-auto my-2" style="width: 70%">
+        <a class="navba m-auto" href="/homeHassen"> <img class="img-fluid card-img logo" src="{{asset('/storage/imagenes/HassenAccesorios/logoWebBlack.png')}}" alt="logo Hassen"></a>
+          <button class="navbar-toggler m-auto" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
-
-        <ul class="navbar-nav ml-auto">
+        <ul class="navbar-nav ml-auto text-center">
           <li class="nav-item active">
-            <a class="nav-link" href="/homeHassen"> Home <span class="sr-only">(current)</span></a>
+            <a class="nav-link" href="/homeHassen"> <i class="fas fa-home"></i> Home <span class="sr-only">(current)</span></a>
           </li>
-
           {{-- El metodo check() devuelve true o false dependiendo de si el user está logueado o no
           y el metodo user() me trae al usuario logueado en ese momento
           AMBOS LOS SACAMOS DE LA CLASE Auth--}}
-
           @if (!Auth::check())
             <li class="nav-item active">
-              <a class="nav-link" href="/register">Register</a>
+              <a id="linksUser" class="nav-link" href="/register">Register</a>
             </li>
           @endif
           @if (!Auth::check())
             <li class="nav-item active">
-              <a class="nav-link" href="/login"> Login <span class="sr-only">(current)</span></a>
-            </li>
-          @endif
-          @if (Auth::check() && Auth::user()->type == 1 && Auth::user()->status == 1)
-            <li class="nav-item active">
-              <a class="nav-link" href="/productManagment/crudTrademarks"> <i class="fas fa-plus-circle"></i> Managment Product <span class="sr-only">(current)</span></a>
+              <a id="linksUser" class="nav-link" href="/login"> Login <span class="sr-only">(current)</span></a>
             </li>
           @endif
           <li class="nav-item active">
             <a class="nav-link" href="/myPurchase"> <i class="fas fa-cart-plus"></i> My purchase <span class="sr-only">(current)</span></a>
           </li>
 
-          @if (Auth::check())
-            <div class="dropdown show">
-              <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                {{ Auth::user() ->name }}
-              </a>
+        @if (Auth::check() && Auth::user()->type == 1 && Auth::user()->status == 1)
+          <li class="nav-item active">
+            <div class="dropdown show mx-1 my-1">
 
-              <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                <a class="dropdown-item" href="/userProfile">Profile</a>
-                <a class="dropdown-item" href="{{ route('logout') }}"
-                onclick="event.preventDefault();
-                document.getElementById('logout-form').submit();">
-                {{ __('Logout') }}
-              </a>
-
-              <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                @csrf
-              </form>
+              <a class="btn btn-danger dropdown-toggle" role="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <i class="fas fa-tasks"></i> Managment </a>
+              <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                <a style="color:black;" class="nav-link ml-3" href="/productManagment/crudTrademarks"> <i class="fas fa-plus-circle"></i> Products <span class="sr-only">(current)</span></a>
+                <div class="dropdown-divider"></div>
+                <a style="color:black;" class="nav-link ml-3" href="/homeHassen/managmentUsers"> <i class="fas fa-users-cog"></i></i> Users <span class="sr-only">(current)</span></a>
+              </div>
             </div>
-          </div>
+          </li>
         @endif
+        @if (Auth::check())
+          <li class="nav-item active">
+          <div class="dropdown show mx-1">
 
-        <li class="nav-item active">
-          <a class="nav-link" href="/faq">F.A.Q.</a>
+            <a style="max-width:170px" class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              {!!Auth::check() && Auth::user()->type == 1 && Auth::user()->status == 1 ? '<i class="fas fa-user-tag"></i>' : '<i class="fas fa-user"></i>' !!}
+              {{ Auth::user() ->name }}
+              <img id="center" class="img-fluid card-img rounded-circle" style="max-width:30%" src="{{asset('/storage/imagenes/imgUsers/'. Auth::user()->profilePhoto)}}" alt="profile-photo">
+            </a>
+                <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                  <a id="linksUser" style="color:black;" class="dropdown-item" href="/userProfile">Profile</a>
+
+                  <div class="dropdown-divider"></div>
+                  <a id="linksUser" style="color:black;" class="dropdown-item" href="{{ route('logout') }}"
+                  onclick="event.preventDefault();
+                  document.getElementById('logout-form').submit();">
+                  {{ __('Logout') }}
+                </a>
+                <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                  @csrf
+                </form>
+              </div>
+            </div>
         </li>
-
-      </ul>
+      @endif
+        </ul>
+      </div>
     </div>
   </nav>
   <!-- NOTE: Fin nav -->
 </header>
 <!-- NOTE: fin header -->
-
-@yield('userProfile')
 @yield('home')
+<div class="container-fluid" style="width: 90%">
+@yield('managmentUsers')
+@yield('userProfile')
+@yield('availableCategory')
 @yield('catalog')
+@yield('accesoriesCare')
 @yield('faq')
+@yield('infoHelp')
 @yield('loadedProduct')
 @yield('myPurchase')
 @yield('crudTrademarks')
@@ -104,7 +113,7 @@
 @yield('crudProducts')
 @yield('loginLaravel')
 @yield('registerLaravel')
-
+</div>
 <!-- NOTE: inicia footer -->
 <footer id="footer" class="mt-5 p-4">
 
@@ -129,77 +138,11 @@
       <div id="contactUs" class="col-12 col-sm-4 col-md-4">
         <h5>Contact us</h5>
         <ul class="list-unstyled quick-links">
-          <li><a class="nav-link active" href="#" data-toggle="modal" data-target="#formularioModal">Send us your questions</a>
-            <!--- modal formulario --->
-            <div class="modal fade" id="formularioModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-              <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                  <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">CONSULT</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"></button>
-                  </div>
-                  <div class="modal-body">
-                    <form id="fomulario">
-                      <div class="row">
-                        <div class="row">
-                          <div class="col-10"><input class="form-control" id="nombre" type="text" placeholder="Name" required="Campo Obligatorio"></div>
-                          <div class="col-10"><input class="form-control" id="apellido" type="text" placeholder="Lastname" required="required"></div>
-                          <div class="col-10"><input class="form-control" id="mail" type="email" placeholder="E-mail" required></div>
-                          <div class="col-10"><input class="form-control" id="tel" type="text" placeholder="Phone"></div>
-                          <div class="col-10"><textarea class="form-control" id="txt" rows="20" type="text" placeholder="Consult" required></textarea></div>
-                        </div>
-                      </div>
-                    </form>
-                  </div>
-                  <div class="modal-footer">
-                    <button type="submit" class="btn btn-secondary">Send Message</button>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </li>
-          <!--- fin modal formulario --->
-          <!--- modal ubicacion -->
-          <li>
-            <a id="linkLocation" class="nav-link" href="#" data-toggle="modal" data-target="#ubicacion">Location</a>
-            <div class="modal fade" id="ubicacion" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-              <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                  <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">LOCATION</h5>
-                  </div>
-                  <div class="modal-body">
-                    <div id="ubicacion"><iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3348.947019831442!2d-68.84629968482672!3d-32.925997980927264!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMzLCsDU1JzMzLjYiUyA2OMKwNTAnMzguOCJX!5e0!3m2!1ses-419!2sar!4v1560388576285!5m2!1ses-419!2sar" width="100%" height="150" frameborder="0" style="border:0" allowfullscreen></iframe></div>
-                  </div>
-                  <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </li>
-          <!-- fin modal ubicacion --->
-          <li>
-            <a class="nav-link" href="#" data-toggle="modal" data-target="#info">Info</a>
-            <!-- modal info --->
-            <div class="modal fade" id="info" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-              <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                  <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">INFO</h5>
-                  </div>
-                  <div class="modal-body">
-                    <p id="datos">Opening hours: Monday - Friday from 8 to 18 h. Saturday from 8 to 14 h.</p>
-                    <p id="datos">Phones: 0261-4525878 / 261-5789633</p>
-                    <p id="datos">E-mail: consultas@tienda-online.com</p>
-                  </div>
-                  <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <!-- finmodal info --->
+            <li>
+              <a class="nav-link" href="{{route('accesoriesCare')}}">Info & Help</a>
+            </li>
+            <li>
+            <a class="nav-link" href="{{route('infoHelp')}}"><b>Contact</b> <span class="sr-only">(current)</span></a>
           </li>
         </ul>
       </div>
@@ -216,7 +159,8 @@
 
 </footer>
 <!-- NOTE: fin footer -->
-
+<script type="text/javascript" src="/js/paisesAPI.js"></script>
+<script src="https://kit.fontawesome.com/46027ca747.js" crossorigin="anonymous"></script>
 <!-- Optional JavaScript -->
 <!-- jQuery first, then Popper.js, then Bootstrap JS -->
 <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>

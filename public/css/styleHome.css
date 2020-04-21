@@ -17,7 +17,6 @@ header nav #navbarSupportedContent .navbar-toggler-icon{
 
 header nav #navbarSupportedContent ul li a {
   color:white;
-  border-color: black;
 }
 
 header .logo {
@@ -139,6 +138,18 @@ div.container .respuestas p{
   font-weight: 400;
 }
 
+.container div #preguntas #listPreguntas li{
+  list-style: none;
+}
+
+.container div #preguntas #listPreguntas li i{
+  color: #fbf4f9;
+}
+
+.container div #preguntas #listPreguntas li a{
+  color: #ffbaba;
+}
+
 /* NOTE: style productForm */
 form h2{
   font-weight: bold;
@@ -227,4 +238,25 @@ form h2{
 /* NOTE: style Login */
 #containerMod {
   color: black;
+}
+
+/* NOTE: Style infoHelp */
+.container-fluid h3 {
+  color: white;
+  font-weight: bold;
+}
+
+.container-fluid .row #contact_info {
+  color: white;
+  font-size: 20px;
+}
+
+.container-fluid .row #contact_info p a{
+  color: white;
+  font-size: 20px;
+}
+
+/* NOTE: Style accesoriesCare */
+.container-fluid #care p {
+  font-size: 20px;
 }

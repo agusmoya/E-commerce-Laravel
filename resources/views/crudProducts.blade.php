@@ -5,8 +5,6 @@
 @endsection
 
 @section('crudProducts')
-
-
   <nav id="breadcrumb" aria-label="breadcrumb">
     <ol class="breadcrumb">
       <li class="breadcrumb-item"><a href="/homeHassen">Home</a></li>
@@ -31,24 +29,25 @@
       <!-- INICIO FORMS PRODUCTO -->
       <!-- INICIA FORM ALTA PRODUCTOS EN BD-->
 
-      <div class="table-responsive">
+      <div class="table-responsive table-bordered">
 
           <h3 class="mt-4" style="color:black"> <b>Productos en el sistema:</b> </h3>
           <table class="table table-hover table-bordered">
             <thead class="thead-dark">
-              <tr>
-                <th class="text-center" scope="col"> ID </th>
-                <th class="text-center" scope="col">Nombre</th>
-                <th class="text-center" scope="col">Precio</th>
-                <th class="text-center" scope="col">Marca</th>
-                <th class="text-center" scope="col">Categoría</th>
-                <th class="text-center" scope="col">Descripción</th>
-                <th class="text-center" scope="col">Fecha de Alta</th>
-                <th class="text-center" scope="col">Fecha de Modificación</th>
-                <th class="text-center" scope="col">Stock</th>
-                <th class="text-center" scope="col">Ver</th>
-                <th class="text-center" scope="col">Actualizar</th>
-                <th class="text-center" scope="col">Eliminar</th>
+              <tr class="text-center">
+                <th scope="col">ID</th>
+                <th scope="col">Foto</th>
+                <th scope="col">Nombre</th>
+                <th scope="col">Precio</th>
+                <th scope="col">Marca</th>
+                <th scope="col">Categoría</th>
+                <th scope="col">Descripción</th>
+                <th scope="col">Fecha de Alta</th>
+                <th scope="col">Fecha de Modificación</th>
+                <th scope="col">Stock</th>
+                <th scope="col">Ver</th>
+                <th scope="col">Actualizar</th>
+                <th scope="col">Eliminar</th>
               </tr>
             </thead>
             <tbody>
@@ -56,27 +55,31 @@
               $contador=1;
               @endphp
               @forelse ($arrayProducts as $product)
-                <tr>
-                  <th class="text-center" scope="row"> {{$contador++}} </th>
-                  <td class="text-center">{{$product->name}}</td>
-                  <td class="text-center">{{$product->price}}</td>
-                  <td class="text-center">{{$product->name_trademark}}</td>
-                  <td class="text-center">{{$product->name_category}}</td>
-                  <td class="text-center">{{$product->description}}</td>
-                  <td class="text-center">{{$product->created_at}}</td>
-                  <td class="text-center">{{ \Carbon\Carbon::parse($product->created_at)->format('d/m/Y')}}</td>
-                  <td class="text-center">{{$product->stock}}</td>
-                  <td class="text-center"> <a href="/productPreview/{{$product->id}}" class= "btn btn-link" style="color:#0f4c75; "> <i class="fas fa-eye"></i> Ver </a> </td>
-                  <td class="text-center"> <a href="/productManagment/updateProduct/{{$product->id}}" class= "btn btn-link" style="color:#64b2cd; "> <i class="fas fa-pencil-alt"></i> Editar </a> </td>
-                  <td class="text-center"> <form class="" action="/productManagment/deleteProduct" method="post">
-                    @csrf
-                    @method('delete')
-                    <input type="hidden" name="product_id" value="{{$product->id}}"> <button type="submit" class="btn btn-link" style="color:#e32249;"> <i class="far fa-trash-alt"> </i> Eliminar </button>
-                  </form> </td>
+                <tr class="text-center">
+                  <th class="align-middle" scope="row"> {{$contador++}} </th>
+                      <td class="container-fluid" style="width:10%">
+                      <img id="center" class="img-fluid card-img" src="{{asset('/storage/imagenes/imgProductos/'.$product->photo)}}" alt="profile-photo">
+                      </td>
+                      <td class="align-middle">{{$product->name}}</td>
+                      <td class="align-middle">{{$product->price}}</td>
+                      <td class="align-middle">{{$product->name_trademark}}</td>
+                      <td class="align-middle">{{$product->name_category}}</td>
+                      <td class="align-middle">{{$product->description}}</td>
+                      <td class="align-middle">{{$product->created_at}}</td>
+                      <td class="align-middle">{{ \Carbon\Carbon::parse($product->updated_at)->format('d/m/Y')}}</td>
+                      <td class="align-middle">{{$product->stock}}</td>
+                      <td class="align-middle"> <a href="/productPreview/{{$product->id}}" class= "btn btn-link btn-sm" style="color:#0f4c75; "> <i class="fas fa-eye"></i> <b>Ver</b> </a> </td>
+                      <td class="align-middle"> <a href="/productManagment/updateProduct/{{$product->id}}" class= "btn btn-link btn-sm" style="color:#64b2cd; "> <i class="fas fa-pencil-alt"></i> <b>Editar</b> </a> </td>
+                      <td class="align-middle"> <form class="" action="/productManagment/deleteProduct" method="post">
+                                                  @csrf
+                                                  @method('delete')
+                                                  <input type="hidden" name="product_id" value="{{$product->id}}"> <button type="submit" class="btn btn-link btn-sm" style="color:#e32249;"> <i class="far fa-trash-alt"></i> <b>Eliminar</b> </button>
+                                                </form>
+                    </td>
                 </tr>
               @empty
-                <tr>
-                  <th scope="row"> ** </th> <td colspan="8"> <i>NO HAY PRODUCTOS CARGADAS EN SISTEMA...</i> </td>
+                <tr class="text-center">
+                  <th scope="row"> ** </th> <td colspan="11"> <i>NO HAY PRODUCTOS CARGADAS EN SISTEMA...</i> </td>
                 </tr>
               @endforelse
             </tbody>

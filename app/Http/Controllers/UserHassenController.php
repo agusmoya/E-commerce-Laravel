@@ -8,6 +8,46 @@ use App\User;
 
 class UserHassenController extends Controller
 {
+
+  public function showAvailableUsers(){
+    $arrayUsers = User::orderBy('name')
+    ->paginate(4);
+    return view('managmentUsers', compact('arrayUsers'));
+  }
+
+  public function editPrivileges(Request $form){
+    $user = User::find($form['userId']);
+    $user->type = $form['roleUser'];
+    $user->save();
+    return redirect('/homeHassen/managmentUsers');
+  }
+
+  public function editStatus(Request $form){
+    $user = User::find($form['userId']);
+    if ($form["userStatus"] == 0) {
+      $user->status = 1;
+    } else {
+      $user->status = 0;
+    }
+    $user->save();
+    return redirect('/homeHassen/managmentUsers');
+  }
+
+  public function deleteUser(Request $form){
+    $user = User::find($form['userId']);
+    $user->status = 0;
+    $user->save();
+    return redirect('/homeHassen/managmentUsers');
+  }
+
+    public function showUserProfile(){
+      return view('userProfile');
+    }
+
+    public function showEditUserProfile(){
+      return view('editUserProfile');
+    }
+
     public function showUpdateUserProfile($id){
       $user = User::find($id);
       return view('editUserProfile', compact('user'));

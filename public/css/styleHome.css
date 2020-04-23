@@ -209,6 +209,14 @@ form h2{
   color: black;
 }
 
+.show_categories_trademarks #listCat h3{
+  color: black;
+}
+
+.show_categories_trademarks #listTrad h3{
+  color: black;
+}
+
 /* NOTE: userProfile */
 .jumbotron{
   overflow: hidden;
@@ -259,4 +267,33 @@ form h2{
 /* NOTE: Style accesoriesCare */
 .container-fluid #care p {
   font-size: 20px;
+}
+
+/* NOTE: Style emailVerify */
+div #verify {
+  color:black;
+}
+
+/* NOTE: Style emailVerify */
+
+#cart thead tr th{
+  font-size: 1.3em;
+}
+
+#cart tr:nth-child(even) {
+}
+
+#cart {
+  background: white;
+  opacity: 0.9;
+}
+
+#cart thead tr th{
+border-bottom: 2px solid #000000;
+}
+
+#cart tr:hover {
+  font-weight: bolder;
+  color: black;
+  background-color: #84a9ac;
 }

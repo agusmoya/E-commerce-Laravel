@@ -37,8 +37,8 @@ class HomeController extends Controller
         return view('homeHassen', compact('arrayProducts', 'arrayCategories'));
     }
 
-    public function goInfoHelp(){
-      return view('infoHelp');
+    public function goContact(){
+      return view('contactUs');
     }
 
     public function goAccesoriesCare(){

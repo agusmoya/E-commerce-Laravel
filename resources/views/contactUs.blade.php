@@ -1,13 +1,13 @@
 @extends('template')
 
-@section('title') Hassen Info&Help - Online Store @endsection
+@section('title') Hassen Contact Us - Online Store @endsection
 
-  @section('infoHelp')
+  @section('contactUs')
     <div class="container-fluid my-4">
 
       <div class="row">
         <div id="contact_info" class="col-xs-12 col-sm-6 col-md-8">
-          <h2 class="mb-4">Contact Us <i class="far fa-calendar-alt"></i></h2>
+          <h2 class="mb-4">Contact Us <i class="far fa-comments"></i></h2>
           {{-- <p><b>Opening hours</b>: Monday - Friday from 8 to 18 h. Saturday from 8 to 14 h.</p> --}}
           <p><b>Follow us: </b></p>
           <p><a href="https://www.facebook.com/fb.me/hassenaccesorios" target="_blank"><i class="fab fa-facebook-square mr-1" style="font-size: 25px;"></i> Hassen - Accesorios</a>  </p>

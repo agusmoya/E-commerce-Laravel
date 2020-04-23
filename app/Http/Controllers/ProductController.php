@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use App\Product;
 use App\Trademark;
 use App\Category;
+use App\CategoryTrademark;
 
 class ProductController extends Controller
 {
@@ -100,9 +101,11 @@ $form["order"]=$order;
     ->orderBy('name_trademark')
     ->paginate(4);
 
+    $arrayCategoryTrademark = CategoryTrademark::all();
+    // dd($arrayCategoryTrademark);
     $arrayTrademarks = Trademark::where('status', 1)->orderBy('name')->get();
     $arrayCategories = Category::where('status', 1)->orderBy('name')->get();
-    return view('crudProducts', compact('arrayProducts', 'arrayTrademarks', 'arrayCategories'));
+    return view('crudProducts', compact('arrayProducts', 'arrayTrademarks', 'arrayCategories', 'arrayCategoryTrademark'));
   }
 
   public function showUpdateProduct($id){

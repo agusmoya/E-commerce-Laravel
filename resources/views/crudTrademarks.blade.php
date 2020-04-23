@@ -18,12 +18,18 @@
     <h1 class="text-center my-4 p-5" style="color:black;"><b>Gestión de Marcas</b></h1>
 
     {{-- ARRAY DE ERRORES --}}
-    <ul class="errors" style="color:red;">
-      @foreach ($errors->all() as $error)
-        <li>{{$error}}</li>
-      @endforeach
-    </ul>
+    @if (count($errors) > 0)
+      <div class="alert alert-danger m-auto"  style="width:80%;">
+        <p style="color:black">{{"Please correct the following errors:"}}</p>
+        <ul class="errors" style="color:red;">
+          @foreach ($errors->all() as $error)
+            <li style="color:#900c3f">{{$error}}</li>
+          @endforeach
+        </ul>
+      </div>
+    @endif
     {{-- ARRAY DE ERRORES --}}
+
     <div class="section">
 
     <!-- INICIA FORMS MARCAS -->
@@ -32,7 +38,7 @@
         <h3 class="mt-4" style="color:black;"> <b>Marcas en el sistema:</b> </h3>
         <div class="table-responsive">
 
-          <table class="table table-hover">
+          <table class="table table-hover table-bordered">
             <thead class="thead-dark">
               <tr class="text-center">
                 <th scope="col"> Marca ID</th> <th scope="col">Nombre Marca</th> <th scope="col">Fecha de Alta</th>
@@ -55,7 +61,7 @@
                   </tr>
                 @empty
                   <tr class="text-center">
-                    <th scope="row"> ** </th> <td> <i>NO HAY MARCAS CARGADAS EN SISTEMA...</i> </td>
+                    <th scope="row"> ** </th> <td colspan="5"> <i>NO HAY MARCAS CARGADAS EN SISTEMA...</i> </td>
                   </tr>
                 @endforelse
               </tbody>

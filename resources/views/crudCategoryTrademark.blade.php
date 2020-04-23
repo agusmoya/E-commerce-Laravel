@@ -19,12 +19,23 @@
     <h1 class="text-center my-4 p-5" style="color:black;"><b>Relación Marca/Categoría</b></h1>
 
     {{-- ARRAY DE ERRORES --}}
-    <ul class="errors" style="color:red;">
-      @foreach ($errors->all() as $error)
-        <li>{{$error}}</li>
-      @endforeach
-    </ul>
+    @if (count($errors) > 0)
+      <div class="alert alert-danger m-auto" style="width:80%;">
+        <p style="color:black">{{"Please correct the following errors:"}}</p>
+        <ul class="errors" style="color:red;">
+          @foreach ($errors->all() as $error)
+            <li style="color:#900c3f">{{$error}}</li>
+          @endforeach
+        </ul>
+      </div>
+    @endif
     {{-- ARRAY DE ERRORES --}}
+
+    @if (session('status'))
+    <div class="alert alert-warning m-auto text-center" style="width:80%;">
+        {{ session('status') }}
+    </div>
+    @endif
 
     <!-- INICIA FORMS MARCAS -->
     <!-- INICIA FORM CONSULTA MARCAS EN BD -->
@@ -33,10 +44,10 @@
         <h3 class="mt-4" style="color:black;"> <b>Relaciones Marca/Categorías en el sistema:</b> </h3>
         <div class="table-responsive">
 
-          <table class="table table-hover">
+          <table class="table table-hover table-bordered">
             <thead class="thead-dark">
               <tr class="text-center">
-                <th scope="col">ID</th> <th scope="col">Nombre Marca</th> <th scope="col">Nombre Categoría</th> <th scope="col">Fecha de Alta</th> <th scope="col">Eliminar</th>
+                <th scope="col">ID</th> <th scope="col">Marca</th> <th scope="col">Categoría</th> <th scope="col">Fecha de Alta</th> <th scope="col">Eliminar</th>
               </tr>
             </thead>
             <tbody>
@@ -55,8 +66,8 @@
                   </form> </td>
                 </tr>
               @empty
-                <tr>
-                  <th scope="row"> ** </th> <td  colspan="5"> <i>NO HAY RELACIONES ENTRE MARCAS Y CATEGORIAS CARGADAS EN SISTEMA...</i> </td>
+                <tr class="text-center">
+                  <th scope="row"> ** </th> <td colspan="5"> <i>NO HAY RELACIONES ENTRE MARCAS Y CATEGORIAS CARGADAS EN SISTEMA...</i> </td>
                 </tr>
               @endforelse
             </tbody>
@@ -70,7 +81,7 @@
       <!-- INICIA FORM RELACION CATEGORIA/MARCA EN BD -->
       <form class="show_categories_trademarks" action="/productManagment/createCategoryTrademark" method="post">
         @csrf
-        <div class="form-group">
+        <div id="listCat" class="form-group">
           <h3 class="mt-4"> <b>Listado de Categorías:</b> </h3>
           <label class="mt-3" for="exampleFormControlSelect1"><i>Listado de categorías cargadas en el sistema: </i></label>
           <select class="form-control" id="exampleFormControlSelect1" name="category_id" >
@@ -84,7 +95,7 @@
           <span style="color: red;"class="help-block" id="error"><i></i></span>
         </div>
 
-        <div class="form-group">
+        <div id="listTrad" class="form-group">
           <h3 class="mt-4"> <b>Listado de Marcas:</b> </h3>
           <label class="mt-3" for="exampleFormControlSelect1"><i>Listado de marcas cargadas en el sistema:</i> </label>
           <select class="form-control" id="exampleFormControlSelect1" name="trademark_id" >

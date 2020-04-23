@@ -15,33 +15,25 @@ Route::get('/', function () {
   return view('welcome');
 });
 
+// Route::get('/home', 'HomeController@index')->name('home')->middleware('verified ');
+
+Auth::routes(['verify' => true]);
 
 Route::get('/homeHassen', function () {
   return view('homeHassen');
 });
 
-// Route::get('/home', function () { //auth
-//   return view('home');
-// });
-// Auth::routes(['verify' => true]);
-//
-// Route::get('/home', 'HomeController@index')->name('home')->middleware('verified ');
-
 Route::get('/products', function () {
   return view('products');
-});
-
-Route::get('/registration', function () {
-  return view('registration');
 });
 
 Route::get('/register', function () { //auth
   return view('register');
 });
 
-Route::get('/myPurchase', function () {
-  return view('myPurchase');
-});
+// Route::get('/myPurchase', function () {
+//   return view('myPurchase');
+// });
 
 Route::get('/loginHassen', function () {
   return view('loginHassen');
@@ -55,29 +47,31 @@ Route::get('/faq', function () {
   return view('faq');
 });
 
-Route::get('/homeHassen/infoHelp', 'HomeController@goInfoHelp')->name('infoHelp');
+Route::get('/homeHassen', 'HomeController@index')->name('homeHassen');
+
+Route::get('/homeHassen/contactUs', 'HomeController@goContact')->name('contactUs');
+
 Route::get('/homeHassen/accesoriesCare', 'HomeController@goAccesoriesCare')->name('accesoriesCare');
 
 
-Route::get('/homeHassen', 'HomeController@index')->name('homeHassen');
-
 Route::get('/homeHassen/availableProducts', 'ProductController@availableProducts');
 Route::post('/homeHassen/availableProducts', 'ProductController@availableProductsOrder');
-// Route::get('/homeHassen/availableProducts/{order}', 'ProductController@availableProductsOrder');
 Route::get('/homeHassen/availableCategory/{category}', 'ProductController@availableCategory');
 
 Route::get('/productPreview/{productId}', 'ProductController@showProductPreview');
 
 // ****************FORMULARIO USER****************
-Route::get('/homeHassen/managmentUsers', 'UserHassenController@showAvailableUsers');
+Route::get('/homeHassen/managmentUsers', 'UserHassenController@showAvailableUsers')->middleware('verified');
 Route::post('/homeHassen/editPrivileges', 'UserHassenController@editPrivileges');
+//suspendido Editar perfil de usuario desde panel de admin
+// Route::get('/managmentUsers/editManagmentProfile/{userId}', 'UserHassenController@editManagmentProfile');
 Route::post('/homeHassen/editUserStatus', 'UserHassenController@editStatus');
 Route::delete('/managmentUsers/deleteUser', 'UserHassenController@deleteUser');
 
-Route::get('/userProfile', 'UserHassenController@showUserProfile');
-Route::get('/editUserProfile', 'UserHassenController@showEditUserProfile');
-Route::get('/userProfile/updateUserProfile/{id}', 'UserHassenController@showUpdateUserProfile');
-Route::post('/userProfile/updateUserProfile', 'UserHassenController@updateUserProfile');
+Route::get('/userProfile', 'UserHassenController@showUserProfile')->middleware('verified');
+Route::get('/editUserProfile', 'UserHassenController@showEditUserProfile')->middleware('verified');
+Route::get('/userProfile/updateUserProfile/{id}', 'UserHassenController@showUpdateUserProfile')->middleware('verified');
+Route::post('/userProfile/updateUserProfile', 'UserHassenController@updateUserProfile')->middleware('verified');
 // ****************FORMULARIO USER****************
 
 // ****************FORMULARIO CRUD TRADEMARKS****************
@@ -124,9 +118,14 @@ Route::post('/productManagment/createProduct', 'ProductController@createProduct'
 Route::delete('/productManagment/deleteProduct', 'ProductController@deleteProduct');
 // ****************FORMULARIO CRUD PRODUCTS****************
 
+// **************** CARRITO ****************
+Route::get('/myPurchase', function () {
+  return view('myPurchase');
+});
 
+Route::get('/shoppingCart/addItem', 'ShoppingCartController@addItem');
 
-
+// **************** CARRITO ****************
 
 
 

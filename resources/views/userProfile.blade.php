@@ -42,34 +42,6 @@
         </div>
 
         <div class="form-body">
-          {{-- <div class="row" >
-            <div class="form-group col-lg-6">
-              <label for="exampleInputEmail1">Name:</label>
-              <div class="input-group">
-                <div class="input-group-addon"><span class="glyphicon glyphicon-lock"></span></div>
-                <input name="name" id="name" type="text" class="form-control" placeholder="Name" value="{{Auth::user()->name}}" readonly>
-              </div>
-              <span class="help-block" id="error"></span>
-            </div>
-            <div class="form-group col-lg-6">
-              <label for="exampleInputEmail1">Surname:</label>
-              <div class="input-group">
-                <div class="input-group-addon"><span class="glyphicon glyphicon-lock"></span></div>
-                <input name="surname" type="text" class="form-control" placeholder="Surname" value="{{Auth::user()->surname}}" readonly>
-              </div>
-              <span class="help-block" id="error"></span>
-            </div>
-          </div>
-
-          <div class="form-group ">
-            <label for="exampleInputEmail1">Email:</label>
-            <div class="input-group">
-              <div class="input-group-addon"><span class="glyphicon glyphicon-envelope"></span></div>
-              <input name="email" type="text" class="form-control" placeholder="Email" value="{{Auth::user()->email}}" readonly>
-            </div>
-            <span class="help-block" id="error"></span>
-          </div> --}}
-
           <div class="row" >
             <div class="form-group col-lg-6">
               <label for="exampleInputEmail1">Name:</label>
@@ -90,7 +62,6 @@
           </div>
 
           <div class="row" >
-
             <div class="form-group col-lg-6">
               <label for="exampleInputEmail1">Province:</label>
               <div class="input-group">

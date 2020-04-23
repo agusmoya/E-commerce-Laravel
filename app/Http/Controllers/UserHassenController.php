@@ -15,6 +15,12 @@ class UserHassenController extends Controller
     return view('managmentUsers', compact('arrayUsers'));
   }
 
+  public function editManagmentProfile($userId){
+    $user = User::find($userId);
+    return view('managmentProfile', compact('user'));
+  }
+
+
   public function editPrivileges(Request $form){
     $user = User::find($form['userId']);
     $user->type = $form['roleUser'];
@@ -54,7 +60,6 @@ class UserHassenController extends Controller
     }
 
     public function updateUserProfile(Request $form){
-
       $rules = [
         'name' => ['required', 'string', 'alpha','min:3', 'max:255'],
         'surname' => ['required', 'string', 'alpha','min:3', 'max:255'],

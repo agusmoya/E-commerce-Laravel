@@ -13,25 +13,14 @@
 
     <div class="container-fluid" style="background-color:white;">
       <h1 class="text-center my-4 p-5" style="color:black;"><b>Usuarios en el sistema:</b></h1>
-
-      {{-- ARRAY DE ERRORES --}}
-      <ul class="errors" style="color:red;">
-        @foreach ($errors->all() as $error)
-          <li>{{$error}}</li>
-        @endforeach
-      </ul>
-      {{-- ARRAY DE ERRORES --}}
-
-      <!-- INICIA FORMS MARCAS -->
-      <!-- INICIA FORM CONSULTA MARCAS EN BD -->
       <div class="section">
         <div class="form-group">
           <h3 class="mt-4" style="color:black;"> <b>Detalles de usuarios:</b> </h3>
           <div class="table-responsive">
-
             <table class="table table-hover">
               <thead class="thead-dark">
                 <tr class="text-center">
+                  <th scope="col">N°</th>
                   <th scope="col">ID</th>
                   <th scope="col">Foto:</th>
                   <th scope="col">Nombre</th>
@@ -41,9 +30,9 @@
                   <th scope="col">Email</th>
                   <th scope="col">Fecha de Alta</th>
                   <th scope="col">Fecha de Modificacion</th>
-                  <th scope="col">Provilegios</th>
-                  <th scope="col">Eliminar</th>
                   <th scope="col">Estado</th>
+                  <th scope="col">Provilegios</th>
+                  {{-- <th scope="col">Eliminar</th> --}}
                 </tr>
               </thead>
               <tbody>
@@ -51,9 +40,9 @@
                 $contador=1;
                 @endphp
                 @forelse ($arrayUsers as $user)
-
                   <tr class="text-center {{$user->status == 0 ? 'table-dark' :''}}">
                     <th class="align-middle" scope="row"> {{$contador++}} </th>
+                    <td class="align-middle">{{$user->id}}</td>
                     <td class="container-fluid" style="width:10%">
                     <img id="center" class="img-fluid card-img" src="{{asset('/storage/imagenes/imgUsers/'.$user->profilePhoto)}}" alt="profile-photo">
                     </td>
@@ -64,17 +53,18 @@
                     <td class="align-middle">{{$user->email}}</td>
                     <td class="align-middle">{{ \Carbon\Carbon::parse($user->created_at)->format('d/m/Y')}}</td>
                     <td class="align-middle">{{ \Carbon\Carbon::parse($user->updated_at)->format('d/m/Y')}}</td>
-                    <td class="align-middle">
+                    <td class="align-middle">{{$user->status == 1 ? 'Activo' :'Inactivo' }}</td>
 
+                    <td class="align-middle">
                       <div class="dropdown">
                         <button class="btn btn-ligth dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                          <i style="color:red" class="fas fa-cogs"></i> <b>Cambiar Privilegios</b>
                         </button>
                         <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                            <a class="dropdown-item" href="#">
-                              <a class="dropdown-item btn btn-link btn-sm" href="/userProfile/updateUserProfile/{{$user->id}}"> <i class="fas fa-user-edit"></i> Editar Perfil</a>
-                            </a>                              
-                              <div class="dropdown-divider"></div>
+                            {{-- <a class="dropdown-item" href="#">
+                              <a class="dropdown-item btn btn-link btn-sm ml-2" href="/managmentUsers/editManagmentProfile/{{$user->id}}"> <i class="fas fa-user-edit"></i> Editar Perfil</a>
+                            </a>
+                              <div class="dropdown-divider"></div> --}}
                               <a class="dropdown-item" href="#">
                                 <form class="" action="/homeHassen/editUserStatus" method="post">
                                   @csrf
@@ -103,19 +93,15 @@
                             </a>
                         </div>
                       </div>
-
-
-
                     </td>
-                    <td class="align-middle">
+                    {{-- <td class="align-middle">
                       <form class="" action="/managmentUsers/deleteUser/" method="post">
                         @csrf
                         @method('delete')
                         <input type="hidden" name="userId" value="{{$user->id}}">
                         <button type="submit" class="btn btn-link btn-sm"> <i class="far fa-trash-alt"></i> <b>Eliminar</b> </button>
                       </form>
-                    </td>
-                    <td class="align-middle">{{$user->status == 1 ? 'Activo' :'Inactivo' }}</td>
+                    </td> --}}
                   </tr>
                 @empty
                   <tr class="text-center">

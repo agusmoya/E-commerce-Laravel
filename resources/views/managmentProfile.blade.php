@@ -19,16 +19,17 @@
         <!-- NOTE: Inicia registracion -->
         <form class="profile_user" role="form" id="register-form" action="/userProfile/updateUserProfile" method="post" enctype="multipart/form-data">
           @csrf
+
           <div class="form-header">
             <div class="container mb-5">
               <div class="jumbotron p-3 m-3">
                 <div class="title-info text-center">
-                  <h1> {{Auth::user()->name}} </h1>
+                  <h1> {{$user->name}} </h1>
                   <p>¡Here you can edit your profile!</p>
                 </div>
-                @if (isset(Auth::user()->profilePhoto))
+                @if (isset($user->profilePhoto))
                   <div class="col-12 col-md-6 m-auto">
-                    <img id="center" class="img-fluid img-thumbnail card-img" src="{{asset('/storage/imagenes/imgUsers/'. Auth::user()->profilePhoto)}}" alt="profile-photo">
+                    <img id="center" class="img-fluid img-thumbnail card-img" src="{{asset('/storage/imagenes/imgUsers/'. $user->profilePhoto)}}" alt="profile-photo">
                   </div>
                 @else
                   <h2 class="form-title mt-4 mb-4"><i class="fa fa-user"> </i>  My Profile</h2>
@@ -60,8 +61,8 @@
                 <label for="exampleInputEmail1">Name:</label>
                 <div class="input-group">
                   <div class="input-group-addon"><span class="glyphicon glyphicon-lock"></span></div>
-                  <input name="name" id="name" type="text" class="form-control" placeholder="Name" value="{{Auth::user()->name}}">
-                  <input name="user_id" id="user_id" type="hidden" class="form-control" value="{{Auth::user()->id}}">
+                  <input name="name" id="name" type="text" class="form-control" placeholder="Name" value="{{$user->name}}">
+                  <input name="user_id" id="user_id" type="hidden" class="form-control" value="{{$user->id}}">
                 </div>
                 <span class="help-block" id="error"></span>
                 @error('name')
@@ -74,7 +75,7 @@
                 <label for="exampleInputEmail1">Surname:</label>
                 <div class="input-group">
                   <div class="input-group-addon"><span class="glyphicon glyphicon-lock"></span></div>
-                  <input name="surname" type="text" class="form-control" placeholder="Lastname" value="{{Auth::user()->surname}}">
+                  <input name="surname" type="text" class="form-control" placeholder="Lastname" value="{{$user->surname}}">
                 </div>
                 <span class="help-block" id="error"></span>
                 @error('surname')
@@ -90,7 +91,7 @@
                 <label for="exampleInputEmail1">Email:</label>
                 <div class="input-group">
                   <div class="input-group-addon"><span class="glyphicon glyphicon-envelope"></span></div>
-                  <input name="email" type="text" class="form-control" placeholder="Email" value="{{Auth::user()->email}}">
+                  <input name="email" type="text" class="form-control" placeholder="Email" value="{{$user->email}}">
                 </div>
                 <span class="help-block" id="error"></span>
                 @error('email')
@@ -122,7 +123,7 @@
                 <label for="exampleInputEmail1">Province:</label>
                 <div class="input-group">
                   <select id="provincesAPI" class="form-control" name="province" required>
-                    <option value="{{Auth::user()->province}}">{{Auth::user()->province}}</option>
+                    <option value="{{$user->province}}">{{$user->province}}</option>
                   </select>
                 </div>
                 <span class="help-block" id="error"></span>

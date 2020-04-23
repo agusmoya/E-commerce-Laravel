@@ -43,19 +43,20 @@
               {{-- <p class="card-text">{{"Stock: " . $productId["objProduct"]["stock"] . " unidades"}}</p> --}}
               <p class="card-text">Material: Fantasía</p>
               <p class="card-text">Efectivo/Mercado Pago</p>
-
                 @if (Auth::check() && Auth::user()->status == 1 && Auth::user()->type == 1)
-                  <p> <a href="/productManagment/crudProducts" class="btn btn-secondary"><strong>Volver al formulario</strong> </a> </p>
+                  <form class="" action="/shoppingCart/addItem" method="get">
+                    @csrf
+                    <input type="hidden" name="productId" value="{{$productForShow->id}}">
+                    <button type="submit" class="btn btn-danger btn-block">Add to my purchase</button>
+                  </form>
                 @else
               <a href="#" class="btn btn-danger">Add to my purchase</a>
             @endif
-
             </div>
-            <a href="/homeHassen" class="btn btn-outline-dark mt-5"><i class="fas fa-arrow-circle-left"></i> Back Home</a>
-
+            <a href="/productManagment/crudProducts" class="btn btn-secondary mt-3"><strong>Volver al formulario</strong> </a>
+            <a href="/homeHassen" class="btn btn-outline-dark mt-3"><i class="fas fa-arrow-circle-left"></i> Back Home</a>
           </div>
         </div>
       </div>
-
   </div>
 @endsection

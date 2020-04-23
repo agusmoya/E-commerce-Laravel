@@ -43,7 +43,7 @@
             </div>
           </li>
           <li class="nav-item active">
-            <a class="nav-link" href="{{route('infoHelp')}}#contact"><b style="color:black;">Contact</b> <span class="sr-only">(current)</span></a>
+            <a class="nav-link" href="{{route('contactUs')}}"><b style="color:black;">Contact</b> <span class="sr-only">(current)</span></a>
           </li>
 
 

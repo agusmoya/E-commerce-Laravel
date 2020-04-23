@@ -69,19 +69,6 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
-      // $form = app('request');
-      // $ruta = $form->file('profilePhoto')->store('public/imagenes/imgUsers');
-      // $nombreArchivo = basename($ruta);
-      //
-      //   return User::create([
-      //       'name' => $data['name'],
-      //       'surname' => $data['surname'],
-      //       'email' => $data['email'],
-      //       'province' => $data['province'],
-      //       'profilePhoto' => $nombreArchivo,
-      //       'password' => Hash::make($data['password']),
-      //   ]);
-
       $form = app('request');
       if (!isset($data['profilePhoto'])) {
         $ruta = 'public/imagenes/imgUsers/userRandom.jpg';

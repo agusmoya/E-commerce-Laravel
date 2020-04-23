@@ -98,13 +98,14 @@
 <!-- NOTE: fin header -->
 @yield('home')
 <div class="container-fluid" style="width: 90%">
+@yield('verifyEmail')
 @yield('managmentUsers')
 @yield('userProfile')
 @yield('availableCategory')
 @yield('catalog')
 @yield('accesoriesCare')
 @yield('faq')
-@yield('infoHelp')
+@yield('contactUs')
 @yield('loadedProduct')
 @yield('myPurchase')
 @yield('crudTrademarks')
@@ -142,7 +143,7 @@
               <a class="nav-link" href="{{route('accesoriesCare')}}">Info & Help</a>
             </li>
             <li>
-            <a class="nav-link" href="{{route('infoHelp')}}"><b>Contact</b> <span class="sr-only">(current)</span></a>
+            <a class="nav-link" href="{{route('contactUs')}}"><b>Contact</b> <span class="sr-only">(current)</span></a>
           </li>
         </ul>
       </div>

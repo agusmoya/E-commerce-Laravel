@@ -20,4 +20,5 @@ class ShoppingCart extends Model
     public function products(){
       return $this->belongsToMany('App\Product', 'product_shoppingCart', 'shoppingCart_id', 'product_id');
     }
+
 }

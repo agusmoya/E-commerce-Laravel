@@ -23,7 +23,7 @@ class CreateShoppingCartsTable extends Migration
             $table->foreign('user_id')
             ->references('id')->on('users');
             // ->onDelete('cascade');
-            $table->boolean('status')->default($value = true);            
+            $table->boolean('status')->default($value = true);
         });
     }
 

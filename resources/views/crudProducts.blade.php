@@ -16,14 +16,19 @@
   </nav>
 
   <div id="container_crud_products" class="container-fluid" style="background-color:white;">
-    <h1 class="text-center my-4 p-5" style="color:black;"><b>Gestión de Productos</b></h1>
+    <h1 class="text-center my-3 p-3" style="color:black;"><b>Gestión de Productos</b></h1>
 
     {{-- ARRAY DE ERRORES --}}
-    <ul class="errors" style="color:red;">
-      @foreach ($errors->all() as $error)
-        <li>{{$error}}</li>
-      @endforeach
-    </ul>
+    @if (count($errors) > 0)
+      <div class="alert alert-danger m-auto" style="width:80%;">
+        <p style="color:black">{{"Please correct the following errors:"}}</p>
+        <ul class="errors" style="color:red;">
+          @foreach ($errors->all() as $error)
+            <li style="color:#900c3f">{{$error}}</li>
+          @endforeach
+        </ul>
+      </div>
+    @endif
     {{-- ARRAY DE ERRORES --}}
     <div class="section">
       <!-- INICIO FORMS PRODUCTO -->
@@ -79,7 +84,7 @@
                 </tr>
               @empty
                 <tr class="text-center">
-                  <th scope="row"> ** </th> <td colspan="11"> <i>NO HAY PRODUCTOS CARGADAS EN SISTEMA...</i> </td>
+                  <th scope="row"> ** </th> <td colspan="12"> <i>NO HAY PRODUCTOS CARGADAS EN SISTEMA...</i> </td>
                 </tr>
               @endforelse
             </tbody>
@@ -89,8 +94,8 @@
           </div>
       </div>
 
+      <fieldset {{ isset($arrayCategoryTrademark['trademark_id']) && isset($arrayCategoryTrademark['category_id']) ? 'disabled' : '' }}>
       <form class="register_product" action="/productManagment/createProduct" method="post" enctype="multipart/form-data">
-        {{-- @method() --}}
         @csrf
         <h2 class="mt-4" style="color:black;"> <b>Producto:</b> </h2>
         <h5> Categorías disponibles por Marca: </h5>
@@ -110,9 +115,11 @@
               @endforelse
             </div>
           @empty
-            <p class="ml-3"> <strong> <i>¡¡No hay marcas relacionadas a categorías en el sistema!!</i> </strong> </p>
-            <div class="alert alert-warning" role="alert">
+            <div class="col-10 m-auto">
+            {{-- <p class="ml-3"> <strong> <i>¡¡No hay marcas relacionadas a categorías en el sistema!!</i> </strong> </p> --}}
+            <div class="alert alert-warning text-center m-3 p-3" role="alert">
               <strong>Nota: </strong>Si no existe ninguna relación entre marcas y categorías no podrá cargar ningún producto!
+            </div>
             </div>
           @endforelse
         </div>
@@ -136,7 +143,9 @@
         <div class="form-group text-center">
           <button type="submit" name="register_producto" class="btn btn-dark btn-lg mt-4 mb-5">Crear Producto</button>
         </div>
+
       </form>
+    </fieldset>
 
     </div>
 

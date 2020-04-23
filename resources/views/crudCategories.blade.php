@@ -20,11 +20,16 @@
     <h1 class="text-center my-4 p-5" style="color:black;"><b>Gestión de Categorías</b></h1>
 
     {{-- ARRAY DE ERRORES --}}
-    <ul class="errors" style="color:red;">
-      @foreach ($errors->all() as $error)
-        <li>{{$error}}</li>
-      @endforeach
-    </ul>
+    @if (count($errors) > 0)
+      <div class="alert alert-danger m-auto" style="width:80%;">
+        <p style="color:black">{{"Please correct the following errors:"}}</p>
+        <ul class="errors" style="color:red;">
+          @foreach ($errors->all() as $error)
+            <li style="color:#900c3f">{{$error}}</li>
+          @endforeach
+        </ul>
+      </div>
+    @endif
     {{-- ARRAY DE ERRORES --}}
 
     <!-- INICIA FORMS MARCAS -->
@@ -34,7 +39,7 @@
         <h3 class="mt-4" style="color:black;"> <b>Categorías en el sistema:</b> </h3>
         <div class="table-responsive">
 
-          <table class="table table-hover">
+          <table class="table table-hover table-bordered">
             <thead class="thead-dark">
               <tr class="text-center">
                 <th scope="col">ID</th> <th scope="col">Nombre</th> <th scope="col">Fecha de Alta</th> <th scope="col">Fecha de Modificación</th> <th scope="col">Actualizar</th> <th scope="col">Eliminar</th>
@@ -56,7 +61,7 @@
                 </tr>
               @empty
                 <tr class="text-center">
-                  <th scope="row"> ** </th> <td> <i>NO HAY CATEGORIAS CARGADAS EN SISTEMA...</i> </td>
+                  <th scope="row"> ** </th> <td colspan="6"> <i>NO HAY CATEGORIAS CARGADAS EN SISTEMA...</i> </td>
                 </tr>
               @endforelse
             </tbody>

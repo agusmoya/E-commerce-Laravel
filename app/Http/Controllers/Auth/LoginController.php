@@ -57,8 +57,8 @@ class LoginController extends Controller
     public function logout(Request $request) //Me traigo esto de AuthenticatesUsers
     {
         $this->guard()->logout();
-
-        $request->session()->invalidate();
+        // $request->session()->invalidate(); //esto lo comento
+        $request->session()->flush(); //y pongo esto para que me vacíe la sesion cuando el usuario se desloguea!
 
         return $this->loggedOut($request) ?: redirect('/homeHassen');
     }

@@ -45,32 +45,45 @@
 
   </div>
 
-  <div class="container-fluid">
+  <div class="container-fluid" style="width:80%">
 
     <?php // NOTE: la grilla funciona como: row-cols-md-3 --> 3 objetos por fila en pantallas con medida md. El numero indica literalmente cuantos productos entran por fila. Es mas mantenible que el de catalogo" ?>
     @foreach ($arrayCategories as $category)
-      <h2>{{$category->name}}</h2>
-      <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 row-cols-xl-5 mt-2">
+      <h2 class="text-center my-5">{{$category->name}}</h2>
+      {{--
+      // Extra large devices (large desktops, 1200px and up)
+      @media (min-width: 1200px) { ... }
+
+      // Large devices (desktops, 992px and up)
+      @media (min-width: 992px) { ... }
+
+      // Medium devices (tablets, 768px and up)
+      @media (min-width: 768px) { ... }
+
+      // Small devices (landscape phones, 576px and up)
+      @media (min-width: 576px) { ... }
+      --}}
+      <div class="row row-cols-1 row-cols-sm-2 row-cols-md-2 row-cols-lg-3 row-cols-xl-4 mt-2">
 
         @forelse ($arrayProducts as $product)
           @if ($product->name_category == $category->name)
-
             <div class="col mb-4">
               <div class="card text-center">
-                <a href="/productPreview/{{$product->id}}"> <img height="100%" src="{{asset('/storage/imagenes/imgProductos/'.$product->photo)}}" class="card-img-top" alt="img_product"> </a>
+                <a href="/productPreview/{{$product->id}}"> <img src="{{asset('/storage/imagenes/imgProductos/'.$product->photo)}}" class="card-img-top" alt="img_product"> </a>
                 <div class="card-body" >
                   <h3 style="font-weight: bolder; color:black;" class="card-title">{{$product->name}}</h3>
                   {{-- <p>{{$product->name_category . " - " . $product->name_trademark}}</p> --}}
                   {{-- <p class="card-text"><i>{{$product->description}}</i></p> --}}
-                  {{-- @if ($product->stock >= 10)
-                    <p class="card-text" style="color:#21bf73; font-weight: bold;"> Stock: Alto </p>
-                  @elseif($product->stock < 10 && $product->stock >= 5)
-                    <p class="card-text" style="color:#ffe196; font-weight: bold;"> Stock: Medio </p>
+                  @if ($product->stock >= 10)
+                    <p class="card-text" style="color:black; font-weight: bold;"> Stock: High({{$product->stock}})</p>
+
+                  @elseif($product->stock >= 6)
+                    <p class="card-text" style="color:black; font-weight: bold;"> Stock: Medium({{$product->stock}})</p>
                   @else
-                    <p class="card-text" style="color:#fd5e53; font-weight: bold;"> Stock: Bajo </p>
-                  @endif --}}
-                  <p class="card-text">Material: Fantasía</p>
-                  <p class="card-text">Precio: ${{$product->price}}</p>
+                    <p class="card-text" style="color:black; font-weight: bold;"> Stock: Low({{$product->stock}})</p>
+                  @endif
+                  <p class="card-text">Material: Fantasy</p>
+                  <p class="card-text">Price: ${{$product->price}}</p>
                   {{-- <p class="card-text">Efectivo/Mercado Pago</p> --}}
                 </div>
               </div>
@@ -78,7 +91,7 @@
           @endif
         @empty
           <div class="alert alert-warning mt-4 d-block text-center my-5 p-4"  style="font-size: 3vw;margin: 0 auto; width: 80%;" role="alert">
-            No hay productos cargados en el sistema!
+            There are no products loaded in the system!
           </div>
         @endforelse
 

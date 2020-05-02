@@ -274,7 +274,8 @@ div #verify {
   color:black;
 }
 
-/* NOTE: Style emailVerify */
+
+/* NOTE: Style Cart */
 
 #cart thead tr th{
   font-size: 1.3em;
@@ -296,4 +297,9 @@ border-bottom: 2px solid #000000;
   font-weight: bolder;
   color: black;
   background-color: #84a9ac;
+}
+
+/*creacion de boton para carrito*/
+button #minusCart {
+
 }

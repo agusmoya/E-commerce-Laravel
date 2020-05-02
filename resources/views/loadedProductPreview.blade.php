@@ -19,44 +19,81 @@
   </nav>
   <div id="loaded_product_preview" class="container mb-5">
 
+                {{--
+                // Extra large devices (large desktops, 1200px and up)
+                @media (min-width: 1200px) { ... }
 
-      <div class="card my-5 p-3">
-        <div class="row no-gutters">
+                // Large devices (desktops, 992px and up)
+                @media (min-width: 992px) { ... }
 
-          <div class="col-md-5 p-2 ml-2">
-            <img src="{{asset('/storage/imagenes/imgProductos/'.$productForShow->photo)}}" class="card-img mt-1" alt="presentacionProducto">
-          </div>
-          <div class="col-md-6 ml-3">
-            <div class="card-body p-2 my-3">
-              <h4 class="card-title"> <b> <i>{{"Nombre: " . $productForShow->name}}</i> </b> </h4>
-              <p class="card-text">{{"Categoría: " .  $productForShow->name_category}}</p>
-              <p class="card-text">{{"Marca: " . $productForShow->name_trademark}}</p>
-              <p class="card-text">{{"Precio: $" . $productForShow->price}}</p>
-              <p class="card-text">{{"Descripcón: " . $productForShow->description}}</p>
-              @if ($productForShow->stock >= 10)
-                <p class="card-text" style="color:#21bf73; font-weight: bold;"> Stock: Alto </p>
-              @elseif($productForShow->stock < 10 && $productForShow->stock >= 5)
-                <p class="card-text" style="color:#ffe196; font-weight: bold;"> Stock: Medio </p>
-              @else
-                <p class="card-text" style="color:#fd5e53; font-weight: bold;"> Stock: Bajo </p>
-              @endif
-              {{-- <p class="card-text">{{"Stock: " . $productId["objProduct"]["stock"] . " unidades"}}</p> --}}
-              <p class="card-text">Material: Fantasía</p>
-              <p class="card-text">Efectivo/Mercado Pago</p>
-                @if (Auth::check() && Auth::user()->status == 1 && Auth::user()->type == 1)
-                  <form class="" action="/shoppingCart/addItem" method="get">
-                    @csrf
-                    <input type="hidden" name="productId" value="{{$productForShow->id}}">
-                    <button type="submit" class="btn btn-danger btn-block">Add to my purchase</button>
-                  </form>
-                @else
-              <a href="#" class="btn btn-danger">Add to my purchase</a>
-            @endif
+                // Medium devices (tablets, 768px and up)
+                @media (min-width: 768px) { ... }
+
+                // Small devices (landscape phones, 576px and up)
+                @media (min-width: 576px) { ... }
+                --}}
+
+            <div class="card">
+              <div class="row">
+                <div class="col-sm-12 col-md-12 col-lg-7 col-xl-6">
+                  <img src="{{asset('/storage/imagenes/imgProductos/'.$productForShow->photo)}}" class="card-img" alt="presentacionProducto">
+                </div>
+
+                <div class="col-sm-12 col-md-12 col-lg-5 col-xl-6">
+                  <div class="card-body">
+                    <h4 class="card-title text-center mt-3"> <b> <i>{{$productForShow->name}}</i> </b> </h4>
+                    <p class="card-text">{{$productForShow->name_category}} {{"marca " . $productForShow->name_trademark}}.</p>
+                    <p class="card-text">{{"Descripción: " . $productForShow->description}}</p>
+                    <p class="card-text">{{"Precio: $" . $productForShow->price}}</p>
+                    <p class="card-text" style="font-weight:bold;"> Stock: Alto(<span id="stockProd">{{$productForShow->stock}}</span>) </p>
+                    {{-- <p class="card-text">{{"Stock: " . $productId["objProduct"]["stock"] . " unidades"}}</p> --}}
+                    <p class="card-text">Material: Fantasía</p>
+                    <p class="card-text">Efectivo/Mercado Pago</p>
+                      @if (Auth::check() && Auth::user()->status == 1 && Auth::user()->type == 1)
+                        <form class="" action="/shoppingCart/addItem" method="get">
+                          @csrf
+                          <input type="hidden" name="productId" value="{{$productForShow->id}}">
+                          <input id="amount" name="amount" type="number" value="1" min="1" max="{{$productForShow->stock}}">
+                          <button id="addToCart" type="submit" class="btn btn-danger btn-block mt-3"><b>Add to cart</b></button>
+                        </form>
+                        <div class="text-center">
+                          <ul class="nav mt-2">
+                            <li class="nav-item mr-auto">
+                              <a class="nav-link active" href="/productManagment/crudProducts" class="btn btn-link" style="color:black"><i class="fas fa-chevron-left"></i><strong> Go to form</strong> </a>
+                            </li>
+                            <li class="nav-item ml-auto">
+                              <a class="nav-link active" href="/myPurchase" class="btn btn-link" style="color:black"><strong> Go to cart </strong> <i class="fas fa-chevron-right"></i></a>
+                            </li>
+                          </ul>
+
+                        </div>
+                      @else
+                    <form class="" action="/shoppingCart/addItem" method="get">
+                      @csrf
+                      <input type="hidden" name="productId" value="{{$productForShow->id}}">
+                      <input class="mt-2" name="amount" type="number" value="1" min="1" max="{{$productForShow->stock}}">
+                      <button id="addToCart" type="submit" class="btn btn-danger btn-block mt-4"><b>Add to cart</b></button>
+                    </form>
+                    <div class="text-center">
+                      <ul class="nav mt-2">
+                        <li class="nav-item mr-auto">
+                          <a class="nav-link active" href="/homeHassen/availableProducts" class="btn btn-link" style="color:black"><i class="fas fa-chevron-left"></i><strong> See more...</strong> </a>
+                        </li>
+                        <li class="nav-item ml-auto">
+                          <a class="nav-link active" href="/myPurchase" class="btn btn-link" style="color:black"><strong> Go to cart </strong> <i class="fas fa-chevron-right"></i></a>
+                        </li>
+                      </ul>
+                    </div>
+                  @endif
+                  </div>
+                  {{-- <a href="/homeHassen" class="btn btn-outline-dark mt-3"><i class="fas fa-arrow-circle-left"></i> Back Home</a> --}}
+                </div>
+              </div>
             </div>
-            <a href="/productManagment/crudProducts" class="btn btn-secondary mt-3"><strong>Volver al formulario</strong> </a>
-            <a href="/homeHassen" class="btn btn-outline-dark mt-3"><i class="fas fa-arrow-circle-left"></i> Back Home</a>
-          </div>
-        </div>
-      </div>
+            @if (session()->has('maxStockAlert'))
+              <div class="alert alert-warning mt-3 text-center" role="alert">
+                {{session('maxStockAlert')}}
+              </div>
+            @endif
   </div>
 @endsection

@@ -124,6 +124,11 @@ Route::get('/myPurchase', function () {
 });
 
 Route::get('/shoppingCart/addItem', 'ShoppingCartController@addItem');
+Route::post('/shoppingCart/updateTotalAmountCart', 'ShoppingCartController@updateTotalAmountCart');
+Route::post('/shoppingCart/updateItemAmountCart', 'ShoppingCartController@updateItemAmountCart');
+
+Route::post('myPurchase/removeItem', 'ShoppingCartController@removeItem');
+
 
 // **************** CARRITO ****************
 

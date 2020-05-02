@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class ShoppingCart extends Model
 {
+    // public $itemsCart = array();
     public $table = "shoppingCarts";
     public $guarded =[];
 

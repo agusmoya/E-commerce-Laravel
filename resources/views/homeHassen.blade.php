@@ -3,7 +3,7 @@
 @section('title') Hassen Home - Online Store @endsection
 
   @section('home')
-
+    
     <nav class="navbar navbar-light bg-light navbar-expand-sm">
     <div class="container-fluid m-auto" style="width: 80%">
       <button class="navbar-toggler mx-auto" type="button" data-toggle="collapse" data-target="#subMenuHassen" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -112,13 +112,7 @@
                 <h3 style="font-weight: bolder; color:black;" class="card-title">{{$product->name}}</h3>
                 <p>{{$product->name_category . " - " . $product->name_trademark}}</p>
                 <p><i>{{$product->description}}</i></p>
-                @if ($product->stock >= 10)
-                  <p class="card-text" style="color:#21bf73; font-weight: bold;"> Stock: Alto </p>
-                @elseif($product->stock < 10 && $product->stock >= 5)
-                  <p class="card-text" style="color:#ffe196; font-weight: bold;"> Stock: Medio </p>
-                @else
-                  <p class="card-text" style="color:#fd5e53; font-weight: bold;"> Stock: Bajo </p>
-                @endif
+                <p class="card-text" style="color:black; font-weight: bold;"> Stock: Alto </p>
                 <p class="card-text"><b>Material:</b> Fantasía</p>
                 <p class="card-text"><b>Precio:</b> ${{$product->price}}</p>
                 <p class="card-text"><b>Efectivo/MercadoPago</b></p>

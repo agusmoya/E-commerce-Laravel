@@ -83,8 +83,12 @@
           <p><i><b>3°)</b> Seleccione la marca en el menu desplegable.</i></p>
           <h4 class="mt-3">Cargar marca:</h4>
           <label for="exampleFormControlInput1">Ingrese una marca a cargar en el sistema: </label>
-          <input name="name_trademark" type="text" class="form-control" id="exampleFormControlInput1" placeholder="Nombre de la marca..." value="{{old('name_trademark')}}">
-
+          <input name="name_trademark" type="text" class="form-control" id="exampleFormControlInput1" placeholder="Nombre de la marca..." value="{{old('name_trademark')}}" required>
+          @error('name_trademark')
+            <small id="alert" class="form-text " style="color:red">
+                  <strong>{{ $message }}</strong>
+              </small>
+          @enderror
         </div>
         <button type="submit" name="register_trademark" class="btn btn-dark mb-3">Crear Marca</button>
       </form>

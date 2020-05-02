@@ -5,15 +5,19 @@
   <!-- Required meta tags -->
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-
-
   <!-- CSRF Token -->
+  {{-- Necesario para poder enviar DATA vía fetch --}}
   <meta name="csrf-token" content="{{ csrf_token() }}">
-
   <!-- Bootstrap CSS -->
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+  <!-- my CSS -->
   <link rel="stylesheet" href="/css/styleHome.css">
 
+  <!-- CDN sweetalert -->
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9.10.12/dist/sweetalert2.all.min.js"></script>
+  <script src="{{ asset('js/cartJs.js') }}" type="text/javascript">
+
+  </script>
   <link href="https://fonts.googleapis.com/css?family=Muli:400,700,800&display=swap" rel="stylesheet">
   <title> @yield('title') </title>
 </head>
@@ -21,7 +25,6 @@
 
   <!-- NOTE: Inicia header -->
   <header>
-
     <nav class="navbar navbar-expand-lg navbar-dark">
       <div class="container-fluid mx-auto my-2" style="width: 70%">
         <a class="navba m-auto" href="/homeHassen"> <img class="img-fluid card-img logo" src="{{asset('/storage/imagenes/HassenAccesorios/logoWebBlack.png')}}" alt="logo Hassen"></a>
@@ -46,8 +49,17 @@
               <a id="linksUser" class="nav-link" href="/login"> Login <span class="sr-only">(current)</span></a>
             </li>
           @endif
-          <li class="nav-item active">
-            <a class="nav-link" href="/myPurchase"> <i class="fas fa-cart-plus"></i> My purchase <span class="sr-only">(current)</span></a>
+          <li class="nav-item active linkMyPurchase">
+            {{-- <a class="nav-link" href="/myPurchase"> <i class="fas fa-cart-plus"></i><span id="linkMyPurchase" > My purchase {{session('totalAmountCart') ? '('.session('totalAmountCart').')' : ''}}</span></a> --}}
+            <a class="d-flex nav-link text-center align-middle" href="/myPurchase" id="linkMyPurchase"> <i class="fas fa-cart-plus"></i>
+              <span style="background: white; color:black; border-radius:50%; height: 25px;
+              width: 25px;
+              border-radius: 50%;
+              display: inline-block;
+              align-items: center;">
+               {{session('totalAmountCart') ? session('totalAmountCart'): '0'}}
+              </span>
+            </a>
           </li>
 
         @if (Auth::check() && Auth::user()->type == 1 && Auth::user()->status == 1)
@@ -97,7 +109,7 @@
 </header>
 <!-- NOTE: fin header -->
 @yield('home')
-<div class="container-fluid" style="width: 90%">
+<div class="container-fluid">
 @yield('verifyEmail')
 @yield('managmentUsers')
 @yield('userProfile')

@@ -33,6 +33,7 @@ class ProductController extends Controller
     ->join('trademarks', 'trademark_id', '=', 'trademarks.id')
     ->select('products.*', 'categories.name as name_category', 'trademarks.name as name_trademark')
     ->where('products.status', 1)
+    ->where('products.stock', '!=', 0)
     ->where('trademarks.status', 1)
     ->where('categories.status', 1)
     ->orderBy('name_trademark')
@@ -43,9 +44,8 @@ class ProductController extends Controller
     return view('availableProducts', compact('arrayProducts', 'arrayCategories'));
   }
 
-  public function availableProductsOrder($order){
-// Request $form
-$form["order"]=$order;
+  public function availableProductsOrder(Request $form){
+
     if ($form["order"] == 1) {
       $order = 'price';
       $cond = 'ASC';

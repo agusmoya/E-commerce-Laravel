@@ -32,11 +32,11 @@ class TrademarkController extends Controller
     ];
 
     $messages = [
-      "alpha" => "El campo :attribute no puede ser numerico",
-      "unique" => "El campo :attribute ya ha sido ingresado",
-      "min" => "El campo :attribute no puede tener menos de :min caracteres",
-      "max" => "El campo :attribute no puede tener mas de :max caracteres",
-      "required" => "El campo :attribute no puede estar vacío"
+      // "alpha" => "El campo :attribute no puede ser numerico ni tener espacios",
+      // "unique" => "El campo :attribute ya ha sido ingresado",
+      // "min" => "El campo :attribute no puede tener menos de :min caracteres",
+      // "max" => "El campo :attribute no puede tener mas de :max caracteres",
+      // "required" => "El campo :attribute no puede estar vacío"
     ];
 
     $arrayTrademarks = Trademark::all();

@@ -11,9 +11,15 @@ class CategoryTrademarkController extends Controller
 {
     public function showCategoryTrademark(){
 
-      $arrayCategories = Category::all();
-      $arrayTrademarks = Trademark::all();
-      $alert = 'La relación que desea ingresar, ya se encuentra en el sistema!';
+      $arrayCategories = Category::where('status', 1)
+      ->orderBy('name')
+      ->get();
+
+      $arrayTrademarks = Trademark::where('status', 1)
+      ->orderBy('name')
+      ->get();
+
+      $alert = 'The relationship you want to enter is already in the system!';
 
       $arrayCategoryTrademark = CategoryTrademark::join('categories', 'category_id', '=', 'categories.id')
       ->join('trademarks', 'trademark_id', '=', 'trademarks.id')
@@ -25,14 +31,13 @@ class CategoryTrademarkController extends Controller
     }
 
     public function createCategoryTrademark(Request $form){
-
       $rules = [
-        "category_id" => "numeric|required",
-        "trademark_id" => "numeric|required"
+        "category_id" => "required",
+        "trademark_id" => "required"
       ];
 
       $messages = [
-        "numerico"=>"El campo :attribute debe ser numerico",
+        "required"=>"You must select an option to create the relationship.",
       ];
 
       $this->validate($form, $rules, $messages);
@@ -42,7 +47,7 @@ class CategoryTrademarkController extends Controller
       foreach ($arrayCategoryTrademark as $row) {
         if ($row['category_id']==$form['category_id']
         && $row['trademark_id']==$form['trademark_id']) {
-          return redirect('/productManagment/crudCategoryTrademark')->with('status', 'La relación que intenta ingresar ya ha sido cargada!');;
+          return redirect('/productManagment/crudCategoryTrademark')->with('status', 'The relationship you are trying to enter has already been loaded!');
         }
       }
 

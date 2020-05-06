@@ -3,55 +3,7 @@
 @section('title') Hassen Home - Online Store @endsection
 
   @section('home')
-    
-    <nav class="navbar navbar-light bg-light navbar-expand-sm">
-    <div class="container-fluid m-auto" style="width: 80%">
-      <button class="navbar-toggler mx-auto" type="button" data-toggle="collapse" data-target="#subMenuHassen" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="subMenuHassen">
-        <ul class="navbar-nav m-auto">
-          <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-              <b style="color:black;">Catalog</b>
-            </a>
-            <div class="dropdown-menu " aria-labelledby="navbarDropdown">
-              <a class="dropdown-item" href="/homeHassen/availableProducts"><strong>Products</strong></a>
-              <div class="dropdown-divider"></div>
-              @if (isset($arrayCategories))
-                @forelse ($arrayCategories as $category)
-                  <a class="dropdown-item" href="/homeHassen/availableCategory/{{$category->name}}">{{$category->name}}</a>
-                  <div class="dropdown-divider"></div>
-                @empty
-                  <a class="dropdown-item">{{"Sin productos disponibles!"}} </a>
-                @endforelse
-              @else
-                <a class="dropdown-item">{{"¡Sin productos disponibles!"}} </a>
-              @endif
-            </div>
-          </li>
-          <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-              <b style="color:black;">Info & Help</b>
-            </a>
-            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-              <a class="dropdown-item" href="{{route('accesoriesCare')}}"> Accessories Care </a>
-              {{-- <div class="dropdown-divider"></div>
-              <a class="dropdown-item"> Shipments </a> --}}
-              <div class="dropdown-divider"></div>
-              <a class="dropdown-item" href="/faq"> F.A.Q. </a>
-            </div>
-          </li>
-          <li class="nav-item active">
-            <a class="nav-link" href="{{route('contactUs')}}"><b style="color:black;">Contact</b> <span class="sr-only">(current)</span></a>
-          </li>
 
-
-        </ul>
-
-      </div>
-    </div>
-  </nav>
   <div class="container-fluid" style="width:90%">
       <!-- NOTE: div jumbo PRESENTACION para describir quienes somos!-->
       <div class="jumbotron jumbotron-fluid mt-4 pl-5 pr-5">
@@ -101,7 +53,7 @@
       <!-- NOTE: Fin carrusel -->
 
       <!-- NOTE: catalogo con cards -->
-      <?php // NOTE: en home la grilla funciona como: row-cols-md-3 --> 3 objetos por fila en pantallas con medida md. El numero indica literalmente cuantos productos entran por fila. Es mas mantenible que el de catalogo" ?>
+      <!-- NOTE: en home la grilla funciona como: row-cols-md-3 -> 3 objetos por fila en pantallas con medida md. El numero indica literalmente cuantos productos entran por fila. Es mas mantenible que el de catalogo" -->
       <h2 class="display-4 text-center my-5"><strong>¡Recomended for you!</strong></h2>
       <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 row-cols-xl-5 mt-2">
         @forelse ($arrayProducts as $product)

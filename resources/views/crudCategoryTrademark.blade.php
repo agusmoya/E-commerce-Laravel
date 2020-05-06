@@ -16,11 +16,11 @@
   </nav>
 
   <div class="container" style="background-color:white;">
-    <h1 class="text-center my-4 p-5" style="color:black;"><b>Relación Marca/Categoría</b></h1>
+    <h1 class="text-center my-4 p-5" style="color:black;"><b>Trademark/Category Relationship</b></h1>
 
     {{-- ARRAY DE ERRORES --}}
     @if (count($errors) > 0)
-      <div class="alert alert-danger m-auto" style="width:80%;">
+      <div class="alert alert-danger mx-auto my-4" style="width:80%;">
         <p style="color:black">{{"Please correct the following errors:"}}</p>
         <ul class="errors" style="color:red;">
           @foreach ($errors->all() as $error)
@@ -41,13 +41,14 @@
     <!-- INICIA FORM CONSULTA MARCAS EN BD -->
     <div class="section">
       <div class="form-group">
-        <h3 class="mt-4" style="color:black;"> <b>Relaciones Marca/Categorías en el sistema:</b> </h3>
+        <h3 class="mt-4" style="color:black;"> <b>Trademark/Category Relationships in the system:</b> </h3>
         <div class="table-responsive">
 
           <table class="table table-hover table-bordered">
             <thead class="thead-dark">
               <tr class="text-center">
-                <th scope="col">ID</th> <th scope="col">Marca</th> <th scope="col">Categoría</th> <th scope="col">Fecha de Alta</th> <th scope="col">Eliminar</th>
+                <th scope="col">ID</th> <th scope="col">Trademark</th> <th scope="col">Category</th>
+                <th scope="col">Created at</th> <th scope="col">Delete a relationship</th>
               </tr>
             </thead>
             <tbody>
@@ -62,12 +63,12 @@
                     @method('delete')
                     <input type="hidden" name="trademark_id" value="{{$categoryTrademark->trademark_id}}">
                     <input type="hidden" name="category_id" value="{{$categoryTrademark->category_id}}">
-                    <button type="submit" class="btn btn-link"> <i class="far fa-trash-alt"> </i> Eliminar </button>
+                    <button type="submit" name="btnDeleteRelationship" class="btn btn-link"> <i class="far fa-trash-alt"> </i> Delete </button>
                   </form> </td>
                 </tr>
               @empty
                 <tr class="text-center">
-                  <th scope="row"> ** </th> <td colspan="5"> <i>NO HAY RELACIONES ENTRE MARCAS Y CATEGORIAS CARGADAS EN SISTEMA...</i> </td>
+                  <th scope="row"> ** </th> <td colspan="5"> <i>THERE ARE NO RELATIONSHIPS BETWEEN TRADEMARKS AND CATEGORIES UPLOADED IN THE SYSTEM...</i> </td>
                 </tr>
               @endforelse
             </tbody>
@@ -81,39 +82,62 @@
       <!-- INICIA FORM RELACION CATEGORIA/MARCA EN BD -->
       <form class="show_categories_trademarks" action="/productManagment/createCategoryTrademark" method="post">
         @csrf
-        <div id="listCat" class="form-group">
-          <h3 class="mt-4"> <b>Listado de Categorías:</b> </h3>
-          <label class="mt-3" for="exampleFormControlSelect1"><i>Listado de categorías cargadas en el sistema: </i></label>
-          <select class="form-control" id="exampleFormControlSelect1" name="category_id" >
-            <option value="">Seleccione una categoría...</option>
-            @forelse ($arrayCategories as $category)
-              <option value="{{$category->id}}"> {{ $category->name }} </option>
-            @empty
-              <option value="" selected>No hay categorías cargadas en el sistema!</option>
-            @endforelse
-          </select>
-          <span style="color: red;"class="help-block" id="error"><i></i></span>
-        </div>
-
         <div id="listTrad" class="form-group">
-          <h3 class="mt-4"> <b>Listado de Marcas:</b> </h3>
-          <label class="mt-3" for="exampleFormControlSelect1"><i>Listado de marcas cargadas en el sistema:</i> </label>
-          <select class="form-control" id="exampleFormControlSelect1" name="trademark_id" >
-            <option value="">Seleccione una marca...</option>
+          <h3 class="mt-4"> <b>List of Trademarks:</b> </h3>
+          <label class="mt-3" for="selectTrademarks"><i>Trademarks loaded in the system:</i> </label>
+          <select class="form-control @error('trademark_id') is-invalid @enderror" id="selectTrademarks" name="trademark_id">
+            <option value="" selected>Select a Trademark...</option>
             @forelse ($arrayTrademarks as $trademark)
               <option value="{{$trademark->id}}"> {{ $trademark->name }} </option>
             @empty
-              <option value="" selected>No hay marcas cargadas en el sistema!</option>
+              <option value="" selected>There are no trademarks loaded in the system!</option>
             @endforelse
           </select>
+          @error('trademark_id')
+            <small id="alert" class="form-text " style="color:red">
+                  <strong>{{ $message }}</strong>
+              </small>
+          @enderror
+          <small id="alertJsSelectTrademark" class="form-text" style="color:red">
+              <strong></strong>
+          </small>
         </div>
-        <button type="submit" name="register_category_trademark" class="btn btn-dark mb-3">Relacionar Marca con Categoría</button>
+
+        <div id="listCat" class="form-group">
+          <h3 class="mt-4"> <b>List of Categories:</b> </h3>
+          <label class="mt-3" for="selectCategories"><i>Categories loaded into the system: </i></label>
+          <select class="form-control @error('category_id') is-invalid @enderror" id="selectCategories" name="category_id">
+            <option value="" selected>Select a Category...</option>
+            @forelse ($arrayCategories as $category)
+              <option value="{{$category->id}}"> {{ $category->name }} </option>
+            @empty
+              <option value="" selected>There are no categories loaded in the system!</option>
+            @endforelse
+          </select>
+          <span style="color: red;"class="help-block" id="error"><i></i></span>
+          @error('category_id')
+            <small id="alert" class="form-text " style="color:red">
+                  <strong>{{ $message }}</strong>
+              </small>
+          @enderror
+          <small id="alertJsSelectCategory" class="form-text" style="color:red">
+                <strong></strong>
+            </small>
+        </div>
+          <small id="alertEmptySubmit" class="form-text m-2" style="color:red">
+            <strong></strong>
+          </small>
+          <button type="submit" name="registerCategoryTrademark" class="btn btn-dark mb-3">Match Trademark to Category</button>
       </form>
       <!-- FIN FORM RELACION CATEGORIA/MARCA EN BD -->
     </div>
     <div class="form-group p-3 text-right">
-      <a class="btn btn-secondary" style="text-decoration: none;color:white;" href="/productManagment/crudCategories"> <strong>Volver a Categoría</strong> </a>
-      <a class="btn btn-danger" style="text-decoration: none;color:white;" href="/productManagment/crudProducts"> <strong>Continuar a Producto</strong> </a>
+      <a class="btn btn-secondary" style="text-decoration: none;color:white;" href="/productManagment/crudCategories">
+        <strong>Back to Categories</strong>
+      </a>
+      <a class="btn btn-danger" style="text-decoration: none;color:white;" href="/productManagment/crudProducts">
+        <strong>Continue to Products</strong>
+      </a>
     </div>
   </div>
 @endsection

@@ -16,7 +16,7 @@ class Product extends Model
     //   $this->hasOne('App\Trademark');
     // }
     //
-    // public function categoriy(){
+    // public function category(){
     //   $this->hasOne('App\Category');
     // }
 

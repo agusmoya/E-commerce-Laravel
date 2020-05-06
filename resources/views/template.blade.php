@@ -15,9 +15,7 @@
 
   <!-- CDN sweetalert -->
   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9.10.12/dist/sweetalert2.all.min.js"></script>
-  <script src="{{ asset('js/cartJs.js') }}" type="text/javascript">
-
-  </script>
+  <script src="{{ asset('js/cartJs.js') }}" type="text/javascript"></script>
   <link href="https://fonts.googleapis.com/css?family=Muli:400,700,800&display=swap" rel="stylesheet">
   <title> @yield('title') </title>
 </head>
@@ -27,11 +25,11 @@
   <header>
     <nav class="navbar navbar-expand-lg navbar-dark">
       <div class="container-fluid mx-auto my-2" style="width: 70%">
-        <a class="navba m-auto" href="/homeHassen"> <img class="img-fluid card-img logo" src="{{asset('/storage/imagenes/HassenAccesorios/logoWebBlack.png')}}" alt="logo Hassen"></a>
+        <a class="navbar m-auto m-5" href="/homeHassen"> <img class="img-fluid card-img logo" src="{{asset('/storage/imagenes/HassenAccesorios/logoWebBlack.png')}}" alt="logo Hassen"></a>
           <button class="navbar-toggler m-auto" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
           </button>
-      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <div style="min-width: 500px;" class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav ml-auto text-center">
           <li class="nav-item active">
             <a class="nav-link" href="/homeHassen"> <i class="fas fa-home"></i> Home <span class="sr-only">(current)</span></a>
@@ -51,7 +49,7 @@
           @endif
           <li class="nav-item active linkMyPurchase">
             {{-- <a class="nav-link" href="/myPurchase"> <i class="fas fa-cart-plus"></i><span id="linkMyPurchase" > My purchase {{session('totalAmountCart') ? '('.session('totalAmountCart').')' : ''}}</span></a> --}}
-            <a class="d-flex nav-link text-center align-middle" href="/myPurchase" id="linkMyPurchase"> <i class="fas fa-cart-plus"></i>
+            <a style="align-items: center;" class="d-flex nav-link text-center align-middle" href="/myPurchase" id="linkMyPurchase"> <i class="fas fa-cart-plus"> </i>
               <span style="background: white; color:black; border-radius:50%; height: 25px;
               width: 25px;
               border-radius: 50%;
@@ -78,12 +76,12 @@
         @endif
         @if (Auth::check())
           <li class="nav-item active">
-          <div class="dropdown show mx-1">
+          <div class="dropdown">
 
-            <a style="max-width:170px" class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <a style="max-width:170px; min-width:170px" class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
               {!!Auth::check() && Auth::user()->type == 1 && Auth::user()->status == 1 ? '<i class="fas fa-user-tag"></i>' : '<i class="fas fa-user"></i>' !!}
               {{ Auth::user() ->name }}
-              <img id="center" class="img-fluid card-img rounded-circle" style="max-width:30%" src="{{asset('/storage/imagenes/imgUsers/'. Auth::user()->profilePhoto)}}" alt="profile-photo">
+              <img id="center" class="rounded-circle" style="max-width:30%" src="{{asset('/storage/imagenes/imgUsers/'. Auth::user()->profilePhoto)}}" alt="profile-photo">
             </a>
                 <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
                   <a id="linksUser" style="color:black;" class="dropdown-item" href="/userProfile">Profile</a>
@@ -106,6 +104,53 @@
     </div>
   </nav>
   <!-- NOTE: Fin nav -->
+
+  <nav class="navbar navbar-light bg-light navbar-expand-sm">
+      <div class="container-fluid m-auto" style="width: 80%">
+        <button class="navbar-toggler mx-auto" type="button" data-toggle="collapse" data-target="#subMenuHassen" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+              <div class="collapse navbar-collapse" id="subMenuHassen">
+                      <ul class="navbar-nav m-auto">
+                            <li class="nav-item dropdown">
+                              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <b style="color:black;">Catalog</b>
+                              </a>
+                              <div class="dropdown-menu " aria-labelledby="navbarDropdown">
+                                <a class="dropdown-item" href="/homeHassen/availableProducts"><strong>Products</strong></a>
+                                <div class="dropdown-divider"></div>
+                                @if (isset($arrayCategoriesWithoutRepeating))
+                                  @forelse ($arrayCategoriesWithoutRepeating as $category)
+                                    <a class="dropdown-item" href="/homeHassen/availableCategory/{{$category->name_category}}">{{$category->name_category}}</a>
+                                    <div class="dropdown-divider"></div>
+                                  @empty
+                                    <a class="dropdown-item">{{"Sin productos disponibles!"}} </a>
+                                  @endforelse
+                                @else
+                                  <a class="dropdown-item">{{"¡Sin productos disponibles!"}} </a>
+                                @endif
+                              </div>
+                            </li>
+                            <li class="nav-item dropdown">
+                              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <b style="color:black;">Info & Help</b>
+                              </a>
+                              <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                <a class="dropdown-item" href="{{route('accesoriesCare')}}"> Accessories Care </a>
+                                {{-- <div class="dropdown-divider"></div>
+                                <a class="dropdown-item"> Shipments </a> --}}
+                                <div class="dropdown-divider"></div>
+                                <a class="dropdown-item" href="/faq"> F.A.Q. </a>
+                              </div>
+                            </li>
+                            <li class="nav-item active">
+                              <a class="nav-link" href="{{route('contactUs')}}"><b style="color:black;">Contact</b> <span class="sr-only">(current)</span></a>
+                            </li>
+                      </ul>
+              </div>
+      </div>
+</nav>
+
 </header>
 <!-- NOTE: fin header -->
 @yield('home')

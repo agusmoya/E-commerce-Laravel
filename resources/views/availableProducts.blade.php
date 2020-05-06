@@ -49,6 +49,7 @@
 
     <?php // NOTE: la grilla funciona como: row-cols-md-3 --> 3 objetos por fila en pantallas con medida md. El numero indica literalmente cuantos productos entran por fila. Es mas mantenible que el de catalogo" ?>
     @foreach ($arrayCategories as $category)
+      
       <h2 class="text-center my-5">{{$category->name}}</h2>
       {{--
       // Extra large devices (large desktops, 1200px and up)

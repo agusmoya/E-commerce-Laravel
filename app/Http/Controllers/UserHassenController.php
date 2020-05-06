@@ -75,7 +75,7 @@ class UserHassenController extends Controller
         "alpha" => 'The field :attribute must contain only letters.',
         "min" => 'The field :attribute must have at least :min letters.',
         "email" => 'The field :attribute must have a valid email format.',
-        "max" => 'The field :attribute must have a maximum of three letters.',
+        "max" => 'The field :attribute must have a maximum of :max letters.',
         "unique" => 'The field :attribute must be unique.',
         "confirmed" => 'The field :attribute must match your email_confirmation.',
         "mimes" => 'The field :attribute must be in the format: .jpg,.jpeg o.png.'

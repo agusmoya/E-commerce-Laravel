@@ -28,7 +28,7 @@ class TrademarkController extends Controller
 
   public function createTrademark(Request $form){
     $rules = [
-      "name_trademark" => "required|alpha|min:3|max:30"
+      "name_trademark" => "required|alpha|min:3|max:30|unique:trademarks,name"
     ];
 
     $messages = [
@@ -38,11 +38,12 @@ class TrademarkController extends Controller
       // "max" => "El campo :attribute no puede tener mas de :max caracteres",
       // "required" => "El campo :attribute no puede estar vacío"
     ];
+    $this->validate($form, $rules, $messages);
 
     $arrayTrademarks = Trademark::all();
     $trademarkFound = null;
     foreach ($arrayTrademarks as $trademark) {
-      if($trademark['name']==$form['name_trademark']){
+      if($trademark['name']==$form['name_trademark'] && $trademark['status'] == 0){
         $trademarkFound = $trademark;
         break;
       }
@@ -53,7 +54,7 @@ class TrademarkController extends Controller
       $trademarkFound->save();
       return redirect('/productManagment/crudTrademarks');
     } else {
-      $this->validate($form, $rules, $messages);
+      // $this->validate($form, $rules, $messages);
       $newTrademark = new Trademark();
       $newTrademark->name = $form["name_trademark"];
       $newTrademark->save();
@@ -62,6 +63,11 @@ class TrademarkController extends Controller
   }
 
   public function updateTrademark(Request $form){
+    $rules = [
+      "name_trademark" => "required|alpha|min:3|max:30|unique:trademarks,name"
+    ];
+
+    $this->validate($form, $rules);
     $trademark = Trademark::find($form["update_trademark_id"]);
     $trademark->name = $form["name_trademark"];
     $trademark->save();
@@ -69,20 +75,20 @@ class TrademarkController extends Controller
   }
 
   public function deleteTrademark(Request $form){
+    // if ($trademark==null) {
+    //   $rules = [
+    //     "id_trademark_delete" => "required"
+    //   ];
+    //   $messages = [
+    //     "required" => "You must select a trademark to remove it!"
+    //   ];
+    //   $this->validate($form, $rules, $messages);
+    // } else {}
     $trademark = Trademark::find($form["trademark_id"]);
-    if ($trademark==null) {
-      $rules = [
-        "id_trademark_delete" => "required"
-      ];
-      $messages = [
-        "required" => "Debe seleccionar una marca para eliminarla!"
-      ];
-      $this->validate($form, $rules, $messages);
-    } else {
-      $trademark->status = 0;
-      $trademark->save();
-      return redirect('/productManagment/crudTrademarks');
-    }
+    $trademark->status = 0;
+    $trademark->save();
+    return redirect('/productManagment/crudTrademarks');
+
   }
 
 

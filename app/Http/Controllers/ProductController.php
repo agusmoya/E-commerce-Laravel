@@ -102,7 +102,6 @@ class ProductController extends Controller
     ->paginate(4);
 
     $arrayCategoryTrademark = CategoryTrademark::all();
-    // dd($arrayCategoryTrademark);
     $arrayTrademarks = Trademark::where('status', 1)->orderBy('name')->get();
     $arrayCategories = Category::where('status', 1)->orderBy('name')->get();
     return view('crudProducts', compact('arrayProducts', 'arrayTrademarks', 'arrayCategories', 'arrayCategoryTrademark'));
@@ -117,25 +116,27 @@ class ProductController extends Controller
   public function createProduct(Request $form){
     $rules = [
       "trademarkId_categoryId" => "required",
-      "name_product" => "required|alpha|min:3|max:30|unique:categories,name",
+      "name_product" => "required|string|min:3|max:30|unique:categories,name",
       "price" => "required|numeric",
       "description" => "required|string|min:3",
-      "stock" => "integer|required",
+      "stock" => "required|integer",
       "photo" => "required|unique:products,photo|mimes:jpg,jpeg,png"
     ];
 
     $messages = [
-      "required" => "El campo :attribute no puede estar vacío",
-      "alpha" => "El campo :attribute no puede ser numerico ni tener espacios en blanco",
-      "unique" => "El campo :attribute ya ha sido ingresado",
-      "min" => "El campo :attribute no puede tener menos de :min caracteres",
-      "max" => "El campo :attribute no puede tener mas de :max caracteres",
-      "numeric" => "El campo :attribute debe ser un número",
-      "mimes" => "El campo :attribute debe ser de tipo .jpg, .jpeg o .png",
-      "string" => "El campo :attribute debe ser texto",
-      "integer" => "El campo :attribute debe ser un numero entero",
+      'trademarkId_categoryId.required' => 'You must select an option.',
+      // "required" => "El campo :attribute no puede estar vacío",
+      // "alpha" => "El campo :attribute no puede ser numerico ni tener espacios en blanco",
+      // "unique" => "El campo :attribute ya ha sido ingresado",
+      // "min" => "El campo :attribute no puede tener menos de :min caracteres",
+      // "max" => "El campo :attribute no puede tener mas de :max caracteres",
+      // "numeric" => "El campo :attribute debe ser un número",
+      // "mimes" => "El campo :attribute debe ser de tipo .jpg, .jpeg o .png",
+      // "string" => "El campo :attribute debe ser texto",
+      // "integer" => "El campo :attribute debe ser un numero entero",
 
     ];
+    $this->validate($form, $rules, $messages);
 
     $arrayProducts = Product::all();
     //Del formulario me llega una cadena separada por coma del id de trademark y de category
@@ -164,7 +165,7 @@ class ProductController extends Controller
       $productPreview = $foundProduct;
 
     } else {
-      $this->validate($form, $rules, $messages);
+      // $this->validate($form, $rules, $messages);
       $newProduct = new Product();
       $newProduct->trademark_id = $trademarkId;
       $newProduct->category_id = $categoryId;
@@ -195,23 +196,23 @@ class ProductController extends Controller
   public function updateProduct(Request $form){
 
     $rules = [
-      "name_product" => "required|alpha|min:3|max:30|unique:categories,name",
+      "name_product" => "required|string|min:3|max:30|unique:categories,name",
       "price" => "required|numeric",
       "description" => "required|string|min:3",
-      "stock" => "integer|required",
-      "photo" => "required|unique:products,photo|mimes:jpg,jpeg,png"
+      "stock" => "required|integer",
+      "photo" => "unique:products,photo|mimes:jpg,jpeg,png"
     ];
 
     $messages = [
-      "required" => "El campo :attribute no puede estar vacío",
-      "alpha" => "El campo :attribute no puede ser numerico ni tener espacios en blanco",
-      "unique" => "El campo :attribute ya ha sido ingresado",
-      "min" => "El campo :attribute no puede tener menos de :min caracteres",
-      "max" => "El campo :attribute no puede tener mas de :max caracteres",
-      "numeric" => "El campo :attribute debe ser un número",
-      "mimes" => "El campo :attribute debe ser de tipo .jpg, .jpeg o .png",
-      "string" => "El campo :attribute debe ser texto",
-      "integer" => "El campo :attribute debe ser un numero entero",
+      // "required" => "El campo :attribute no puede estar vacío",
+      // "alpha" => "El campo :attribute no puede ser numerico ni tener espacios en blanco",
+      // "unique" => "El campo :attribute ya ha sido ingresado",
+      // "min" => "El campo :attribute no puede tener menos de :min caracteres",
+      // "max" => "El campo :attribute no puede tener mas de :max caracteres",
+      // "numeric" => "El campo :attribute debe ser un número",
+      // "mimes" => "El campo :attribute debe ser de tipo .jpg, .jpeg o .png",
+      // "string" => "El campo :attribute debe ser texto",
+      // "integer" => "El campo :attribute debe ser un numero entero",
     ];
     $this->validate($form, $rules, $messages);
 
@@ -224,10 +225,16 @@ class ProductController extends Controller
     $product->price = $form["price"];
     $product->description = $form["description"];
     $product->stock = $form["stock"];
-    $ruta = $form->file('photo')->store('public/imagenes/imgProductos');
-    $nombreArchivo = basename($ruta);
-    $product->photo = $nombreArchivo;
-    $product->save();
+
+    if ($form["photo"] == "") {
+      $form["photo"] = $product["photo"];
+      $product->save();
+    } else {
+      $ruta = $form->file('photo')->store('public/imagenes/imgProductos');
+      $nombreArchivo = basename($ruta);
+      $product->photo = $nombreArchivo;
+      $product->save();
+    }
 
     $productForShow = Product::join('categories', 'category_id', '=', 'categories.id')
     ->join('trademarks', 'trademark_id', '=', 'trademarks.id')

@@ -48,6 +48,7 @@ Route::get('/faq', function () {
 });
 
 Route::get('/homeHassen', 'HomeController@index')->name('homeHassen');
+Route::get('/homeHassen', 'HomeController@index')->name('homeHassen');
 
 Route::get('/homeHassen/contactUs', 'HomeController@goContact')->name('contactUs');
 

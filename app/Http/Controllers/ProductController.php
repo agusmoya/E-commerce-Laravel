@@ -14,19 +14,23 @@ class ProductController extends Controller
 {
 
     public function availableCategory($category){
-      $arrayProductsByCategory = Product::join('categories', 'category_id', '=', 'categories.id')
-      ->join('trademarks', 'trademark_id', '=', 'trademarks.id')
-      ->select('products.*', 'categories.name as name_category', 'trademarks.name as name_trademark')
-      ->where('products.status', 1)
-      ->where('trademarks.status', 1)
-      ->where('categories.status', 1)
-      ->where('categories.name', $category)
-      ->orderBy('name_trademark')
-      ->orderBy('name_category')
-      ->get();
 
-      return view('availableCategory', compact('arrayProductsByCategory'));
-    }
+        $arrayProductsByCategory = Product::join('categories', 'category_id', '=', 'categories.id')
+        ->join('trademarks', 'trademark_id', '=', 'trademarks.id')
+        ->select('products.*', 'categories.name as name_category', 'trademarks.name as name_trademark')
+        ->where('products.status', 1)
+        ->where('trademarks.status', 1)
+        ->where('categories.status', 1)
+        ->where('categories.name', $category)
+        ->orderBy('name_trademark')
+        ->orderBy('name_category')
+        ->get();
+
+        if (!isset($arrayProductsByCategory[0])) {
+          return redirect('/homeHassen/availableProducts')->with('alertUnavailableCategory', '¡There are no products associated to the selected category at this time!');
+        }
+        return view('availableCategory', compact('arrayProductsByCategory'));
+      }
 
   public function availableProducts(){
     $arrayProducts = Product::join('categories', 'category_id', '=', 'categories.id')
@@ -40,8 +44,16 @@ class ProductController extends Controller
     ->orderBy('name_category')
     ->get();
 
-    $arrayCategories = Category::orderBy('name')->get();
+    $arrayCategories = CategoryTrademark::join('categories', 'category_id', '=', 'categories.id')
+    ->select('categories.name as name_category')
+    ->where('categories.status', 1)
+    ->orderBy('name_category')
+    ->distinct('name_category')
+    ->get();
+    // dd($arrayCategories);
+    // $arrayCategories = Category::orderBy('name')->get();
     return view('availableProducts', compact('arrayProducts', 'arrayCategories'));
+
   }
 
   public function availableProductsOrder(Request $form){
@@ -110,7 +122,6 @@ class ProductController extends Controller
   public function showUpdateProduct($id){
     $product = Product::find($id);
     return view('updateProduct', compact('product'));
-
   }
 
   public function createProduct(Request $form){

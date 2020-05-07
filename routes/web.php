@@ -54,7 +54,6 @@ Route::get('/homeHassen/contactUs', 'HomeController@goContact')->name('contactUs
 
 Route::get('/homeHassen/accesoriesCare', 'HomeController@goAccesoriesCare')->name('accesoriesCare');
 
-
 Route::get('/homeHassen/availableProducts', 'ProductController@availableProducts');
 Route::post('/homeHassen/availableProducts', 'ProductController@availableProductsOrder');
 Route::get('/homeHassen/availableCategory/{category}', 'ProductController@availableCategory');
@@ -129,11 +128,7 @@ Route::post('/shoppingCart/updateTotalAmountCart', 'ShoppingCartController@updat
 Route::post('/shoppingCart/updateItemAmountCart', 'ShoppingCartController@updateItemAmountCart');
 
 Route::post('myPurchase/removeItem', 'ShoppingCartController@removeItem');
-
-
 // **************** CARRITO ****************
-
-
 
 
 // ****************Generados con makeauth****************

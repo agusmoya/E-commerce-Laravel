@@ -590,7 +590,38 @@ if (document.querySelector('[name="btnDeleteProd"]')) {
   }
 }
 /*tabla: delete*/
-
 /* **** VALIDACIONES DE CRUD Products **** */
+
+/* **** VALIDACIONES DE Login **** */
+if (document.getElementById('formLogin')) {
+  var formLogin = document.getElementById('formLogin');
+  var flag = false;
+  var arrayFormLogin = Array.from(formLogin.elements);
+  arrayFormLogin.pop();
+  var elementsArrayFormLogin = arrayFormLogin.elements;
+  console.log(arrayFormLogin);
+      arrayFormLogin.forEach(item => {
+              item.addEventListener('blur', function(){
+                console.log(this.value);
+                    if (this.value == '') {
+                      flag=true;
+                      this.nextElementSibling.childNodes[1].innerText="Please, this field is required.";
+                    } else {
+                      flag=false;
+                      this.nextElementSibling.childNodes[1].innerText="";
+                    }
+
+                    formLogin.onsubmit = function(event){
+                      console.log(flag);
+                      if (flag) {
+                        event.preventDefault();
+                      }
+                    }
+
+              });
+        });
+
+}
+/* **** VALIDACIONES DE Login **** */
 
 });

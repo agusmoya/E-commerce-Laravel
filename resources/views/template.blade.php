@@ -26,79 +26,79 @@
     <nav class="navbar navbar-expand-lg navbar-dark">
       <div class="container-fluid mx-auto my-2" style="width: 70%">
         <a class="navbar m-auto m-5" href="/homeHassen"> <img class="img-fluid card-img logo" src="{{asset('/storage/imagenes/HassenAccesorios/logoWebBlack.png')}}" alt="logo Hassen"></a>
-          <button class="navbar-toggler m-auto" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-          </button>
-      <div style="min-width: 500px;" class="collapse navbar-collapse" id="navbarSupportedContent">
-        <ul class="navbar-nav ml-auto text-center">
-          <li class="nav-item active">
-            <a class="nav-link" href="/homeHassen"> <i class="fas fa-home"></i> Home <span class="sr-only">(current)</span></a>
-          </li>
-          {{-- El metodo check() devuelve true o false dependiendo de si el user está logueado o no
-          y el metodo user() me trae al usuario logueado en ese momento
-          AMBOS LOS SACAMOS DE LA CLASE Auth--}}
-          @if (!Auth::check())
+        <button class="navbar-toggler m-auto" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div style="min-width: 500px;" class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav ml-auto text-center">
             <li class="nav-item active">
-              <a id="linksUser" class="nav-link" href="/register">Register</a>
+              <a class="nav-link" href="/homeHassen"> <i class="fas fa-home"></i> Home <span class="sr-only">(current)</span></a>
             </li>
-          @endif
-          @if (!Auth::check())
-            <li class="nav-item active">
-              <a id="linksUser" class="nav-link" href="/login"> Login <span class="sr-only">(current)</span></a>
-            </li>
-          @endif
-          <li class="nav-item active linkMyPurchase">
-            {{-- <a class="nav-link" href="/myPurchase"> <i class="fas fa-cart-plus"></i><span id="linkMyPurchase" > My purchase {{session('totalAmountCart') ? '('.session('totalAmountCart').')' : ''}}</span></a> --}}
-            <a style="align-items: center;" class="d-flex nav-link text-center align-middle" href="/myPurchase" id="linkMyPurchase"> <i class="fas fa-cart-plus"> </i>
-              <span style="background: white; color:black; border-radius:50%; height: 25px;
-              width: 25px;
-              border-radius: 50%;
-              display: inline-block;
-              align-items: center;">
-               {{session('totalAmountCart') ? session('totalAmountCart'): '0'}}
+            {{-- El metodo check() devuelve true o false dependiendo de si el user está logueado o no
+            y el metodo user() me trae al usuario logueado en ese momento
+            AMBOS LOS SACAMOS DE LA CLASE Auth--}}
+            @if (!Auth::check())
+              <li class="nav-item active">
+                <a id="linksUser" class="nav-link" href="/register">Register</a>
+              </li>
+            @endif
+            @if (!Auth::check())
+              <li class="nav-item active">
+                <a id="linksUser" class="nav-link" href="/login"> Login <span class="sr-only">(current)</span></a>
+              </li>
+            @endif
+            <li class="nav-item active linkMyPurchase">
+              {{-- <a class="nav-link" href="/myPurchase"> <i class="fas fa-cart-plus"></i><span id="linkMyPurchase" > My purchase {{session('totalAmountCart') ? '('.session('totalAmountCart').')' : ''}}</span></a> --}}
+              <a style="align-items: center;" class="d-flex nav-link text-center align-middle" href="/myPurchase" id="linkMyPurchase"> <i class="fas fa-cart-plus"> </i>
+                <span style="background: white; color:black; border-radius:50%; height: 25px;
+                width: 25px;
+                border-radius: 50%;
+                display: inline-block;
+                align-items: center;">
+                {{session('totalAmountCart') ? session('totalAmountCart'): '0'}}
               </span>
             </a>
           </li>
 
-        @if (Auth::check() && Auth::user()->type == 1 && Auth::user()->status == 1)
-          <li class="nav-item active">
-            <div class="dropdown show mx-1 my-1">
+          @if (Auth::check() && Auth::user()->type == 1 && Auth::user()->status == 1)
+            <li class="nav-item active">
+              <div class="dropdown show mx-1 my-1">
 
-              <a class="btn btn-danger dropdown-toggle" role="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                <i class="fas fa-tasks"></i> Managment </a>
-              <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                <a style="color:black;" class="nav-link ml-3" href="/productManagment/crudTrademarks"> <i class="fas fa-plus-circle"></i> Products <span class="sr-only">(current)</span></a>
-                <div class="dropdown-divider"></div>
-                <a style="color:black;" class="nav-link ml-3" href="/homeHassen/managmentUsers"> <i class="fas fa-users-cog"></i></i> Users <span class="sr-only">(current)</span></a>
+                <a class="btn btn-danger dropdown-toggle" role="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  <i class="fas fa-tasks"></i> Managment </a>
+                  <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                    <a style="color:black;" class="nav-link ml-3" href="/productManagment/crudTrademarks"> <i class="fas fa-plus-circle"></i> Products <span class="sr-only">(current)</span></a>
+                    <div class="dropdown-divider"></div>
+                    <a style="color:black;" class="nav-link ml-3" href="/homeHassen/managmentUsers"> <i class="fas fa-users-cog"></i></i> Users <span class="sr-only">(current)</span></a>
+                  </div>
+                </div>
+              </li>
+            @endif
+            @if (Auth::check())
+              <li class="nav-item active">
+                <div class="dropdown">
+
+                  <a style="max-width:170px; min-width:170px" class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    {!!Auth::check() && Auth::user()->type == 1 && Auth::user()->status == 1 ? '<i class="fas fa-user-tag"></i>' : '<i class="fas fa-user"></i>' !!}
+                    {{ Auth::user() ->name }}
+                    <img id="center" class="rounded-circle" style="max-width:30%" src="{{asset('/storage/imagenes/imgUsers/'. Auth::user()->profilePhoto)}}" alt="profile-photo">
+                  </a>
+                  <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                    <a id="linksUser" style="color:black;" class="dropdown-item" href="/userProfile">Profile</a>
+
+                    <div class="dropdown-divider"></div>
+                    <a id="linksUser" style="color:black;" class="dropdown-item" href="{{ route('logout') }}"
+                    onclick="event.preventDefault();
+                    document.getElementById('logout-form').submit();">
+                    {{ __('Logout') }}
+                  </a>
+                  <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                    @csrf
+                  </form>
+                </div>
               </div>
-            </div>
-          </li>
-        @endif
-        @if (Auth::check())
-          <li class="nav-item active">
-          <div class="dropdown">
-
-            <a style="max-width:170px; min-width:170px" class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-              {!!Auth::check() && Auth::user()->type == 1 && Auth::user()->status == 1 ? '<i class="fas fa-user-tag"></i>' : '<i class="fas fa-user"></i>' !!}
-              {{ Auth::user() ->name }}
-              <img id="center" class="rounded-circle" style="max-width:30%" src="{{asset('/storage/imagenes/imgUsers/'. Auth::user()->profilePhoto)}}" alt="profile-photo">
-            </a>
-                <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                  <a id="linksUser" style="color:black;" class="dropdown-item" href="/userProfile">Profile</a>
-
-                  <div class="dropdown-divider"></div>
-                  <a id="linksUser" style="color:black;" class="dropdown-item" href="{{ route('logout') }}"
-                  onclick="event.preventDefault();
-                  document.getElementById('logout-form').submit();">
-                  {{ __('Logout') }}
-                </a>
-                <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                  @csrf
-                </form>
-              </div>
-            </div>
-        </li>
-      @endif
+            </li>
+          @endif
         </ul>
       </div>
     </div>
@@ -106,71 +106,71 @@
   <!-- NOTE: Fin nav -->
 
   <nav class="navbar navbar-light bg-light navbar-expand-sm">
-      <div class="container-fluid m-auto" style="width: 80%">
-        <button class="navbar-toggler mx-auto" type="button" data-toggle="collapse" data-target="#subMenuHassen" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
-        </button>
-              <div class="collapse navbar-collapse" id="subMenuHassen">
-                      <ul class="navbar-nav m-auto">
-                            <li class="nav-item dropdown">
-                              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <b style="color:black;">Catalog</b>
-                              </a>
-                              <div class="dropdown-menu " aria-labelledby="navbarDropdown">
-                                <a class="dropdown-item" href="/homeHassen/availableProducts"><strong>Products</strong></a>
-                                <div class="dropdown-divider"></div>
-                                @if (isset($arrayCategoriesWithoutRepeating))
-                                  @forelse ($arrayCategoriesWithoutRepeating as $category)
-                                    <a class="dropdown-item" href="/homeHassen/availableCategory/{{$category->name_category}}">{{$category->name_category}}</a>
-                                    <div class="dropdown-divider"></div>
-                                  @empty
-                                    <a class="dropdown-item">{{"Sin productos disponibles!"}} </a>
-                                  @endforelse
-                                @else
-                                  <a class="dropdown-item">{{"¡Sin productos disponibles!"}} </a>
-                                @endif
-                              </div>
-                            </li>
-                            <li class="nav-item dropdown">
-                              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <b style="color:black;">Info & Help</b>
-                              </a>
-                              <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                <a class="dropdown-item" href="{{route('accesoriesCare')}}"> Accessories Care </a>
-                                {{-- <div class="dropdown-divider"></div>
-                                <a class="dropdown-item"> Shipments </a> --}}
-                                <div class="dropdown-divider"></div>
-                                <a class="dropdown-item" href="/faq"> F.A.Q. </a>
-                              </div>
-                            </li>
-                            <li class="nav-item active">
-                              <a class="nav-link" href="{{route('contactUs')}}"><b style="color:black;">Contact</b> <span class="sr-only">(current)</span></a>
-                            </li>
-                      </ul>
-              </div>
+    <div class="container-fluid m-auto" style="width: 80%">
+      <button class="navbar-toggler mx-auto" type="button" data-toggle="collapse" data-target="#subMenuHassen" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="subMenuHassen">
+        <ul class="navbar-nav m-auto">
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              <b style="color:black;">Catalog</b>
+            </a>
+            <div class="dropdown-menu " aria-labelledby="navbarDropdown">
+              <a class="dropdown-item" href="/homeHassen/availableProducts"><strong>Products</strong></a>
+              <div class="dropdown-divider"></div>
+              @if (isset($arrayCategoriesWithoutRepeating))
+                @forelse ($arrayCategoriesWithoutRepeating as $category)
+                  <a class="dropdown-item" href="/homeHassen/availableCategory/{{$category->name_category}}">{{$category->name_category}}</a>
+                  <div class="dropdown-divider"></div>
+                @empty
+                  <a class="dropdown-item">{{"Sin productos disponibles!"}} </a>
+                @endforelse
+              @else
+                <a class="dropdown-item">{{"¡Sin productos disponibles!"}} </a>
+              @endif
+            </div>
+          </li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              <b style="color:black;">Info & Help</b>
+            </a>
+            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+              <a class="dropdown-item" href="{{route('accesoriesCare')}}"> Accessories Care </a>
+              {{-- <div class="dropdown-divider"></div>
+              <a class="dropdown-item"> Shipments </a> --}}
+              <div class="dropdown-divider"></div>
+              <a class="dropdown-item" href="/faq"> F.A.Q. </a>
+            </div>
+          </li>
+          <li class="nav-item active">
+            <a class="nav-link" href="{{route('contactUs')}}"><b style="color:black;">Contact</b> <span class="sr-only">(current)</span></a>
+          </li>
+        </ul>
       </div>
-</nav>
+    </div>
+  </nav>
 
 </header>
 <!-- NOTE: fin header -->
 @yield('home')
 <div class="container-fluid">
-@yield('verifyEmail')
-@yield('managmentUsers')
-@yield('userProfile')
-@yield('availableCategory')
-@yield('catalog')
-@yield('accesoriesCare')
-@yield('faq')
-@yield('contactUs')
-@yield('loadedProduct')
-@yield('myPurchase')
-@yield('crudTrademarks')
-@yield('crudCategories')
-@yield('crudCategoryTrademark')
-@yield('crudProducts')
-@yield('loginLaravel')
-@yield('registerLaravel')
+  @yield('verifyEmail')
+  @yield('managmentUsers')
+  @yield('userProfile')
+  @yield('availableCategory')
+  @yield('catalog')
+  @yield('accesoriesCare')
+  @yield('faq')
+  @yield('contactUs')
+  @yield('loadedProduct')
+  @yield('myPurchase')
+  @yield('crudTrademarks')
+  @yield('crudCategories')
+  @yield('crudCategoryTrademark')
+  @yield('crudProducts')
+  @yield('loginLaravel')
+  @yield('registerLaravel')
 </div>
 <!-- NOTE: inicia footer -->
 <footer id="footer" class="mt-5 p-4">
@@ -196,10 +196,10 @@
       <div id="contactUs" class="col-12 col-sm-4 col-md-4">
         <h5>Contact us</h5>
         <ul class="list-unstyled quick-links">
-            <li>
-              <a class="nav-link" href="{{route('accesoriesCare')}}">Info & Help</a>
-            </li>
-            <li>
+          <li>
+            <a class="nav-link" href="{{route('accesoriesCare')}}">Info & Help</a>
+          </li>
+          <li>
             <a class="nav-link" href="{{route('contactUs')}}"><b>Contact</b> <span class="sr-only">(current)</span></a>
           </li>
         </ul>

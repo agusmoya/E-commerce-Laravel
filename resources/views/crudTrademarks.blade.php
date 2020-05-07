@@ -5,15 +5,19 @@
 @endsection
 
 @section('crudTrademarks')
+
   <nav id="breadcrumb" aria-label="breadcrumb">
     <ol class="breadcrumb">
       <li class="breadcrumb-item"><a href="/homeHassen">Home</a></li>
       <li class="breadcrumb-item active" aria-current="page">CRUD Trademark</li>
       <li class="breadcrumb-item"><a href="/productManagment/crudCategories">CRUD Category</a></li>
-      <li class="breadcrumb-item"><a href="/productManagment/crudCategoryTrademark">CRUD Trademark|Category</a></li>
-      {{-- <li class="breadcrumb-item"><a href="/productManagment/crudProducts">CRUD Products</li> --}}
+      <li class="breadcrumb-item"><a href="/productManagment/crudCategoryTrademark">CRUD Trademark&Category</a></li>
+      <li class="breadcrumb-item"><a href="/productManagment/crudProducts">CRUD Products</li>
+      <li style="display:none" class="breadcrumb-item"><a href="#">Home</a></li>
     </ol>
   </nav>
+
+
   <div class="container" style="background-color:white;">
     <h1 class="text-center my-4 p-5" style="color:black;"><b>Trademarks management</b></h1>
 
@@ -53,12 +57,14 @@
                   <tr class="text-center">
                     <th scope="row"> {{$contador++}} </th> <td>{{$trademark->name}}</td> <td>{{$trademark->created_at}}</td> <td>{{$trademark->updated_at}}</td>
                     <td> <button type="button" class="btn btn-link btn-sm"> <a href="/productManagment/updateTrademark/{{$trademark->id}}"> <i class="fas fa-pencil-alt"></i> <b>Edit</b> </a> </button> </td>
-                    <td> <form class="" name="formDeleteTrademark" action="/productManagment/deleteTrademark" method="post">
+                    <td>
+                      <form class="" name="formDeleteTrademark" action="/productManagment/deleteTrademark" method="post">
                       @csrf
                       @method('delete')
                       <input type="hidden" name="trademark_id" value="{{$trademark->id}}">
                       <button id="btnDeleteTrademark" type="submit" class="btn btn-link btn-sm"> <i class="far fa-trash-alt"></i> <b>Delete</b> </button>
-                    </form> </td>
+                    </form>
+                  </td>
                   </tr>
                 @empty
                   <tr class="text-center">

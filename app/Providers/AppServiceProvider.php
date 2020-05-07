@@ -30,22 +30,13 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-      $arrayCategoriesWithoutRepeating = Product::join('categories', 'category_id', '=', 'categories.id')
-      ->join('trademarks', 'trademark_id', '=', 'trademarks.id')
-      ->select('products.*', 'categories.name as name_category', 'trademarks.name as name_trademark')
-      ->where('products.status', 1)
-      ->where('trademarks.status', 1)
-      ->where('categories.status', 1)
-      ->orderBy('name_category')
-      ->groupBy('name_category');
 
-          // $arrayCategoriesWithoutRepeating = CategoryTrademark::join('categories', 'category_id', '=', 'categories.id')
-          // ->select('categories.name as name_category')
-          // ->where('categories.status', 1)
-          // ->orderBy('name_category')
-          // ->distinct('name_category')
-          // ->get();
-          // dd($arrayCategoriesWithoutRepeating);
+          $arrayCategoriesWithoutRepeating = CategoryTrademark::join('categories', 'category_id', '=', 'categories.id')
+          ->select('categories.name as name_category')
+          ->where('categories.status', 1)
+          ->orderBy('name_category')
+          ->distinct('name_category')
+          ->get();
           View::share('arrayCategoriesWithoutRepeating', $arrayCategoriesWithoutRepeating);
     }
 }

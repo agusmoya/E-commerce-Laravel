@@ -10,8 +10,9 @@
       <li class="breadcrumb-item"><a href="/homeHassen">Home</a></li>
       <li class="breadcrumb-item"><a href="/productManagment/crudTrademarks">CRUD Trademark</a></li>
       <li class="breadcrumb-item"><a href="/productManagment/crudCategories">CRUD Category</a></li>
-      <li class="breadcrumb-item"><a href="/productManagment/crudCategoryTrademark">CRUD Trademark|Category</a></li>
+      <li class="breadcrumb-item"><a href="/productManagment/crudCategoryTrademark">CRUD Trademark&Category</a></li>
       <li class="breadcrumb-item active" aria-current="page">CRUD Products</li>
+      <li style="display:none" class="breadcrumb-item"><a href="#">Home</a></li>
     </ol>
   </nav>
 
@@ -62,7 +63,7 @@
             @forelse ($arrayProducts as $product)
               <tr class="text-center">
                 <th class="align-middle" scope="row"> {{$contador++}} </th>
-                <td class="container-fluid" style="width:10%">
+                <td class="container-fluid align-middle" style="width:10%">
                   <img id="center" class="img-fluid card-img" src="{{asset('/storage/imagenes/imgProductos/'.$product->photo)}}" alt="profile-photo">
                 </td>
                 <td class="align-middle">{{$product->name}}</td>
@@ -77,11 +78,16 @@
                 <td class="align-middle">
                   <a href="/productManagment/updateProduct/{{$product->id}}" class= "btn btn-link btn-sm" style="color:#64b2cd;"> <i class="fas fa-pencil-alt"></i> <b>Edit</b> </a>
                 </td>
-                <form class="" action="/productManagment/deleteProduct" method="post">
+                <td class="align-middle">
+                <form action="/productManagment/deleteProduct" method="post">
                   @csrf
                   @method('delete')
-                  <td class="align-middle"><input type="hidden" name="product_id" value="{{$product->id}}"> <button id="btnDeleteProd" type="submit" class="btn btn-link btn-sm align-middle" style="color:#e32249;"> <i class="far fa-trash-alt"></i> <b>Delete</b> </button></td>
+                  <input type="hidden" name="product_id" value="{{$product->id}}">
+                    <button name="btnDeleteProd" id="btnDeleteProd" type="submit" class="btn btn-link btn-sm mt-3" style="color:#e32249;">
+                      <i class="far fa-trash-alt"></i> <b>Delete</b>
+                    </button>
                 </form>
+              </td>
               </tr>
             @empty
               <tr class="text-center">

@@ -46,11 +46,15 @@
   </div>
 
   <div class="container-fluid" style="width:80%">
-
+    @if (session()->has('alertUnavailableCategory'))
+        <div class="alert alert-warning mt-3 p-4 text-center" role="alert">
+        <strong>{{session('alertUnavailableCategory')}}</strong>
+        </div>
+    @endif
     <?php // NOTE: la grilla funciona como: row-cols-md-3 --> 3 objetos por fila en pantallas con medida md. El numero indica literalmente cuantos productos entran por fila. Es mas mantenible que el de catalogo" ?>
     @foreach ($arrayCategories as $category)
-      
-      <h2 class="text-center my-5">{{$category->name}}</h2>
+      {{$flag=true}}
+      <h2 class="text-center my-5">{{$category->name_category}}</h2>
       {{--
       // Extra large devices (large desktops, 1200px and up)
       @media (min-width: 1200px) { ... }
@@ -65,9 +69,9 @@
       @media (min-width: 576px) { ... }
       --}}
       <div class="row row-cols-1 row-cols-sm-2 row-cols-md-2 row-cols-lg-3 row-cols-xl-4 mt-2">
-
         @forelse ($arrayProducts as $product)
-          @if ($product->name_category == $category->name)
+          @if ($product->name_category == $category->name_category)
+            {{$flag=false}}
             <div class="col mb-4">
               <div class="card text-center">
                 <a href="/productPreview/{{$product->id}}"> <img src="{{asset('/storage/imagenes/imgProductos/'.$product->photo)}}" class="card-img-top" alt="img_product"> </a>
@@ -77,7 +81,6 @@
                   {{-- <p class="card-text"><i>{{$product->description}}</i></p> --}}
                   @if ($product->stock >= 10)
                     <p class="card-text" style="color:black; font-weight: bold;"> Stock: High({{$product->stock}})</p>
-
                   @elseif($product->stock >= 6)
                     <p class="card-text" style="color:black; font-weight: bold;"> Stock: Medium({{$product->stock}})</p>
                   @else
@@ -95,8 +98,12 @@
             There are no products loaded in the system!
           </div>
         @endforelse
-
       </div><!-- NOTE: fin div-row -->
+      @if ($flag)
+        <div class="alert alert-warning p-4 text-center m-auto" style="width:70%;" role="alert">
+        <strong>¡There are no products associated to this category!</strong>
+        </div>
+      @endif
     @endforeach
   </div><!-- NOTE: fin container-fluid -->
 @endsection

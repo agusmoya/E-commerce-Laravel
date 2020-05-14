@@ -1,5 +1,5 @@
-{{-- @extends('layouts.app') --}}
 @extends('template')
+
 @section('title') Hassen Register - Online Store @endsection
 
 @section('registerLaravel')

@@ -1,5 +1,5 @@
 // Body
-$body-bg: #f8fafc;
+$body-bg: #1b262c;
 
 // Typography
 $font-family-sans-serif: 'Nunito', sans-serif;
@@ -17,3 +17,113 @@ $yellow: #ffed4a;
 $green: #38c172;
 $teal: #4dc0b5;
 $cyan: #6cb2eb;
+
+//----------------------------------
+// Model colors 1:
+//----------------------------------
+$darkSmoke: #3c4245;
+$lightSmoke: #5f6769;
+$darkTeal: #719192;
+$pastelWhite: #dfcdc3;
+//----------------------------------
+
+//----------------------------------
+// Model colors 2:
+//----------------------------------
+$skin: #f9d5bb;
+$lightRed: #f66767;
+$darkRed: #d35656;
+$dark: #212121;
+//----------------------------------
+
+/*----------------------------------
+Estilos de prueba
+------------------------------------*/
+body {
+ font-family: $font-family-sans-serif;
+ background-color: $body-bg;
+ font-size: $font-size-base;
+ line-height: $line-height-base;
+}
+
+header {
+  background-color: $dark;
+}
+
+.shadow {
+    box-shadow: 0 0.5rem 1rem rgba(13, 11, 11, 0.94) !important;
+}
+
+#breadcrumb {
+  background-color: #1b262c;
+}
+
+#breadcrumb ol {
+  background-color: #1b262c;
+}
+
+#breadcrumb ol li a{
+  color: lightgrey;
+}
+
+.jumbotron {
+  background-color: #84142d;
+  color: white;
+}
+
+.jumbotron h1{
+  font-weight: 800;
+}
+
+@media(min-width: 768px){
+  html{
+    font-size: 16px;
+  }
+
+}
+
+@media
+only screen and (max-width: 570px),
+(min-device-width: 0px) and (max-device-width: 576px)  {
+
+/* Force table to not be like tables anymore */
+table, thead, tbody, th, td, tr {
+    display: block;
+}
+
+/* Hide table headers (but not display: none;, for accessibility) */
+thead tr {
+    position: absolute;
+    top: -9999px;
+    left: -9999px;
+}
+
+tr { border: 1px solid black;}
+
+td {
+    /* Behave  like a "row" */
+    border: none;
+    position: relative;
+    padding-left: 50%;
+}
+
+td:before {
+    /* Now like a table header */
+    // position: absolute;
+    /* Top/left values mimic padding */
+    top: 6px;
+    left: 60px;
+    width: 45%;
+    padding-right: 20px;
+    // white-space: nowrap;
+}
+
+/*
+Label the data
+*/
+td:nth-of-type(2):before { content: "NAME:"; }
+td:nth-of-type(3):before { content: "PRICE:"; }
+td:nth-of-type(4):before { content: "AMOUNT:"; }
+td:nth-of-type(5):before { content: "SUBTOTAL:"; }
+
+}

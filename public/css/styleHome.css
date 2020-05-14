@@ -1,43 +1,3 @@
-/* NOTE: Style Home */
-
-body {
-  padding: 0;
-  margin: 0;
-  font-family: 'Muli', sans-serif;
-  background-color:#1b262c;
-}
-
-header {
-  background-color: #212121;
-}
-
-header nav #navbarSupportedContent .navbar-toggler-icon{
-  color:white;
-}
-
-header nav #navbarSupportedContent ul li a {
-  color:white;
-}
-
-header .logo {
-  width: 230px;
-}
-
-header a {
-  font-weight: bolder;
-}
-
-#breadcrumb {
-  background-color: #1b262c;
-}
-
-#breadcrumb ol {
-  background-color: #1b262c;
-}
-
-#breadcrumb ol li a{
-  color: lightgrey;
-}
 
 .jumbotron {
   background-color: #84142d;
@@ -50,7 +10,6 @@ header a {
 
 #footer {
   background-color: #212121;
-  
 }
 
 #footer .container{

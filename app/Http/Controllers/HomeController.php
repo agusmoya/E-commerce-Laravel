@@ -30,7 +30,7 @@ class HomeController extends Controller
         ->join('trademarks', 'trademark_id', '=', 'trademarks.id')
         ->select('products.*', 'categories.name as name_category', 'trademarks.name as name_trademark')
         ->where('products.status', 1)
-        ->limit(5)
+        ->limit(8)
         ->inRandomOrder()
         ->get();
         $arrayCategories = Category::orderBy('name')->get();

@@ -36,10 +36,12 @@
               <strong></strong>
           </small>
         </div>
-          <button name="register_category" class="btn btn-dark btn-block col-4 m-auto" type="submit" id="button-addon2">Update</button>
+        <div class="form-group text-center text-dark">
+          <button id="btnUpdateCategory" name="register_category" class="btn btn-dark btn-block col-8 col-sm-6 mx-auto my-3" type="submit">Update</button>
+        </div>
       </form>
       <!-- FIN FORM MODIFICAR CATEGORIES EN BD -->
-    <a class="btn btn-secondary mb-2" style="text-decoration: none;color:white;" href="/productManagment/crudCategories"> <strong>Volver a Categoría</strong> </a>
+    <a class="btn btn-outline-dark mb-2" href="/productManagment/crudCategories"> <i class="fas fa-angle-double-left"></i> Categoría </a>
 
   </div>
   @endsection

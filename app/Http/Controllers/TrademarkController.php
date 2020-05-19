@@ -27,18 +27,21 @@ class TrademarkController extends Controller
   }
 
   public function createTrademark(Request $form){
+    $rulesWithoutUnique = [
+      "name_trademark" => "required|alpha|min:3|max:30"
+    ];
     $rules = [
       "name_trademark" => "required|alpha|min:3|max:30|unique:trademarks,name"
     ];
 
-    $messages = [
+    // $messages = [
       // "alpha" => "El campo :attribute no puede ser numerico ni tener espacios",
       // "unique" => "El campo :attribute ya ha sido ingresado",
       // "min" => "El campo :attribute no puede tener menos de :min caracteres",
       // "max" => "El campo :attribute no puede tener mas de :max caracteres",
       // "required" => "El campo :attribute no puede estar vacío"
-    ];
-    $this->validate($form, $rules, $messages);
+    // ];
+    // $this->validate($form, $rules);
 
     $arrayTrademarks = Trademark::all();
     $trademarkFound = null;
@@ -50,11 +53,12 @@ class TrademarkController extends Controller
     }
 
     if (isset($trademarkFound)) {
+      $this->validate($form, $rulesWithoutUnique);
       $trademarkFound->status = true;
       $trademarkFound->save();
       return redirect('/productManagment/crudTrademarks');
     } else {
-      // $this->validate($form, $rules, $messages);
+      $this->validate($form, $rules);
       $newTrademark = new Trademark();
       $newTrademark->name = $form["name_trademark"];
       $newTrademark->save();
@@ -64,7 +68,7 @@ class TrademarkController extends Controller
 
   public function updateTrademark(Request $form){
     $rules = [
-      "name_trademark" => "required|alpha|min:3|max:30|unique:trademarks,name"
+      "name_trademark" => "required|alpha|min:3|max:50|unique:trademarks,name"
     ];
 
     $this->validate($form, $rules);

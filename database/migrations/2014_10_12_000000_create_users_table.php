@@ -20,13 +20,12 @@ class CreateUsersTable extends Migration
       $table->string('surname')->string();
       $table->string('province')->nullable();
       $table->string('email')->unique();
-      $table->boolean('type')->nullable();
+      $table->boolean('role')->default($value = false);
       $table->timestamp('email_verified_at')->nullable();
       $table->string('password');
       $table->string('profilePhoto', 200);
       $table->rememberToken();
       $table->boolean('status')->default($value = true);
-
     });
   }
 

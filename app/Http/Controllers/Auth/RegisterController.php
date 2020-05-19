@@ -50,11 +50,10 @@ class RegisterController extends Controller
      */
     protected function validator(array $data)
     {
-      // dd($data);
         return Validator::make($data, [
             'name' => ['required', 'alpha', 'string','min:3', 'max:255'],
             'surname' => ['required', 'string','min:3', 'max:255'],
-            'province' => ['required', 'string', 'alpha'],
+            'province' => ['required', 'string'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users,email'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
             'profilePhoto' => ['mimes:jpg,jpeg,png']
@@ -78,13 +77,25 @@ class RegisterController extends Controller
         $nombreArchivo = basename($ruta);
       }
 
-        return User::create([
-            'name' => $data['name'],
-            'surname' => $data['surname'],
-            'email' => $data['email'],
-            'province' => $data['province'],
-            'profilePhoto' => $nombreArchivo,
-            'password' => Hash::make($data['password']),
-        ]);
+            if (User::count() == 0) {
+              return User::create([
+                'name' => $data['name'],
+                'surname' => $data['surname'],
+                'email' => $data['email'],
+                'role' => true,
+                'province' => $data['province'],
+                'profilePhoto' => $nombreArchivo,
+                'password' => Hash::make($data['password']),
+              ]);
+            } else {
+              return User::create([
+                'name' => $data['name'],
+                'surname' => $data['surname'],
+                'email' => $data['email'],
+                'province' => $data['province'],
+                'profilePhoto' => $nombreArchivo,
+                'password' => Hash::make($data['password']),
+              ]);
+            }
     }
 }

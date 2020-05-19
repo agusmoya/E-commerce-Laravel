@@ -45,85 +45,148 @@ body {
  font-size: $font-size-base;
  line-height: $line-height-base;
 }
-
 header {
   background-color: $dark;
 }
-
 .shadow {
     box-shadow: 0 0.5rem 1rem rgba(13, 11, 11, 0.94) !important;
 }
-
 #breadcrumb {
   background-color: #1b262c;
 }
-
 #breadcrumb ol {
   background-color: #1b262c;
 }
-
 #breadcrumb ol li a{
   color: lightgrey;
 }
-
 .jumbotron {
   background-color: #84142d;
   color: white;
 }
-
 .jumbotron h1{
   font-weight: 800;
 }
-
-@media(min-width: 768px){
+@media(min-width: 992px){
   html{
-    font-size: 16px;
+    font-size: 17px;
+  }
+}
+/* NOTE: tablas para mobilefirst */
+@media (max-device-width: 905px) {
+/* Force table to not be like tables anymore for mobile first */
+  table, thead, tbody, th, td, tr { display: block; }
+/* Hide table headers (but not display: none;, for accessibility) */
+  thead tr {
+      position: absolute;
+      top: -9999px;
+      left: -9999px;
+  }
+  tr { border: 1px solid black;}
+  td:before { padding-right: 20px; }
+/* Label the data Table cart*/
+  #cart td:nth-of-type(2):before { content: "NAME:"; }
+  #cart td:nth-of-type(3):before { content: "PRICE:"; }
+  #cart td:nth-of-type(4):before { content: "AMOUNT:"; }
+  #cart td:nth-of-type(5):before { content: "SUBTOTAL:"; }
+
+/* Label the data Table Trademark, Category*/
+  #trademark td:nth-of-type(1):before, #categories td:nth-of-type(1):before {
+    font-weight: bold;
+    content: "Name:";
+  }
+  #trademark td:nth-of-type(2):before, #categories td:nth-of-type(2):before {
+    font-weight: bold;
+    content: "Created at:";
+  }
+  #trademark td:nth-of-type(3):before, #categories td:nth-of-type(3):before {
+    font-weight: bold;
+    content: "Updated at:";
   }
 
-}
+  /* Label the data Table Trademark&Category*/
+  #categoryTrademark td:nth-of-type(1):before {
+    font-weight: bold;
+    content: "Trademark:";
+  }
+  #categoryTrademark td:nth-of-type(2):before {
+    font-weight: bold;
+    content: "Category:";
+  }
+  #categoryTrademark td:nth-of-type(3):before {
+    font-weight: bold;
+    content: "Created at:";
+  }
+  /* Label the data Table Products*/
 
-@media
-only screen and (max-width: 570px),
-(min-device-width: 0px) and (max-device-width: 576px)  {
-
-/* Force table to not be like tables anymore */
-table, thead, tbody, th, td, tr {
-    display: block;
-}
-
-/* Hide table headers (but not display: none;, for accessibility) */
-thead tr {
-    position: absolute;
-    top: -9999px;
-    left: -9999px;
-}
-
-tr { border: 1px solid black;}
-
-td {
-    /* Behave  like a "row" */
-    border: none;
-    position: relative;
-    padding-left: 50%;
-}
-
-td:before {
-    /* Now like a table header */
-    // position: absolute;
-    /* Top/left values mimic padding */
-    top: 6px;
-    left: 60px;
-    width: 45%;
-    padding-right: 20px;
-    // white-space: nowrap;
-}
-
-/*
-Label the data
-*/
-td:nth-of-type(2):before { content: "NAME:"; }
-td:nth-of-type(3):before { content: "PRICE:"; }
-td:nth-of-type(4):before { content: "AMOUNT:"; }
-td:nth-of-type(5):before { content: "SUBTOTAL:"; }
+  #products td:nth-of-type(2):before {
+    font-weight: bold;
+    content: "Name:";
+  }
+  #products td:nth-of-type(3):before {
+    font-weight: bold;
+    content: "Price:";
+  }
+  #products td:nth-of-type(4):before {
+    font-weight: bold;
+    content: "Trademark:";
+  }
+  #products td:nth-of-type(5):before {
+    font-weight: bold;
+    content: "Category:";
+  }
+  #products td:nth-of-type(6):before {
+    font-weight: bold;
+    content: "Description:";
+  }
+  #products td:nth-of-type(7):before {
+    font-weight: bold;
+    content: "Created at:";
+  }
+  #products td:nth-of-type(8):before {
+    font-weight: bold;
+    content: "Updated at:";
+  }
+  #products td:nth-of-type(9):before {
+    font-weight: bold;
+    content: "Stock:";
+  }
+  /* Label the data Table Management Users*/
+  #tableManagementUsers td:nth-of-type(1):before {
+    font-weight: bold;
+    content: "Id:";
+  }
+  #tableManagementUsers td:nth-of-type(3):before {
+    font-weight: bold;
+    content: "Name:";
+  }
+  #tableManagementUsers td:nth-of-type(4):before {
+    font-weight: bold;
+    content: "Surname:";
+  }
+  #tableManagementUsers td:nth-of-type(5):before {
+    font-weight: bold;
+    content: "Province:";
+  }
+  #tableManagementUsers td:nth-of-type(6):before {
+    font-weight: bold;
+    content: "Role:";
+  }
+  #tableManagementUsers td:nth-of-type(7):before {
+    font-weight: bold;
+    content: "E-mail:";
+  }
+  #tableManagementUsers td:nth-of-type(8):before {
+    font-weight: bold;
+    content: "Created at:";
+  }
+  #tableManagementUsers td:nth-of-type(9):before {
+    font-weight: bold;
+    content: "Updated at:";
+  }
+  #tableManagementUsers td:nth-of-type(10):before {
+    font-weight: bold;
+    content: "Status:";
+  }
 
 }

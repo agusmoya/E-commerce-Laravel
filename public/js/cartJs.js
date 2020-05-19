@@ -166,91 +166,7 @@ window.addEventListener('load', function(){
       // console.log(data);
     })
     .catch();
-
   }
-
-  //JS PARA REGISTER USER
-  //TRAIGO PROVINCIAS DE ARGENTINA PARA REGISTRACION DE USER
-  fetch('https://apis.datos.gob.ar/georef/api/provincias?campos=id,nombre')
-  .then(function(data) {
-    return data.json();
-  }).then(function(dataProvincias) {
-    var arrayProvincias = dataProvincias.provincias.sort(function(a, b) {
-      return 0;
-    });
-    if (document.getElementById('provincesAPI')) {
-      let selectProvincias = document.getElementById('provincesAPI');
-      var option = document.createElement('option');
-
-      for (var provincia of arrayProvincias) {
-        selectProvincias.innerHTML += `<option value="${provincia.nombre}"> ${provincia.nombre} </option>`
-      }
-
-      // @foreach ($generos as $genero)
-      //         <option value="{{$genero->id}}" {{$genero->id == $pelicula->genre_id ? "selected" : ""}}>{{$genero->name}}</option>
-      //       @endforeach
-    }
-  });
-
-  //SI SE ENCUENTRA EL FORM DE REGISTRACION Y EL SELECT DE LAS PROVINCIAS (PARA QUE NO LANCE ERROR EN OTRAS PAGINAS)
-  if (document.getElementById('formRegister') && document.getElementById('provincesAPI')) {
-    var selectProv = document.getElementById('provincesAPI');
-    var myForm = document.getElementById('formRegister');
-
-    myForm.addEventListener('submit', function(event){
-      if (selectProv.options[selectProv.selectedIndex].value === '') {
-        event.preventDefault();
-        var errorProv = document.querySelector('.provHelp');
-        if(errorProv){
-          errorProv.innerText = 'You must select a province.';
-        }
-      }
-    });
-
-    var myForm = document.getElementById('formRegister');
-    var elementsMyForm = Array.from(myForm.elements);
-    var errorProv = document.querySelector('.provHelp');
-    elementsMyForm.pop();
-    for (var element of elementsMyForm) {
-      element.addEventListener('change', function(event){
-        if (selectProv.options[selectProv.selectedIndex].value === '') {
-          event.preventDefault();
-
-          if(errorProv){
-            errorProv.innerText = 'This field is required.';
-          }
-        } else {
-          errorProv.innerText = '';
-        }
-
-        var alert = document.getElementById('error_' + this.getAttribute('name'));
-        if (alert) {
-          if (this.value.trim() == "") {
-            alert.innerText = 'This field is required.';
-            alert.style.color="red";
-          }
-          if(this.value.trim() !== "") {
-            alert.innerText = '';
-          }
-        }
-      });
-    }
-
-    //cambiamos el nombre del archivo que se selecciona
-    if (document.getElementById('iptFileUpload')) {
-      var inputFile = document.getElementById('iptFileUpload');
-      inputFile.addEventListener('change', function(){
-        if (document.getElementById('iptFileUpload').files[0]) {
-          var contInputFile = document.getElementById('iptFileUpload').files[0].name;
-          console.log('hola');
-          var txtInputFile = document.getElementById('lblFileUpload');
-          console.log(txtInputFile.firstChild.data);
-          txtInputFile.firstChild.data = contInputFile;
-        }
-      });
-    }
-  }
-  //JS PARA REGISTER USER
 
   /* **** VALIDACIONES DE CRUD Trademarks **** */
   /* Tabla */
@@ -278,24 +194,22 @@ window.addEventListener('load', function(){
     }
   }
   /*DELETE*/
-  /* Tabla */
-
-  /* Form Create and update*/
+  /* Form Tabla Create and update*/
   if (document.getElementById('name_trademark')) {
     var nameTrademarkIpt = document.getElementById('name_trademark');
     var alertJsNameTrademark = document.getElementById('alertJsNameTrademark');
     nameTrademarkIpt.addEventListener('blur', function(){
       if (this.value.trim() === '') {
-        alertJsNameTrademark.childNodes[1].innerText = 'This field is required.';
+        alertJsNameTrademark.innerText = 'This field is required.';
       } else {
-        alertJsNameTrademark.childNodes[1].innerText = '';
+        alertJsNameTrademark.innerText = '';
       }
     });
     var btnRegisterTrademark = document.querySelector('[name="register_trademark"]');
     btnRegisterTrademark.addEventListener('click', function(event){
       if (nameTrademarkIpt.value.trim() === ''){
         event.preventDefault();
-        alertJsNameTrademark.childNodes[1].innerText = 'This field is required.';
+        alertJsNameTrademark.innerText = 'This field is required.';
       } else {
         event.preventDefault();
         Swal.fire({
@@ -308,7 +222,7 @@ window.addEventListener('load', function(){
           confirmButtonText: 'Yes, register it!'
         }).then((result) => {
           if (result.value) {
-            this.parentElement.submit();
+            this.parentElement.parentElement.submit();
           }
         });
       }
@@ -316,7 +230,7 @@ window.addEventListener('load', function(){
   );
 
 }
-/* Form Create and update*/
+/* Form Tabla Create and update*/
 /* **** VALIDACIONES DE CRUD Trademark **** */
 
 /* **** VALIDACIONES DE CRUD Category **** */
@@ -326,9 +240,9 @@ if (document.getElementById('name_category')) {
       nameCategoryIpt.addEventListener('blur', function(){
           var alertJsNameCategory = document.getElementById('alertJsNameCategory');
           if (this.value.trim() === '') {
-            alertJsNameCategory.childNodes[1].innerText = 'This field is required.';
+            alertJsNameCategory.innerText = 'This field is required.';
           } else {
-            alertJsNameCategory.childNodes[1].innerText = '';
+            alertJsNameCategory.innerText = '';
           }
       });
 
@@ -336,7 +250,7 @@ var btnRegisterCategory = document.querySelector('[name="register_category"]');
       btnRegisterCategory.addEventListener('click', function(event){
                 if (nameCategoryIpt.value.trim() === ''){
                   event.preventDefault();
-                  alertJsNameCategory.childNodes[1].innerText = 'This field is required.';
+                  alertJsNameCategory.innerText = 'This field is required.';
                 } else {
                       event.preventDefault();
                       Swal.fire({
@@ -349,7 +263,7 @@ var btnRegisterCategory = document.querySelector('[name="register_category"]');
                         confirmButtonText: 'Yes, register it!'
                       }).then((result) => {
                             if (result.value) {
-                              this.parentElement.submit();
+                              this.parentElement.parentElement.submit();
                             }
                       });
                 }
@@ -416,45 +330,42 @@ if (document.querySelector('[name="btnDeleteRelationship"]')) {
 /* Tabla */
 
 /* Form Select Trademark */
-if (document.getElementById('selectTrademarks')) {
+if (document.getElementById('selectCategories') || document.getElementById('selectTrademarks')) {
+
   var selectTrademarks = document.getElementById('selectTrademarks');
   var alertJsSelectTrademark = document.getElementById('alertJsSelectTrademark');
-  var btnRegisterCategoryTrademark = document.querySelector('[name="registerCategoryTrademark"]');
 
   selectTrademarks.addEventListener("change", function(){
     if (this.options[this.selectedIndex].value == '') {
-      alertJsSelectTrademark.childNodes[1].innerText = 'This field is required';
+      alertJsSelectTrademark.innerText = 'This field is required';
     } else {
-      alertJsSelectTrademark.childNodes[1].innerText = '';
+      alertJsSelectTrademark.innerText = '';
     }
   });
 
-}
-/* Form Select Trademark */
-
 /* Form Select Category */
-if (document.getElementById('selectCategories')) {
   var selectCategories = document.getElementById('selectCategories');
-  var alertJsSelectCategory = document.getElementById('alertJsSelectCategory');
-  var btnRegisterCategoryTrademark = document.querySelector('[name="registerCategoryTrademark"]');
-
+    var flag = true;
   selectCategories.addEventListener("change", function(){
     if (this.options[this.selectedIndex].value == '') {
-      alertJsSelectCategory.childNodes[1].innerText = 'This field is required';
+      flag = true;
+      alertJsSelectCategory.innerText = 'This field is required';
     } else {
-      alertJsSelectCategory.childNodes[1].innerText = '';
+      flag = false;
+      alertJsSelectCategory.innerText = '';
     }
   });
 
-}
-/* Form Select Category */
-if (document.getElementById('selectCategories') || document.getElementById('selectTrademarks')) {
+/* Validation submit */
+var btnRegisterCategoryTrademark = document.querySelector('[name="registerCategoryTrademark"]');
+
         btnRegisterCategoryTrademark.addEventListener('click', function(event){
           event.preventDefault();
-          if (selectCategories.selectedIndex == 0 || selectTrademarks.selectedIndex == 0) {
+          if (flag) {
+            console.log(selectCategories.selectedIndex);
             event.preventDefault();
             var alertEmptySubmit = document.getElementById('alertEmptySubmit');
-            alertEmptySubmit.childNodes[1].innerText = 'You must select trademark and category.';
+            alertEmptySubmit.innerText = 'You must select trademark and category.';
           } else {
             Swal.fire({
               title: 'Are you sure?',
@@ -466,7 +377,7 @@ if (document.getElementById('selectCategories') || document.getElementById('sele
               confirmButtonText: 'Yes, register it!'
             }).then((result) => {
               if (result.value) {
-                this.parentElement.submit();
+                this.parentElement.parentElement.submit();
               }
             });
           }
@@ -480,7 +391,8 @@ if (document.getElementById('selectCategories') || document.getElementById('sele
 if (document.querySelector('[name="register_product"]')) {
   /* Validar boton submit (deshabilitado para ver demas validaciones)*/
   var formProd = document.querySelector('[name="register_product"]');
-
+  var btnCreateProduct = document.getElementById('btnCreateProduct');
+  var flag = false;
   /*** vista registro ***/
   var arrayFormProd = Array.from(formProd.elements); //quitamos ulitmo elemento, el boton.
   arrayFormProd.pop();
@@ -488,16 +400,18 @@ if (document.querySelector('[name="register_product"]')) {
     item.addEventListener(
       'blur', function(){
         if (this.value == '') {
-          item.parentElement.childNodes[5].childNodes[1].innerText='Please, complete this field.';
+          flag = false;
+          item.parentElement.childNodes[5].innerText='Please, complete this field.';
         } else {
-          item.parentElement.childNodes[5].childNodes[1].innerText='';
+          flag = true;
+          item.parentElement.childNodes[5].innerText='';
         }
       }
     );
   });
-
-  formProd.addEventListener('submit', function(event){
+  btnCreateProduct.addEventListener('click', function(event){
     event.preventDefault();
+    if (flag) {
         Swal.fire({
           title: 'Are you sure?',
           text: "You are about to CREATE the product...",
@@ -508,9 +422,14 @@ if (document.querySelector('[name="register_product"]')) {
           confirmButtonText: 'Yes, create it!'
         }).then((result) => {
           if (result.value) {
-            this.submit();
+            this.parentElement.parentElement.submit();
           }
         });
+      } else {
+        event.preventDefault();
+        var alertJsBtnCrudProd = document.querySelector('#alertJsBtnCrudProd');
+        alertJsBtnCrudProd.innerText = 'Please, complete all fields before send the form.'
+      }
   });
 }
 /*** vista registro ***/
@@ -523,9 +442,9 @@ if (document.querySelector('[name="update_product"]')) {
   arrayFormProd.forEach(item => {
     item.addEventListener('blur', function(){
       if (this.value == '') {
-        this.nextElementSibling.childNodes[1].innerText='Please, complete this field.';
+        this.nextElementSibling.innerText='Please, complete this field.';
       } else {
-        this.nextElementSibling.childNodes[1].innerText='';
+        this.nextElementSibling.innerText='';
       }
     }
   );
@@ -558,7 +477,7 @@ formProd.addEventListener('submit', function(event){
 
       } else {
         var alertJsBtnUpdateProd = document.getElementById('alertJsBtnUpdateProd');
-        alertJsBtnUpdateProd.childNodes[1].innerText = 'You must complete all fields!'
+        alertJsBtnUpdateProd.innerText = 'You must complete all fields!'
       }
 
 });
@@ -598,30 +517,118 @@ if (document.getElementById('formLogin')) {
   var flag = false;
   var arrayFormLogin = Array.from(formLogin.elements);
   arrayFormLogin.pop();
-  var elementsArrayFormLogin = arrayFormLogin.elements;
-  console.log(arrayFormLogin);
       arrayFormLogin.forEach(item => {
               item.addEventListener('blur', function(){
-                console.log(this.value);
+                // console.log(this.value);
                     if (this.value == '') {
                       flag=true;
-                      this.nextElementSibling.childNodes[1].innerText="Please, this field is required.";
+                      this.nextElementSibling.innerText="Please, complete this field.";
                     } else {
                       flag=false;
-                      this.nextElementSibling.childNodes[1].innerText="";
-                    }
-
-                    formLogin.onsubmit = function(event){
-                      console.log(flag);
-                      if (flag) {
-                        event.preventDefault();
-                      }
+                      this.nextElementSibling.innerText="";
                     }
 
               });
-        });
-
+    });
+     formLogin.onsubmit = function(event){
+           if (flag) {
+             event.preventDefault();
+             var alertSubmitLogin = document.querySelector('#alertSubmitLogin');
+             console.log(alertSubmitLogin);
+             alertSubmitLogin.innerText = 'Please, complete all fields.'
+           }
+     }
 }
 /* **** VALIDACIONES DE Login **** */
+
+/* **** VALIDACIONES DE Register **** */
+//SI SE ENCUENTRA EL FORM DE REGISTRACION Y EL SELECT DE LAS PROVINCIAS (PARA QUE NO LANCE ERROR EN OTRAS PAGINAS)
+if (document.getElementById('provincesAPI')) {
+//Traigo provincias de Argentina via Fetch
+fetch('https://apis.datos.gob.ar/georef/api/provincias?campos=id,nombre')
+.then(function(data) {
+  return data.json();
+}).then(function(dataProvincias) {
+  var arrayProvincias = dataProvincias.provincias.sort(function(a, b) {
+    return 0;
+  });
+  if (document.getElementById('provincesAPI')) {
+    let selectProvincias = document.getElementById('provincesAPI');
+    var option = document.createElement('option');
+      for (var provincia of arrayProvincias) {
+        selectProvincias.innerHTML += `<option value="${provincia.nombre}"> ${provincia.nombre} </option>`
+      }
+  }
+});
+
+  var flag = false;
+  var selectProv = document.getElementById('provincesAPI');
+  var myForm = document.getElementById('formRegister');
+  var elementsMyForm = Array.from(myForm.elements);
+  var errorProv = document.querySelector('.provHelp');
+  elementsMyForm.pop(); //quitamos boton
+  for (var element of elementsMyForm) {
+    element.addEventListener('blur', function(){
+      var alert = document.getElementById('error_' + this.getAttribute('name'));
+      if (alert) {
+        if (this.value.trim() == "") {
+          flag = true;
+          alert.innerText = 'This field is required.';
+          alert.style.color="red";
+        }
+        if(this.value.trim() != "") {
+          flag = false;
+          alert.innerText = '';
+        }
+      }
+    });
+  }
+
+  //cambiamos el nombre del archivo que se selecciona
+  // if (document.getElementById('iptFileUpload')) {
+  //   var inputFile = document.getElementById('iptFileUpload');
+  //   inputFile.addEventListener('change', function(){
+  //     if (document.getElementById('iptFileUpload').files[0]) {
+  //       var contInputFile = document.getElementById('iptFileUpload').files[0].name;
+  //       console.log('hola');
+  //       var txtInputFile = document.getElementById('lblFileUpload');
+  //       console.log(txtInputFile.firstChild.data);
+  //       txtInputFile.firstChild.data = contInputFile;
+  //     }
+  //   });
+  // }
+
+  //validacion de select provinces
+  // myForm.addEventListener('submit', function(event){
+  //   if (selectProv.options[selectProv.selectedIndex].value === '') {
+  //     event.preventDefault();
+  //     var errorProv = document.querySelector('.provHelp');
+  //     if(errorProv){
+  //       errorProv.innerText = 'You must select a province.';
+  //     }
+  //   }
+  // });
+
+   //validamos submit de registracion (con add event no lo manda aunque no activemos los campos)
+  myForm.addEventListener('submit', function(event){
+        if (flag) {
+          event.preventDefault();
+          console.log(flag);
+          var alertSubmitRegister = document.querySelector('#alertSubmitRegister');
+          alertSubmitRegister.innerText = "Please, complete all fields."
+        }
+  });
+
+  //validamos submit de registracion (con este lo manda igual a menos que activemos los campos)
+  // myForm.onsubmit = function(event){
+  //     if (flag) {
+  //       event.preventDefault();
+  //       console.log(flag);
+  //       var alertSubmitRegister = document.querySelector('#alertSubmitRegister');
+  //       alertSubmitRegister.innerText = "Please, complete all fields."
+  //     }
+  // }
+}
+/* **** VALIDACIONES DE Register **** */
 
 });

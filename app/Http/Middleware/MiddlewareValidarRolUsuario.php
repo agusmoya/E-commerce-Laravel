@@ -16,16 +16,16 @@ class MiddlewareValidarRolUsuario
      */
     public function handle($request, Closure $next)
     {
-        echo "estoy en el middleware <br>";
+        // echo "estoy en el middleware <br>";
         // dd(Auth::user());
         if (Auth::check() && Auth::user()->type==1) {
-          echo "logueado y admin";
+          // echo "logueado y admin";
           return $next($request);
         } elseif (Auth::check() && Auth::user()->type==0) {
-          echo "logueado e invitado";
+          // echo "logueado e invitado";
           return redirect('/homeHassen');
         } else {
-          echo "ni logueado";
+          // echo "ni logueado";
           return redirect('/register');
         }
     }

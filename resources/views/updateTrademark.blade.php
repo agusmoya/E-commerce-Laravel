@@ -5,8 +5,17 @@
 @endsection
 
 @section('crudTrademarks')
-  <div class="container my-5" style="background-color:white;">
-    <h1 class="text-center my-3 py-3" style="color:black;"><b>Update trademark</b></h1>
+  <div class="d-flex justify-content-between flex-column flex-md-row mt-5 mt-sm-3">
+    <nav id="breadcrumb" aria-label="breadcrumb" style="font-size:1em;">
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="/productManagment/crudTrademarks">CRUD Trademark</a></li>
+        <li class="breadcrumb-item active" aria-current="page">Edit Trademark</li>
+        <li style="display:none" class="breadcrumb-item"><a href="#">Home</a></li>
+        </ol>
+      </nav>
+    </div>
+  <div class="container my-4" style="background-color:white;">
+    <h1 class="text-center my-3 py-3" style="color:black;"><b>Edit trademark</b></h1>
 
     {{-- ARRAY DE ERRORES --}}
     @if (count($errors) > 0)
@@ -34,17 +43,17 @@
         </div>
         @error('name_trademark')
           <small id="alert" class="form-text" style="color:red">
-            <strong>{{ $message }}</strong>
+            {{ $message }}
           </small>
         @enderror
-        <small id="alertJsNameTrademark" class="text-center form-text" style="color:red">
-              <strong></strong>
-        </small>
+        <small id="alertJsNameTrademark" class="text-center form-text" style="color:red"></small>
       </div>
-        <button name="register_trademark" class="btn btn-dark btn-block col-4 m-auto" type="submit" id="button-addon2">Update</button>
+      <div class="form-group text-center text-dark">
+        <button name="register_trademark" class="btn btn-dark btn-block col-8 col-sm-6 mx-auto my-3" type="submit" id="btnUpdateTrad">Update</button>
+      </div>
       </form>
       <!-- FIN FORM MODIFICAR MARCAS EN BD -->
-    <a class="btn btn-secondary mb-2" style="text-decoration: none;color:white;" href="/productManagment/crudTrademarks"> <strong>Back to trademark</strong> </a>
+    <a class="btn btn-outline-dark mb-2" href="/productManagment/crudTrademarks"> <i class="fas fa-angle-double-left"></i> Trademark </a>
 
   </div>
 

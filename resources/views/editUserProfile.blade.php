@@ -3,21 +3,20 @@
 @section('title') Hassen Edit User Profile - Online Store @endsection
 
   @section('userProfile')
-
-    <nav id="breadcrumb" aria-label="breadcrumb">
+    <div class="d-flex justify-content-between flex-column flex-md-row mt-5 mt-sm-3">
+    <nav id="breadcrumb" aria-label="breadcrumb" style="font-size:1em;">
       <ol class="breadcrumb">
         <li class="breadcrumb-item"><a href="/homeHassen">Home</a></li>
         <li class="breadcrumb-item active"> <a href="/userProfile">User Profile</a></li>
         <li class="breadcrumb-item active" aria-current="page">Update User Profile</li>
       </ol>
     </nav>
+  </div>
 
     <div class="container" >
-
       <div class="signup-form-container">
-
         <!-- NOTE: Inicia registracion -->
-        <form class="profile_user" role="form" id="register-form" action="/userProfile/updateUserProfile" method="post" enctype="multipart/form-data">
+        <form class="profile_user text-light" role="form" id="register-form" action="/userProfile/updateUserProfile" method="post" enctype="multipart/form-data">
           @csrf
           <div class="form-header">
             <div class="container mb-5">
@@ -28,11 +27,11 @@
                 </div>
                 @if (isset(Auth::user()->profilePhoto))
                   <div class="col-12 col-md-6 m-auto">
-                    <img id="center" class="img-fluid img-thumbnail card-img" src="{{asset('/storage/imagenes/imgUsers/'. Auth::user()->profilePhoto)}}" alt="profile-photo">
+                    <img id="center" class="img-fluid img-thumbnail card-img border-dark" src="{{asset('/storage/imagenes/imgUsers/'. Auth::user()->profilePhoto)}}" alt="profile-photo" style="max-width:525px;">
                   </div>
                 @else
                   <h2 class="form-title mt-4 mb-4"><i class="fa fa-user"> </i>  My Profile</h2>
-                  <div class="col-6 col-md-6 m-auto">
+                  <div class="col-6 m-auto">
                     <span style="font-size: 48px; color: Dodgerblue;">
                       <i class="fas fa-user-alt"></i>
                     </span>
@@ -154,7 +153,7 @@
 
           </div>
             <div class="form-footer">
-              <button type="submit" class="btn btn-outline-secondary btn-block">
+              <button id="btnUpdateUser" type="submit" class="btn btn-block text-light">
                 <span class="glyphicon glyphicon-log-in">Update Profile</span>
               </button>
             </div>

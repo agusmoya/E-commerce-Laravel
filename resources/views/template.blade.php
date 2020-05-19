@@ -22,11 +22,11 @@
   <link rel="dns-prefetch" href="//fonts.gstatic.com">
   <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
 </head>
-<body>
+<body class="mt-5 pt-5">
 
   <!-- NOTE: Inicia header principal-->
-  <header>
-    <nav class="navbar navbar-dark navbar-expand-md text-white text-uppercase align-items-center">
+  <header class="fixed-top shadow">
+    <nav class="navbar navbar-dark navbar-expand-md text-white align-items-center">
       <div class="container col-10 text-center my-2">
         <a class="navbar-brand mx-auto mx-sm-0 mr-sm-5" href="/homeHassen">
         <img class="logo img-fluid" width="230" height="auto" src="{{asset('/storage/imagenes/HassenAccesorios/logoWebBlack.png')}}" alt="logo Hassen">
@@ -36,8 +36,8 @@
         </button>
         <div class="collapse navbar-collapse" id="menu-principal">
           <ul class="navbar-nav ml-sm-auto mt-4 mt-md-0 align-items-center text-center">
-              <li class="nav-item d-none d-lg-inline">
-                  <a class="nav-link active" href="/homeHassen">
+              <li class="nav-item d-none d-lg-inline text-uppercase">
+                  <a id="linksUser" class="nav-link active" href="/homeHassen">
                     <i style="font-size: 1.3em;" class="fas fa-home"></i> Home
                   </a>
               </li>
@@ -45,29 +45,29 @@
             y el metodo user() me trae al usuario logueado en ese momento
             AMBOS LOS SACAMOS DE LA CLASE Auth--}}
             @if (!Auth::check())
-              <li class="nav-item">
+              <li class="nav-item text-uppercase">
                   <a id="linksUser" class="nav-link active" href="/register"> Register </a>
               </li>
             @endif
             @if (!Auth::check())
-              <li class="nav-item">
+              <li class="nav-item text-uppercase">
                   <a id="linksUser" class="nav-link active" href="/login"> Login </a>
               </li>
             @endif
 
-          @if (Auth::check() && Auth::user()->type == 1 && Auth::user()->status == 1)
-              <li class="nav-item">
+          @if (Auth::check() && Auth::user()->role == 1 && Auth::user()->status == 1)
+              <li class="nav-item text-uppercase">
                     <div class="dropdown show m-1">
-                        <a class="btn btn-danger dropdown-toggle" role="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                          <i style="font-size: 1.3em;" class="fas fa-tasks"></i> Managment
+                        <a class="btn dropdown-toggle" role="button" id="dropManagement" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                          <i style="font-size: 1.1em;" class="fas fa-tasks"></i> Managment
                         </a>
                         <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                            <a class="nav-link ml-3 text-dark" href="/productManagment/crudTrademarks">
+                            <a id="linkProducts" class="nav-link pl-3 text-dark" href="/productManagment/crudTrademarks">
                               <i style="font-size: 1.1em;" class="fas fa-plus-circle"></i> Products
                             </a>
                         <div class="dropdown-divider"></div>
-                            <a class="nav-link ml-3 text-dark" href="/homeHassen/managmentUsers">
-                              <i style="font-size: 1.1em;" class="fas fa-users-cog"></i></i> Users
+                            <a id="linkUsers" class="nav-link pl-3 text-dark" href="/homeHassen/managmentUsers">
+                              <i style="font-size: 1.1em;" class="fas fa-users-cog"></i> Users
                             </a>
                         </div>
                     </div>
@@ -77,7 +77,7 @@
               <li class="nav-item">
                 <div class="dropdown">
                   <a class="btn btn-outline-light dropdown-toggle m-1" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    {!!Auth::check() && Auth::user()->type == 1 && Auth::user()->status == 1 ? '<i style="font-size: 1.3em;" class="fas fa-user-tag"></i>' : '<i style="font-size: 1.3em;" class="fas fa-user"></i>' !!}
+                    {!!Auth::check() && Auth::user()->role == 1 && Auth::user()->status == 1 ? '<i style="font-size: 1.3em;" class="fas fa-user-tag"></i>' : '<i style="font-size: 1.3em;" class="fas fa-user"></i>' !!}
                     {{ Auth::user()->name }}
                     {{-- <img id="center" class="rounded-circle" width="35" height="35" src="{{asset('/storage/imagenes/imgUsers/'. Auth::user()->profilePhoto)}}" alt="profile-photo"> --}}
                   </a>
@@ -85,7 +85,7 @@
                     <a id="linksUser" class="dropdown-item" href="/userProfile">Profile</a>
 
                     <div class="dropdown-divider"></div>
-                    <a id="linksUser" style="color:black;" class="dropdown-item" href="{{ route('logout') }}"
+                    <a id="linksUser" class="dropdown-item" href="{{ route('logout') }}"
                     onclick="event.preventDefault();
                     document.getElementById('logout-form').submit();">
                     {{ __('Logout') }}
@@ -97,7 +97,7 @@
               </div>
             </li>
           @endif
-          <li class="nav-item linkMyPurchase" style="min-width:66px;">
+          <li class="nav-item linkMyPurchase" style="min-width:70px;">
             {{-- <a class="nav-link" href="/myPurchase"> <i class="fas fa-cart-plus"></i><span id="linkMyPurchase" > My purchase {{session('totalAmountCart') ? '('.session('totalAmountCart').')' : ''}}</span></a> --}}
               <a class="nav-link active align-middle" href="/myPurchase" id="linkMyPurchase">
                 <i class="fas fa-cart-plus" style="font-size: 1.3em;"></i>
@@ -121,7 +121,7 @@
       <div class="collapse navbar-collapse" id="subMenuHassen">
         <ul class="navbar-nav text-center mx-auto mt-3 mt-sm-0">
           <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle text-dark" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <a class="nav-link dropdown-toggle text-dark" href="#" id="linkSubMenu" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
               Catalog
             </a>
             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
@@ -140,7 +140,7 @@
             </div>
           </li>
           <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle text-dark" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <a class="nav-link dropdown-toggle text-dark" href="#" id="linkSubMenu" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
               Info & Help
             </a>
             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
@@ -152,7 +152,7 @@
             </div>
           </li>
           <li class="nav-item active">
-            <a class="nav-link" href="{{route('contactUs')}}"> Contact </a>
+            <a id="linkSubMenu" class="nav-link" href="{{route('contactUs')}}"> Contact </a>
           </li>
         </ul>
       </div>
@@ -161,8 +161,8 @@
 
 </header>
 <!-- NOTE: fin header -->
-@yield('home')
-  <div class="container-fluid" style="width:85%;">
+  @yield('home')
+  <div class="container-fluid pt-5" style="width:95%;">
   @yield('verifyEmail')
   @yield('managmentUsers')
   @yield('userProfile')
@@ -179,44 +179,46 @@
   @yield('crudProducts')
   @yield('loginLaravel')
   @yield('registerLaravel')
+  @yield('resetEmail')
+  @yield('resetPassword')
 </div>
 <!-- NOTE: inicia footer -->
 <footer id="footer" class="mt-5 p-4">
-  <div class="container">
-    <div class="row text-center text-sm-left text-md-left">
+  <div class="container mt-4 text-light">
+    <div class="row text-center text-light">
       <div id="aboutUs" class="col-12 col-sm-4">
-        <h5 class="text-center">About Us</h5>
+        <h5 class="text-center text-uppercase">About Us</h5>
         <ul class="list-unstyled text-center">
           <li><a href="/homeHassen"></i>Home</a></li>
           <li><a href="/homeHassen/availableProducts"></i>Catalog</a></li>
           <li><a href="/faq"></i>FAQ</a></li>
         </ul>
       </div>
-      <div id="socNetworks" class="col-12 col-sm-4 mt-3 mt-sm-0">
-        <h5 class="text-center">Social Networks</h5>
+      <div id="socNetworks" class="col-12 col-sm-4 mt-3 mt-sm-0 text-light">
+        <h5 class="text-center text-uppercase">Social Networks</h5>
         <ul class="list-unstyled text-center">
           <li><a href="https://www.facebook.com/fb.me/hassenaccesorios" target="_blank"><i class="fab fa-facebook-square mr-2" style="font-size: 25px;"></i>Facebook</a></li>
           <li><a href="https://instagram.com/hassen_accesorios?igshid=12tcsxg35b87r" target="_blank"><i class="fab fa-instagram mr-2" style="font-size: 25px;"></i>Instagram</a></li>
           <li><a href="https://www.twitter.com/" target="_blank"><i class="fab fa-twitter-square mr-2" style="font-size: 25px;" ></i>Twitter</a></li>
         </ul>
       </div>
-      <div id="contactUs" class="col-12 col-sm-4 mt-3 mt-sm-0">
-        <h5 class="text-center">Contact us</h5>
+      <div id="contactUs" class="col-12 col-sm-4 mt-3 mt-sm-0 text-light">
+        <h5 class="text-center text-uppercase">Contact us</h5>
         <ul class="list-unstyled text-center">
           <li>
-            <a class="nav-link" href="{{route('accesoriesCare')}}">Info & Help</a>
+            <a href="{{route('accesoriesCare')}}">Info & Help</a>
           </li>
           <li>
-            <a class="nav-link" href="{{route('contactUs')}}"><b>Contact</b> <span class="sr-only">(current)</span></a>
+            <a href="{{route('contactUs')}}"> Contact <span class="sr-only">(current)</span></a>
           </li>
         </ul>
       </div>
     </div>
 
     <div id="firma" class="row mt-5">
-      <div class="col-12 col-sm-12 col-md-12 mt-2 mt-sm-2 text-center">
-        <p><a href="https://www.digitalhouse.com/"><i>Digital House</i></a> - Mendoza, Argentina.</p>
-        <p class="h6">&copy All right Reversed.<a class="text-blue ml-2" href="#" target="_blank"><i>Luis Romano - Agustín Moya</i></a></p>
+      <div class="col-12 col-sm-12 col-md-12 mt-2 mt-sm-2 text-center mb-5">
+        <p class="h6 text-light"><a class="text-light" href="https://www.digitalhouse.com/"><i>Digital House</i></a> - Mendoza, Argentina.</p>
+        <p class="h6">&copy All right Reversed.<a class="text-light ml-2" href="#" target="_blank"><i>Luis Romano - Agustín Moya</i></a></p>
       </div>
 
     </div>

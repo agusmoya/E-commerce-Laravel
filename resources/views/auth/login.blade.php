@@ -1,14 +1,21 @@
 @extends('template')
-{{-- @extends('layouts.app') --}}
 
 @section('title') Hassen Login - Online Store @endsection
 
   @section('loginLaravel')
+    <div class="d-flex justify-content-between flex-column flex-md-row align-items-center mt-5 mt-sm-3">
+    <nav id="breadcrumb" class="mr-auto" aria-label="breadcrumb" style="font-size:1em;">
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item" aria-label="breadcrumb"><a href="/homeHassen">Home</a></li>
+        <li class="breadcrumb-item active" aria-current="page">Login</li>
+      </ol>
+    </nav>
+  </div>
     <div id="containerMod" class="container py-5">
       <div class="row justify-content-center">
-        <div class="col-md-8">
+        <div class="col-md-9">
           <div class="card">
-            <div class="card-header">{{ __("Let's login!") }}</div>
+            <div class="card-header font-weight-bold">{{ __("Let's login!") }}</div>
 
             <div class="card-body">
               <form id="formLogin" method="POST" action="{{ route('login') }}">
@@ -17,13 +24,12 @@
                   <label for="email" class="col-md-4 col-form-label text-md-right">{{ __('E-Mail Address') }}</label>
 
                   <div class="col-md-6">
-                    <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email" autofocus>
-                      <small id="alertJsLogin" class="form-text " style="color:red">
-                        <strong></strong>
+                    <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email" >
+                      <small id="alertJsLogin" class="form-text" style="color:red">
                       </small>
                       @error('email')
                         <span class="invalid-feedback" role="alert">
-                          <strong>{{ $message }}</strong>
+                          {{ $message }}
                         </span>
                       @enderror
                     </div>
@@ -35,11 +41,10 @@
                     <div class="col-md-6">
                       <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="current-password">
                         <small id="alertJsLogin" class="form-text " style="color:red">
-                              <strong></strong>
-                          </small>
+                        </small>
                         @error('password')
                           <span class="invalid-feedback" role="alert">
-                            <strong>{{ $message }}</strong>
+                            {{ $message }}
                           </span>
                         @enderror
                       </div>
@@ -57,9 +62,11 @@
                       </div>
                     </div>
 
-                    <div class="form-group row mb-0">
+                    <small id="alertSubmitLogin" class="form-text text-center mb-2" style="color:red">
+                    </small>
+                    <div class="form-group row">
                       <div class="col-md-8 offset-md-4">
-                        <button type="submit" class="btn btn-primary">
+                        <button id="btnLogin" type="submit" class="btn btn-lg btn-primary">
                           {{ __('Login') }}
                         </button>
 

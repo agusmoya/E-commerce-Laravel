@@ -30,7 +30,6 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-
           $arrayCategoriesWithoutRepeating = CategoryTrademark::join('categories', 'category_id', '=', 'categories.id')
           ->select('categories.name as name_category')
           ->where('categories.status', 1)

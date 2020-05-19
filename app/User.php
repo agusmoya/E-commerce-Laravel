@@ -5,6 +5,7 @@ namespace App;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use App\Notifications\UserResetPassword;
 
 class User extends Authenticatable implements MustVerifyEmail
 {
@@ -16,7 +17,7 @@ class User extends Authenticatable implements MustVerifyEmail
      * @var array
      */
     protected $fillable = [
-        'name', 'surname', 'province', 'email', 'password', 'profilePhoto'
+        'name', 'surname', 'province', 'email', 'role', 'password', 'profilePhoto'
     ];
 
     /**
@@ -36,6 +37,11 @@ class User extends Authenticatable implements MustVerifyEmail
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public function sendPasswordResetNotification($token) // traido desde vendor\laravel\framework\src\Illuminate\Auth\Passwords\CanResetPassword.php
+    {                                                     // pero modifico el objeto new ResetPasswordNotification($token) por el siguiente:
+        $this->notify(new UserResetPassword($token));
+    }
 
     public function shoppingCart(){
       return $this->hasOne('App\ShoppingCart');

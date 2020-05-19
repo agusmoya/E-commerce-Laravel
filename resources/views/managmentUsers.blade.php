@@ -3,13 +3,14 @@
 @section('title') Hassen Managment Users - Online Store @endsection
 
   @section('managmentUsers')
-
-    <nav id="breadcrumb" aria-label="breadcrumb">
-      <ol class="breadcrumb">
-        <li class="breadcrumb-item" aria-label="breadcrumb"><a href="/homeHassen">Home</a></li>
-        <li class="breadcrumb-item active" aria-current="page">Managment Users</a></li>
-      </ol>
-    </nav>
+    <div class="d-flex justify-content-between flex-column flex-md-row mt-5 mt-sm-3">
+      <nav id="breadcrumb" aria-label="breadcrumb" style="font-size:1em;">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item" aria-label="breadcrumb"><a href="/homeHassen">Home</a></li>
+          <li class="breadcrumb-item active" aria-current="page">Managment Users</a></li>
+        </ol>
+      </nav>
+    </div>
 
     <div class="container-fluid" style="background-color:white;">
       <h1 class="text-center my-4 p-5" style="color:black;"><b>Usuarios en el sistema:</b></h1>
@@ -17,7 +18,7 @@
         <div class="form-group">
           <h3 class="mt-4" style="color:black;"> <b>Detalles de usuarios:</b> </h3>
           <div class="table-responsive">
-            <table class="table table-hover">
+            <table id="tableManagementUsers" class="table table-hover">
               <thead class="thead-dark">
                 <tr class="text-center">
                   <th scope="col">N°</th>
@@ -32,7 +33,6 @@
                   <th scope="col">Fecha de Modificacion</th>
                   <th scope="col">Estado</th>
                   <th scope="col">Provilegios</th>
-                  {{-- <th scope="col">Eliminar</th> --}}
                 </tr>
               </thead>
               <tbody>
@@ -43,13 +43,13 @@
                   <tr class="text-center {{$user->status == 0 ? 'table-dark' :''}}">
                     <th class="align-middle" scope="row"> {{$contador++}} </th>
                     <td class="align-middle">{{$user->id}}</td>
-                    <td class="container-fluid" style="width:10%">
-                    <img id="center" class="img-fluid card-img" src="{{asset('/storage/imagenes/imgUsers/'.$user->profilePhoto)}}" alt="profile-photo">
+                    <td class="align-middle">
+                      <img id="center" style="min-width:160px; max-width:160px;" class="img-fluid card-img" src="{{asset('/storage/imagenes/imgUsers/'.$user->profilePhoto)}}" alt="profile-photo">
                     </td>
                     <td class="align-middle">{{$user->name}}</td>
                     <td class="align-middle">{{$user->surname}}</td>
                     <td class="align-middle">{{$user->province}}</td>
-                    <td class="align-middle">{{$user->type == 1 ? 'Administrador' : 'Invitado'}}</td>
+                    <td class="align-middle">{{$user->role == 1 ? 'Administrador' : 'Invitado'}}</td>
                     <td class="align-middle">{{$user->email}}</td>
                     <td class="align-middle">{{ \Carbon\Carbon::parse($user->created_at)->format('d/m/Y')}}</td>
                     <td class="align-middle">{{ \Carbon\Carbon::parse($user->updated_at)->format('d/m/Y')}}</td>
@@ -58,50 +58,38 @@
                     <td class="align-middle">
                       <div class="dropdown">
                         <button class="btn btn-ligth dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                         <i style="color:red" class="fas fa-cogs"></i> <b>Cambiar Privilegios</b>
+                          <i style="color:#d63447;font-size:1.3em;" class="fas fa-cogs"></i> <b>Cambiar Privilegios</b>
                         </button>
                         <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                            {{-- <a class="dropdown-item" href="#">
-                              <a class="dropdown-item btn btn-link btn-sm ml-2" href="/managmentUsers/editManagmentProfile/{{$user->id}}"> <i class="fas fa-user-edit"></i> Editar Perfil</a>
-                            </a>
-                              <div class="dropdown-divider"></div> --}}
-                              <a class="dropdown-item" href="#">
-                                <form class="" action="/homeHassen/editUserStatus" method="post">
-                                  @csrf
-                                  <input type="hidden" name="userStatus" value="{{$user->status}}">
-                                  <input type="hidden" name="userId" value="{{$user->id}}">
-                                    <button style="color: #222831" type="submit" class="btn btn-link btn-sm"> <i class="fas fa-user-cog"></i> Activar/Desactivar </button>
-                                  </form>
-                              </a>
-                              <div class="dropdown-divider"></div>
-                              <a class="dropdown-item" href="#">
-                                <form class="" action="/homeHassen/editPrivileges" method="post">
-                                  @csrf
-                                  <input type="hidden" name="roleUser" value="1">
-                                  <input type="hidden" name="userId" value="{{$user->id}}">
-                                    <button style="color: #fa163f" type="submit" class="btn btn-link btn-sm"> <i class="fas fa-user-cog"></i> Administrador</button>
-                                  </form>
-                              </a>
-                              <div class="dropdown-divider"></div>
-                              <a class="dropdown-item" href="#">
-                                <form class="" action="/homeHassen/editPrivileges" method="post">
-                                  @csrf
-                                <input type="hidden" name="roleUser" value="0">
-                                <input type="hidden" name="userId" value="{{$user->id}}">
-                                  <button style="color: #018383" type="submit" class="btn btn-link btn-sm"> <i class="fas fa-user-shield"></i> Invitado</button>
-                              </form>
-                            </a>
+                          <a class="dropdown-item" href="#">
+                            <form class="" action="/homeHassen/editUserStatus" method="post">
+                              @csrf
+                              <input type="hidden" name="userStatus" value="{{$user->status}}">
+                              <input type="hidden" name="userId" value="{{$user->id}}">
+                              <button style="color: #222831" type="submit" class="btn btn-link btn-sm"> <i class="fas fa-user-cog"></i> Activar/Desactivar </button>
+                            </form>
+                          </a>
+                          <div class="dropdown-divider"></div>
+                          <a class="dropdown-item" href="#">
+                            <form class="" action="/homeHassen/editPrivileges" method="post">
+                              @csrf
+                              <input type="hidden" name="roleUser" value="1">
+                              <input type="hidden" name="userId" value="{{$user->id}}">
+                              <button style="color: #d63447" type="submit" class="btn btn-link btn-sm"> <i class="fas fa-user-cog"></i> Administrador</button>
+                            </form>
+                          </a>
+                          <div class="dropdown-divider"></div>
+                          <a class="dropdown-item" href="#">
+                            <form class="" action="/homeHassen/editPrivileges" method="post">
+                              @csrf
+                              <input type="hidden" name="roleUser" value="0">
+                              <input type="hidden" name="userId" value="{{$user->id}}">
+                              <button style="color: #018383" type="submit" class="btn btn-link btn-sm"> <i class="fas fa-user-shield"></i> Invitado</button>
+                            </form>
+                          </a>
                         </div>
                       </div>
                     </td>
-                    {{-- <td class="align-middle">
-                      <form class="" action="/managmentUsers/deleteUser/" method="post">
-                        @csrf
-                        @method('delete')
-                        <input type="hidden" name="userId" value="{{$user->id}}">
-                        <button type="submit" class="btn btn-link btn-sm"> <i class="far fa-trash-alt"></i> <b>Eliminar</b> </button>
-                      </form>
-                    </td> --}}
                   </tr>
                 @empty
                   <tr class="text-center">
@@ -109,18 +97,18 @@
                   </tr>
                 @endforelse
               </tbody>
-          </table>
-          <div class="pagination justify-content-center">
-            {{$arrayUsers->links()}}
+            </table>
+            <div class="pagination justify-content-center">
+              {{$arrayUsers->links()}}
+            </div>
           </div>
-        </div>
         </div>
 
       </div>
 
-      <div class="form-group p-3 text-right">
-        <a class="btn btn-secondary" style="text-decoration: none;color:white;" href="/homeHassen"> <strong>Volver a Home</strong> </a>
+      <div class="form-group p-3 text-left">
+        <a class="btn btn-outline-dark" href="/homeHassen"> <i class="fas fa-angle-double-left"></i> Home </a>
       </div>
     </div>
 
-    @endsection
+  @endsection

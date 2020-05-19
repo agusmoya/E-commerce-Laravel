@@ -1,8 +1,10 @@
-@extends('layouts.app')
+@extends('template')
 
-@section('content')
+@section('title') Hassen Register - Reset Password @endsection
+
+@section('resetPassword')
 <div class="container">
-    <div class="row justify-content-center">
+    <div class="row justify-content-center my-5">
         <div class="col-md-8">
             <div class="card">
                 <div class="card-header">{{ __('Reset Password') }}</div>
@@ -51,7 +53,7 @@
 
                         <div class="form-group row mb-0">
                             <div class="col-md-6 offset-md-4">
-                                <button type="submit" class="btn btn-primary">
+                                <button id="resetPass" type="submit" class="btn btn-primary">
                                     {{ __('Reset Password') }}
                                 </button>
                             </div>

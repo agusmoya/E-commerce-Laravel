@@ -5,19 +5,18 @@
 @endsection
 
 @section('userProfile')
-
-  <nav id="breadcrumb" aria-label="breadcrumb">
-    <ol class="breadcrumb">
-      <li class="breadcrumb-item"><a href="/homeHassen">Home</a></li>
-      <li class="breadcrumb-item active" aria-current="page">User Profile</li>
-    </ol>
-  </nav>
-
+  <div class="d-flex justify-content-between flex-column flex-md-row mt-5 mt-sm-3">
+    <nav id="breadcrumb" aria-label="breadcrumb" style="font-size:1em;">
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="/homeHassen">Home</a></li>
+        <li class="breadcrumb-item active" aria-current="page">User Profile</li>
+      </ol>
+    </nav>
+  </div>
   <div class="container" >
     <div class="signup-form-container">
-
       <!-- NOTE: Inicia registracion -->
-      <form class="profile_user" role="form" id="register-form" action="/userProfile/updateUserProfile/{{Auth::user()->id}}" method="get">
+      <form class="profile_user text-light" role="form" id="register-form" action="/userProfile/updateUserProfile/{{Auth::user()->id}}" method="get">
         <div class="form-header">
           <div class="container mb-5">
             <div class="jumbotron p-3 m-3">
@@ -26,12 +25,12 @@
                 <p>¡You have successfully registered!</p>
               </div>
               @if (isset(Auth::user()->profilePhoto))
-                <div class="col-6 col-md-6 m-auto">
-                  <img id="center" class="img-fluid img-thumbnail card-img m-auto" src="{{asset('/storage/imagenes/imgUsers/'. Auth::user()->profilePhoto)}}" alt="profile-photo">
+                <div class="col-12 col-md-6 mx-auto">
+                  <img id="center" class="img-thumbnail card-img mx-auto border-dark" src="{{asset('/storage/imagenes/imgUsers/'. Auth::user()->profilePhoto)}}" alt="profile-photo" style="max-width:525px;">
                 </div>
               @else
                 <h2 class="form-title mt-4 mb-4"><i class="fa fa-user"> </i>  My Profile</h2>
-                <div class="col-6 col-md-6 m-auto">
+                <div class="col-6 m-auto">
                   <span style="font-size: 48px; color: Dodgerblue;">
                     <i class="fas fa-user-alt"></i>
                   </span>
@@ -83,7 +82,7 @@
 
         </div>
         <div class="form-footer">
-          <button type="submit" class="btn btn-info">
+          <button id="editProfile" type="submit" class="btn btn-block text-light">
             <span class="glyphicon glyphicon-log-in">Edit Profile</span>
           </button>
         </div>

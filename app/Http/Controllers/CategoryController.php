@@ -25,6 +25,9 @@ class CategoryController extends Controller
     $rules = [
       "name_category" => "required|alpha|min:3|max:30|unique:categories,name"
     ];
+    $rulesWithoutUnique = [
+      "name_category" => "required|alpha|min:3|max:30"
+    ];
 
     $messages = [
       // "required" => "El campo :attribute no puede estar vacío",
@@ -33,7 +36,6 @@ class CategoryController extends Controller
       // "min" => "El campo :attribute no puede tener menos de :min caracteres",
       // "max" => "El campo :attribute no puede tener mas de :max caracteres"
     ];
-    $this->validate($form, $rules, $messages);
 
     $arrayCategories = Category::all();
     $foundCategory = null;
@@ -45,10 +47,12 @@ class CategoryController extends Controller
     }
 
     if(isset($foundCategory)) {
+      $this->validate($form, $rulesWithoutUnique, $messages);
       $foundCategory->status = true;
       $foundCategory->save();
       return redirect('/productManagment/crudCategories');
     } else {
+      $this->validate($form, $rules, $messages);
       $newCategory = new Category();
       $newCategory->name = $form["name_category"];
       $newCategory->save();
@@ -70,15 +74,6 @@ class CategoryController extends Controller
 
   public function deleteCategory(Request $form){
     $category = Category::find($form["category_id"]);
-    // if ($category==null) {
-    //   $rules = [
-    //     "category_id" => "required"
-    //   ];
-    //   $messages = [
-    //     "required" => "Debe seleccionar una categoría para eliminarla!"
-    //   ];
-    //   $this->validate($form, $rules, $messages);
-    // } else {}
       $category->status = 0;
       $category->save();
       return redirect('/productManagment/crudCategories');

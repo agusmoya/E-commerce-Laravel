@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
+use App\User;
+
 use App\Product;
 use App\Trademark;
 use App\Category;
@@ -50,14 +52,11 @@ class ProductController extends Controller
     ->orderBy('name_category')
     ->distinct('name_category')
     ->get();
-    // dd($arrayCategories);
-    // $arrayCategories = Category::orderBy('name')->get();
-    return view('availableProducts', compact('arrayProducts', 'arrayCategories'));
 
+    return view('availableProducts', compact('arrayProducts', 'arrayCategories'));
   }
 
   public function availableProductsOrder(Request $form){
-
     if ($form["order"] == 1) {
       $order = 'price';
       $cond = 'ASC';
@@ -89,7 +88,12 @@ class ProductController extends Controller
     ->orderBy('name_category')
     ->get();
 
-    $arrayCategories = Category::orderBy('name')->get();
+    $arrayCategories = CategoryTrademark::join('categories', 'category_id', '=', 'categories.id')
+    ->select('categories.name as name_category')
+    ->where('categories.status', 1)
+    ->orderBy('name_category')
+    ->distinct('name_category')
+    ->get();
     return view('availableProducts', compact('arrayProducts', 'arrayCategories'));
   }
 
@@ -102,7 +106,6 @@ class ProductController extends Controller
       ['products.id', $productId]
       ])->first();
     return view('loadedProductPreview', compact('productForShow'));
-
   }
 
   public function showProducts(){
@@ -112,7 +115,6 @@ class ProductController extends Controller
     ->where('products.status', 1)
     ->orderBy('name_trademark')
     ->paginate(4);
-
     $arrayCategoryTrademark = CategoryTrademark::all();
     $arrayTrademarks = Trademark::where('status', 1)->orderBy('name')->get();
     $arrayCategories = Category::where('status', 1)->orderBy('name')->get();
@@ -189,7 +191,6 @@ class ProductController extends Controller
       $nombreArchivo = basename($ruta);
       $newProduct->photo = $nombreArchivo;
       $newProduct->save();
-
       $productPreview = $newProduct;
     }
 
@@ -205,9 +206,8 @@ class ProductController extends Controller
   }
 
   public function updateProduct(Request $form){
-
     $rules = [
-      "name_product" => "required|string|min:3|max:30|unique:categories,name",
+      "name_product" => "required|alpha_dash|min:3|max:30|unique:categories,name",
       "price" => "required|numeric",
       "description" => "required|string|min:3",
       "stock" => "required|integer",

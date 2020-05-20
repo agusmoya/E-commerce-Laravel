@@ -116,6 +116,7 @@ class ProductController extends Controller
     ->orderBy('name_trademark')
     ->paginate(4);
     $arrayCategoryTrademark = CategoryTrademark::all();
+    
     $arrayTrademarks = Trademark::where('status', 1)->orderBy('name')->get();
     $arrayCategories = Category::where('status', 1)->orderBy('name')->get();
     return view('crudProducts', compact('arrayProducts', 'arrayTrademarks', 'arrayCategories', 'arrayCategoryTrademark'));

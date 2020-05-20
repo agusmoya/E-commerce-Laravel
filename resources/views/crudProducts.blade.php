@@ -103,7 +103,7 @@
         <p>{{$arrayProducts->links()}}</p>
       </div>
     </div>
-    <fieldset {{ isset($arrayCategoryTrademark['trademark_id']) && isset($arrayCategoryTrademark['category_id']) ? 'disabled' : '' }}>
+    <fieldset {{ count($arrayCategoryTrademark) == 0 ? 'disabled' : '' }}>
       <form name="register_product" class="register_product mb-0" action="/productManagment/createProduct" method="post" enctype="multipart/form-data">
         @csrf
         <h2 class="my-4 text-center font-weight-bold text-dark"> <b>Create Product:</b> </h2>

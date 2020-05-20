@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use App\User;
+use Intervention\Image\ImageManagerStatic as Image;
 
 class UserHassenController extends Controller
 {
@@ -98,11 +99,12 @@ class UserHassenController extends Controller
       $user->province = $form["province"];
 
       if ($form["profilePhoto"] == "") {
-        $form["profilePhoto"] = $user["profilePhoto"];
+        // $form["profilePhoto"] = $user["profilePhoto"];
         $user->save();
         return redirect('/userProfile');
       }
-
+      // $img = Image::make($form->file('profilePhoto'))->orientate();
+      // dd(Image::make($form->file('profilePhoto'))->orientate());
       $ruta = $form->file('profilePhoto')->store('public/imagenes/imgUsers');
       $nombreArchivo = basename($ruta);
       $user->profilePhoto = $nombreArchivo;

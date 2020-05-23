@@ -2,25 +2,25 @@ window.addEventListener('load', function(){
 
   /*Levanto la varible se sessionStorage para recargar las ultimas
   modificaciones del usuario hechas en el carrito*/
-  if (document.querySelector('table tbody #rowItemCartId') &&
-  JSON.parse(sessionStorage.getItem('array')) != null)
-  {
-    // var linkCartNav = document.getElementById('linkMyPurchase').style.display="none";
-
-    var arrayRowsTable = Array.from(document.querySelectorAll('table tbody #rowItemCartId'));
-
-    for ( var item of JSON.parse(sessionStorage.getItem('array')) ) {
-      for (var row of arrayRowsTable) {
-        if (item.id == row.dataset.itemId) {
-          // row.children[3].childNodes[1].value = item.amount;
-          // console.log(row.children[3].childNodes[1].value = item.amount);
-          // row.children[4].childNodes[1].innerText = parseInt(row.children[2].childNodes[1].innerText) * item.amount;
-          // console.log(row.children[3].childNodes[1].value);
-        }
-      }
-    }
-    sessionStorage.removeItem('array')
-  }
+  // if (document.querySelector('table tbody #rowItemCartId') &&
+  // JSON.parse(sessionStorage.getItem('array')) != null)
+  // {
+  //   // var linkCartNav = document.getElementById('linkMyPurchase').style.display="none";
+  //
+  //   var arrayRowsTable = Array.from(document.querySelectorAll('table tbody #rowItemCartId'));
+  //
+  //   for ( var item of JSON.parse(sessionStorage.getItem('array')) ) {
+  //     for (var row of arrayRowsTable) {
+  //       if (item.id == row.dataset.itemId) {
+  //         // row.children[3].childNodes[1].value = item.amount;
+  //         // console.log(row.children[3].childNodes[1].value = item.amount);
+  //         // row.children[4].childNodes[1].innerText = parseInt(row.children[2].childNodes[1].innerText) * item.amount;
+  //         // console.log(row.children[3].childNodes[1].value);
+  //       }
+  //     }
+  //   }
+  //   sessionStorage.removeItem('array')
+  // }
 
   // myPurchase SHOPPING CART
   var spanTotal = document.getElementById('total');

@@ -33,7 +33,7 @@ Route::get('/register', function () { //auth
 
 // Route::get('/myPurchase', function () {
 //   return view('myPurchase');
-// });
+// })->middleware('auth');
 
 Route::get('/loginHassen', function () {
   return view('loginHassen');
@@ -119,15 +119,15 @@ Route::delete('/productManagment/deleteProduct', 'ProductController@deleteProduc
 // ****************FORMULARIO CRUD PRODUCTS****************
 
 // **************** CARRITO ****************
+// Route::get('/myPurchase', 'ShoppingCartController@showMyCart')->middleware('auth');
 Route::get('/myPurchase', function () {
   return view('myPurchase');
-});
-
-Route::get('/shoppingCart/addItem', 'ShoppingCartController@addItem');
+})->middleware('auth');
+Route::get('/shoppingCart/addItem', 'ShoppingCartController@addItem')->middleware('auth');
 Route::post('/shoppingCart/updateTotalAmountCart', 'ShoppingCartController@updateTotalAmountCart');
 Route::post('/shoppingCart/updateItemAmountCart', 'ShoppingCartController@updateItemAmountCart');
-
 Route::post('myPurchase/removeItem', 'ShoppingCartController@removeItem');
+Route::post('myPurchase/confirm', 'ShoppingCartController@confirm')->middleware('auth');;
 // **************** CARRITO ****************
 
 

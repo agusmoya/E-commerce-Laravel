@@ -30,6 +30,7 @@
             </tr>
           </thead>
           <tbody id="items">
+            {{-- {{dd(session('shoppingCart'))}} --}}
             @if (session('shoppingCart'))
               @forelse (session('shoppingCart') as $item)
 
@@ -68,7 +69,7 @@
 
               @endforelse
               <tr>
-                <td class="text-right pr-5" colspan="6"><span style="font-size: 20px;font-weight:bold;" id="total">Total: $ </span> </td>
+                <td class="text-center text-sm-right" colspan="6"><span style="font-size: 20px;font-weight:bold;" id="total">Total: $ </span> </td>
               </tr>
             @else
               <tr class="text-center">
@@ -79,6 +80,13 @@
         </table>
       </div>
     </div>
-    <a href="/homeHassen/availableProducts" style="color:lightblue;" class="btn btn-link" name="button"><i style="font-size:20px;" class="fas fa-long-arrow-alt-left"></i> Seguir comprando</a>
+
+    <div class="d-block d-sm-flex justify-content-between">
+      <a href="/homeHassen/availableProducts" style="color:lightblue;" class="btn btn-link" name="button"><i style="font-size:20px;" class="fas fa-long-arrow-alt-left"></i> Continue shopping </a>
+      <form action="{{ url('myPurchase/confirm') }}" method="post">
+        @csrf
+        <button id="btnConfrimPurchase" type="submit" class="btn btn-light text-uppercase btn-block mt-2 mt-sm-0" name="button"> Confirm purchase </button>
+      </form>
+    </div>
   </div>
 @endsection

@@ -9,7 +9,7 @@ class Product extends Model
     public $guarded=[];
 
     public function shoppingCarts(){
-      return $this->belongsToMany('App\ShoppinCart', 'product_shoppingCart', 'product_id', 'shoppingCart_id');
+      return $this->belongsToMany('App\ShoppinCart', 'product_shoppingcart', 'product_id', 'shoppingCart_id');
     }
 
     // public function trademark(){

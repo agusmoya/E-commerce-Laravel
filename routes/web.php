@@ -61,8 +61,8 @@ Route::get('/homeHassen/availableCategory/{category}', 'ProductController@availa
 Route::get('/productPreview/{productId}', 'ProductController@showProductPreview');
 
 // ****************FORMULARIO USER****************
-Route::get('/homeHassen/managmentUsers', 'UserHassenController@showAvailableUsers')->middleware('verified');
-Route::post('/homeHassen/editPrivileges', 'UserHassenController@editPrivileges');
+Route::get('/homeHassen/managmentUsers', 'UserHassenController@showAvailableUsers')->middleware('roleUser', 'verified');
+Route::post('/homeHassen/editPrivileges', 'UserHassenController@editPrivileges')->middleware('roleUser', 'verified');
 //suspendido Editar perfil de usuario desde panel de admin
 // Route::get('/managmentUsers/editManagmentProfile/{userId}', 'UserHassenController@editManagmentProfile');
 Route::post('/homeHassen/editUserStatus', 'UserHassenController@editStatus');

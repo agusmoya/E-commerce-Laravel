@@ -13,26 +13,26 @@
     </div>
 
     <div class="container-fluid" style="background-color:white;">
-      <h1 class="text-center my-4 p-5" style="color:black;"><b>Usuarios en el sistema:</b></h1>
+      <h1 class="text-center my-4 p-5" style="color:black;"><b>Users in the system:</b></h1>
       <div class="section">
         <div class="form-group">
-          <h3 class="mt-4" style="color:black;"> <b>Detalles de usuarios:</b> </h3>
+          <h3 class="mt-4" style="color:black;"> <b>Users details:</b> </h3>
           <div class="table-responsive">
             <table id="tableManagementUsers" class="table table-hover">
               <thead class="thead-dark">
                 <tr class="text-center">
                   <th scope="col">N°</th>
                   <th scope="col">ID</th>
-                  <th scope="col">Foto:</th>
-                  <th scope="col">Nombre</th>
-                  <th scope="col">Apellido</th>
-                  <th scope="col">Provincia</th>
-                  <th scope="col">Rol</th>
+                  <th scope="col">Photo</th>
+                  <th scope="col">Name</th>
+                  <th scope="col">Surname</th>
+                  <th scope="col">Province</th>
+                  <th scope="col">Role</th>
                   <th scope="col">Email</th>
-                  <th scope="col">Fecha de Alta</th>
-                  <th scope="col">Fecha de Modificacion</th>
-                  <th scope="col">Estado</th>
-                  <th scope="col">Provilegios</th>
+                  <th scope="col">Created at</th>
+                  <th scope="col">Updated at</th>
+                  <th scope="col">State</th>
+                  <th scope="col">Privileges</th>
                 </tr>
               </thead>
               <tbody>
@@ -58,7 +58,7 @@
                     <td class="align-middle">
                       <div class="dropdown">
                         <button class="btn btn-ligth dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                          <i style="color:#d63447;font-size:1.3em;" class="fas fa-cogs"></i> <b>Cambiar Privilegios</b>
+                          <i style="color:#d63447;font-size:1.3em;" class="fas fa-cogs"></i> <b>Change Privileges</b>
                         </button>
                         <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                           <a class="dropdown-item" href="#">
@@ -66,7 +66,7 @@
                               @csrf
                               <input type="hidden" name="userStatus" value="{{$user->status}}">
                               <input type="hidden" name="userId" value="{{$user->id}}">
-                              <button style="color: #222831" type="submit" class="btn btn-link btn-sm"> <i class="fas fa-user-cog"></i> Activar/Desactivar </button>
+                              <button style="color: #222831" type="submit" class="btn btn-link btn-sm"> <i class="fas fa-user-cog"></i> Active/Inactive </button>
                             </form>
                           </a>
                           <div class="dropdown-divider"></div>
@@ -75,7 +75,7 @@
                               @csrf
                               <input type="hidden" name="roleUser" value="1">
                               <input type="hidden" name="userId" value="{{$user->id}}">
-                              <button style="color: #d63447" type="submit" class="btn btn-link btn-sm"> <i class="fas fa-user-cog"></i> Administrador</button>
+                              <button style="color: #d63447" type="submit" class="btn btn-link btn-sm"> <i class="fas fa-user-cog"></i> Admin </button>
                             </form>
                           </a>
                           <div class="dropdown-divider"></div>
@@ -84,7 +84,7 @@
                               @csrf
                               <input type="hidden" name="roleUser" value="0">
                               <input type="hidden" name="userId" value="{{$user->id}}">
-                              <button style="color: #018383" type="submit" class="btn btn-link btn-sm"> <i class="fas fa-user-shield"></i> Invitado</button>
+                              <button style="color: #018383" type="submit" class="btn btn-link btn-sm"> <i class="fas fa-user-shield"></i> Guest </button>
                             </form>
                           </a>
                         </div>
@@ -93,7 +93,7 @@
                   </tr>
                 @empty
                   <tr class="text-center">
-                    <th scope="row"> ** </th> <td colspan="10"> <i>NO HAY USUARIOS EN SISTEMA...</i> </td>
+                    <th scope="row"> ** </th> <td colspan="10"> <i>There are not users in the system...</i> </td>
                   </tr>
                 @endforelse
               </tbody>

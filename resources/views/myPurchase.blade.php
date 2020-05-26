@@ -17,7 +17,7 @@
   <div class="container-fluid mb-5 pb-5" style="width:80%">
     <div class="row">
 
-      <div class="table-responsive mt-5">
+      <div class="table-responsive mt-sm-3">
         <table id="cart" class="table mt-3 text-center">
           <thead class="">
             <tr>
@@ -78,6 +78,11 @@
             @endif
           </tbody>
         </table>
+        @if (session()->has('emptyCartAlert'))
+          <div class="alert alert-warning text-center mx-auto">
+            {{session('emptyCartAlert')}}
+          </div>
+        @endif
       </div>
     </div>
 

@@ -24,7 +24,7 @@ class UserHassenController extends Controller
 
   public function editPrivileges(Request $form){
     $user = User::find($form['userId']);
-    $user->type = $form['roleUser'];
+    $user->role = $form['roleUser'];
     $user->save();
     return redirect('/homeHassen/managmentUsers');
   }

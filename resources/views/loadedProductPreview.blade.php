@@ -5,7 +5,7 @@
 @endsection
 
 @section('loadedProduct')
-  <div class="d-flex justify-content-between flex-column flex-md-row mt-5 mt-sm-3">
+  <div class="d-flex justify-content-between flex-column flex-md-row mt-5 mt-sm-0">
   <nav id="breadcrumb" aria-label="breadcrumb" style="font-size:1em;">
     <ol class="breadcrumb">
       <li class="breadcrumb-item" aria-label="breadcrumb"><a href="/homeHassen">Home</a></li>
@@ -18,11 +18,11 @@
 
             <div class="card">
               <div class="row">
-                <div class="col-12 col-lg-7 col-xl-6">
+                <div class="col-12 col-lg-6 col-xl-6">
                   <img src="{{asset('/storage/imagenes/imgProductos/'.$productForShow->photo)}}" class="card-img" alt="presentacionProducto">
                 </div>
 
-                <div class="col-12 col-lg-5 col-xl-6">
+                <div class="col-12 col-lg-6 col-xl-6">
                   <div class="card-body text-center text-lg-left">
                     <h4 class="card-title text-center mt-3"> <b> <i>{{$productForShow->name}}</i> </b> </h4>
                     <p class="card-text">{{$productForShow->name_category}} {{"marca " . $productForShow->name_trademark}}.</p>
@@ -37,7 +37,7 @@
                           @csrf
                           <input type="hidden" name="productId" value="{{$productForShow->id}}">
                           <input id="amount" name="amount" type="number" value="1" min="1" max="{{$productForShow->stock}}">
-                          <button id="addToCart" type="submit" class="btn btn-dark btn-block mt-2">ADD TO CART</button>
+                          <button id="addToCart" type="submit" class="btn btn-dark btn-block mt-2 mt-md-3">ADD TO CART</button>
                         </form>
                         <div class="text-center">
                           <ul class="nav mt-3">
@@ -55,7 +55,7 @@
                       @csrf
                       <input type="hidden" name="productId" value="{{$productForShow->id}}">
                       <input class="mt-2" name="amount" type="number" value="1" min="1" max="{{$productForShow->stock}}">
-                      <button id="addToCart" type="submit" class="btn btn-dark btn-block mt-2">ADD TO CART</button>
+                      <button id="addToCart" type="submit" class="btn btn-dark btn-block mt-2 mt-md-3">ADD TO CART</button>
                     </form>
                     <div class="text-center">
                       <ul class="nav mt-3">

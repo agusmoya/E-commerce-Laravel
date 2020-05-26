@@ -16,10 +16,11 @@ class CreateShoppingCartsTable extends Migration
         Schema::create('shoppingCarts', function (Blueprint $table) {
             $table->timestamps();
             $table->bigIncrements('id');
-            $table->bigInteger('user_id')->unsigned();
-            $table->float('shipping_price', 8, 4);
-            $table->float('subtotal', 8, 2);
-            $table->float('total', 8, 2);
+            $table->bigInteger('user_id')->unsigned()->nullable();
+            $table->float('shipping_price', 8, 4)->nullable();
+            $table->float('subtotal', 8, 2)->nullable();
+            $table->float('total', 8, 2)->nullable();
+            $table->->string('mp_response', 300)->nullable();
             $table->foreign('user_id')
             ->references('id')->on('users');
             // ->onDelete('cascade');

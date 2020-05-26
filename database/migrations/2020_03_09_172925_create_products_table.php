@@ -23,7 +23,8 @@ class CreateProductsTable extends Migration
       $table->integer('stock')->nullable();
       $table->string('available', 10)->nullable();
       $table->float('price', 8, 2);
-      $table->string('photo', 200);
+      $table->string('currency_id')->default($value = 'ARS');
+      $table->string('photo', 300);
       $table->foreign('category_id')
       ->references('id')->on('categories')
       ->onDelete('cascade');

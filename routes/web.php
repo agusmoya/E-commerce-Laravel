@@ -128,6 +128,13 @@ Route::post('/shoppingCart/updateTotalAmountCart', 'ShoppingCartController@updat
 Route::post('/shoppingCart/updateItemAmountCart', 'ShoppingCartController@updateItemAmountCart');
 Route::post('myPurchase/removeItem', 'ShoppingCartController@removeItem');
 Route::post('myPurchase/confirm', 'ShoppingCartController@confirm')->middleware('auth');;
+
+/*Back urls MercadoPago*/
+Route::any('/mercadopago', 'MercadoPagoController@store');
+Route::get('/MercadoPago/purchaseSuccess', 'MercadoPagoController@purchaseSuccess');
+Route::get('/MercadoPago/purchaseFailure', 'MercadoPagoController@purchaseFailure');
+Route::get('/MercadoPago/purchasePending', 'MercadoPagoController@purchasePending');
+
 // **************** CARRITO ****************
 
 

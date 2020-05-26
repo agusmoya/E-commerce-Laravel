@@ -163,7 +163,43 @@ class ShoppingCartController extends Controller
     }
 
     public function confirm(){
-      dd(session('shoppingCart'));
+      $itemsCart = session('shoppingCart');
+      // Agrega credenciales
+      \MercadoPago\SDK::setAccessToken(env('MP_TEST_ACCESS_TOKEN'));
+
+      // Crea un objeto de preferencia
+      $preference = new \MercadoPago\Preference();
+      $products = [];
+      $cart = session('objCart');
+      if (isset($cart)) {
+        foreach ($cart->products as $product) {
+          // Crea un ítem en la preferencia
+          $item = new \MercadoPago\Item();
+          $item->id = $product->id;
+          $item->title = $product->title;
+          $item->currency_id = $product->currency_id;
+          $item->picture_url = $product->photo;
+          $item->description = $product->description;
+          $item->category_id = $product->category_id;
+          $item->quantity = $itemsCart[$product->id]['amount'];//amount está almacenado en itemsCart
+          $item->unit_price = $product->price;
+          $products [] = $item;
+        }
+
+        $preference->items = $products;
+
+        $preference->back_urls = [
+          "success" => url("/MercadoPago/purchaseSuccess"),
+          "failure" => url("/MercadoPago/purchaseFailure"),
+          "pending" => url("/MercadoPago/purchasePending"),
+        ];
+
+        $preference->save();
+        return redirect($preference->init_point);
+
+      } else {
+        dd('$CART ES NULL');
+      }
 
     }
 

@@ -8,8 +8,8 @@ use Faker\Generator as Faker;
 
 $factory->define(Product::class, function (Faker $faker) {
   $relationsTrademarksCategories = CategoryTrademark::all();
-  $categoriesId;
-  $trademarksId;
+  $categoriesId=[];
+  $trademarksId=[];
   foreach ($relationsTrademarksCategories as $fila) {
     $categoriesId[]= $fila->category_id;
     $trademarksId[]= $fila->trademark_id;
@@ -20,7 +20,7 @@ $factory->define(Product::class, function (Faker $faker) {
     return [
           "category_id" => $collectionCategories->random(),
           "trademark_id" => $collectionTrademarks->random(),
-          "name" => $faker->sentence(2),
+          "name" => $faker->word,
           "description" => $faker->text(5),
           "stock" => $faker->numberBetween(2, 15),
           "price" => $faker->numberBetween(250, 590),

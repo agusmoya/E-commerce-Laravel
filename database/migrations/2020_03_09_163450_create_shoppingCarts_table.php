@@ -20,7 +20,7 @@ class CreateShoppingCartsTable extends Migration
             $table->float('shipping_price', 8, 4)->nullable();
             $table->float('subtotal', 8, 2)->nullable();
             $table->float('total', 8, 2)->nullable();
-            $table->->string('mp_response', 300)->nullable();
+            $table->string('mp_response', 300)->nullable();
             $table->foreign('user_id')
             ->references('id')->on('users');
             // ->onDelete('cascade');

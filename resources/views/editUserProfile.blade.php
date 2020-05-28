@@ -16,7 +16,7 @@
     <div class="container" >
       <div class="signup-form-container">
         <!-- NOTE: Inicia registracion -->
-        <form class="profile_user text-light" role="form" id="register-form" action="/userProfile/updateUserProfile" method="post" enctype="multipart/form-data">
+        <form class="profile_user text-light" role="form" id="formRegister" action="/userProfile/updateUserProfile" method="post" enctype="multipart/form-data">
           @csrf
           <div class="form-header">
             <div class="container mb-5">
@@ -64,9 +64,9 @@
                 </div>
                 <span class="help-block" id="error"></span>
                 @error('name')
-                    <p class="m-0"><small class="" style="color:red" role="alert">
-                        <strong>{{ $message }}</strong>
-                    </small></p>
+                    <small class="" style="color:#e84a5f" role="alert">
+                        {{ $message }}
+                    </small>
                 @enderror
               </div>
               <div class="form-group col-lg-6">
@@ -77,9 +77,9 @@
                 </div>
                 <span class="help-block" id="error"></span>
                 @error('surname')
-                  <p class="m-0"><small class="" style="color:red" role="alert">
-                    <strong>{{ $message }}</strong>
-                  </small></p>
+                  <small class="" style="color:#e84a5f" role="alert">
+                    {{ $message }}
+                  </small>
                 @enderror
               </div>
             </div>
@@ -94,9 +94,9 @@
                 <span class="help-block" id="error"></span>
                 @error('email')
                   @foreach ($errors->get('email') as $message)
-                    <p class="m-0"><small class="" style="color: red;" role="alert">
-                      <strong>{{ $message }}</strong>
-                    </small></p>
+                    <small class="" style="color: #e84a5f" role="alert">
+                      {{ $message }}
+                    </small>
                   @endforeach
                 @enderror
               </div>
@@ -109,9 +109,9 @@
                 </div>
                 <span class="help-block" id="error"></span>
                 @error('email_confirmation')
-                  <p class="m-0"><small class="" style="color:red" role="alert">
-                    <strong>{{ $message }}</strong>
-                  </small></p>
+                  <small class="" style="color:#e84a5f" role="alert">
+                    {{ $message }}
+                  </small>
                 @enderror
               </div>
             </div>
@@ -126,9 +126,9 @@
                 </div>
                 <span class="help-block" id="error"></span>
                 @error('province')
-                    <p class="m-0"><small class="" style="color:red" role="alert">
-                        <strong>{{ $message }}</strong>
-                    </small></p>
+                    <small class="" style="color:#e84a5f" role="alert">
+                        {{ $message }}
+                    </small>
                 @enderror
               </div>
 
@@ -144,15 +144,18 @@
                   </div>
                 </div>
                 @error('profilePhoto')
-                    <p class="m-0"><small class="" style="color:red" role="alert">
-                        <strong>{{ $message }}</strong>
-                    </small></p>
+                    <small class="" style="color:#e84a5f" role="alert">
+                        {{ $message }}
+                    </small>
                 @enderror
               </div>
             </div>
 
           </div>
             <div class="form-footer">
+              <small id="submitEditUserProfile" class="text-center" style="color:#e84a5f" role="alert">
+
+              </small>
               <button id="btnUpdateUser" type="submit" class="btn btn-block text-light">
                 <span class="glyphicon glyphicon-log-in">Update Profile</span>
               </button>

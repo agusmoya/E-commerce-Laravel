@@ -22,6 +22,81 @@ window.addEventListener('load', function(){
   //   sessionStorage.removeItem('array')
   // }
 
+  /* **** VALIDACIONES DE editUserProfile **** */
+  if (document.getElementById('btnUpdateUser')) {
+    var formUpdateUser = document.getElementById('formRegister');
+    var arrayFormUpdateUser = Array.from(formUpdateUser);
+    var flag = false;
+    arrayFormUpdateUser.pop();
+    arrayFormUpdateUser.pop();
+    for (var input of arrayFormUpdateUser) {
+      //cargamos las alertas cuando los campos están vacíos
+      input.addEventListener('change', function(){
+        if (this.value == '') {
+          flag = true;
+          var spanError=this.parentElement.nextElementSibling.style.color='#e84a5f';
+          var spanError=this.parentElement.nextElementSibling.style.fontSize='0.9em';
+          this.parentElement.nextElementSibling.innerText = 'Please, complete this field.';
+        } else {
+          flag = false;
+          this.parentElement.nextElementSibling.innerText = '';
+        }
+      });
+    }
+
+    //validamos el envío del formulario
+    var btnUpdateUser = document.getElementById('btnUpdateUser');
+    btnUpdateUser.addEventListener('click', function(event){
+      if (flag) {
+        event.preventDefault();
+        var submitEditUserProfile = document.getElementById('submitEditUserProfile');
+        submitEditUserProfile.innerText = 'Please, complete all fields.';
+      } else {
+        event.preventDefault();
+        Swal.fire({
+          title: 'Are you sure?',
+          text: "you are about to update your profile...",
+          icon: 'warning',
+          showCancelButton: true,
+          confirmButtonColor: '#e43f5a',
+          cancelButtonColor: '#393e46',
+          confirmButtonText: 'Yes, update it!'
+        }).then((result) => {
+          if (result.value) {
+            this.parentElement.parentElement.submit();
+          }
+        });
+      }
+
+    });
+
+
+  }
+  /* **** VALIDACIONES DE editUserProfile **** */
+
+  /* **** VALIDACIONES DE My Purchase **** */
+  if (document.getElementById('cart')) {
+    var btnConfrimPurchase = document.getElementById('btnConfrimPurchase');
+    btnConfrimPurchase.addEventListener('click', function(event){
+      event.preventDefault();
+      Swal.fire({
+        title: 'Are you sure?',
+        text: "you are about to CONFIRM the PURCHASE...",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#e43f5a',
+        cancelButtonColor: '#393e46',
+        confirmButtonText: 'Yes, confirm it!'
+      }).then((result) => {
+        if (result.value) {
+          this.parentElement.submit();
+        }
+      });
+
+    });
+  }
+  /* **** VALIDACIONES DE My Purchase **** */
+
   // myPurchase SHOPPING CART
   var spanTotal = document.getElementById('total');
   var subtotalPricesItems = Array.from(document.querySelectorAll('#subtotal'));
@@ -36,9 +111,7 @@ window.addEventListener('load', function(){
   if (document.querySelector('#addToCart')) {
     var addToCart = document.querySelector('#addToCart');
     addToCart.addEventListener("click", function(e){
-      // var productId = document.querySelector('[name="productId"]').value;
       var stockProd = parseInt(document.getElementById("stockProd").innerText);
-
       var selectAmount = document.querySelector('[name="amount"]').value;
       if (selectAmount > stockProd) {
         e.preventDefault();
@@ -108,6 +181,7 @@ window.addEventListener('load', function(){
     var linkCartNav = document.getElementById('linkMyPurchase');
 
     sessionStorage.setItem("totalAmountCart", totalAmountCart);
+    
     linkCartNav.innerText = ' My Cart (' + sessionStorage.getItem("totalAmountCart") + ')';
 
     var dataTotalAmountCart = new FormData();
@@ -397,14 +471,17 @@ if (document.querySelector('[name="register_product"]')) {
   var arrayFormProd = Array.from(formProd.elements); //quitamos ulitmo elemento, el boton.
   arrayFormProd.pop();
   arrayFormProd.forEach(item => {
-    item.addEventListener(
-      'blur', function(){
+    item.addEventListener('blur', function(){
         if (this.value == '') {
           flag = false;
-          item.parentElement.childNodes[5].innerText='Please, complete this field.';
+            if (this.parentElement.childNodes[5]) {
+              this.parentElement.childNodes[5].innerText='Please, complete this field.';
+            }
         } else {
           flag = true;
-          item.parentElement.childNodes[5].innerText='';
+            if (this.parentElement.childNodes[5]) {
+              this.parentElement.childNodes[5].innerText='';
+            }
         }
       }
     );
@@ -519,7 +596,6 @@ if (document.getElementById('formLogin')) {
   arrayFormLogin.pop();
       arrayFormLogin.forEach(item => {
               item.addEventListener('blur', function(){
-                // console.log(this.value);
                     if (this.value == '') {
                       flag=true;
                       this.nextElementSibling.innerText="Please, complete this field.";
@@ -536,6 +612,21 @@ if (document.getElementById('formLogin')) {
              var alertSubmitLogin = document.querySelector('#alertSubmitLogin');
              console.log(alertSubmitLogin);
              alertSubmitLogin.innerText = 'Please, complete all fields.'
+           } else {
+             // event.preventDefault();
+             // Swal.fire({
+             //     title: 'Are you sure?',
+             //     text: "You are about to log in to our site...",
+             //     icon: 'warning',
+             //     showCancelButton: true,
+             //     confirmButtonColor: '#e43f5a',
+             //     cancelButtonColor: '#393e46',
+             //     confirmButtonText: 'Yes, log me in!'
+             //   }).then((result) => {
+             //     if (result.value) {
+             //       this.submit();
+             //     }
+             //   });
            }
      }
 }
@@ -585,22 +676,21 @@ fetch('https://apis.datos.gob.ar/georef/api/provincias?campos=id,nombre')
   }
 
   //cambiamos el nombre del archivo que se selecciona
-  // if (document.getElementById('iptFileUpload')) {
-  //   var inputFile = document.getElementById('iptFileUpload');
-  //   inputFile.addEventListener('change', function(){
-  //     if (document.getElementById('iptFileUpload').files[0]) {
-  //       var contInputFile = document.getElementById('iptFileUpload').files[0].name;
-  //       console.log('hola');
-  //       var txtInputFile = document.getElementById('lblFileUpload');
-  //       console.log(txtInputFile.firstChild.data);
-  //       txtInputFile.firstChild.data = contInputFile;
-  //     }
-  //   });
-  // }
+  if (document.getElementById('iptFileUpload')) {
+    var inputFile = document.getElementById('iptFileUpload');
+    inputFile.addEventListener('change', function(){
+      if (document.getElementById('iptFileUpload').files[0]) {
+        var contInputFile = document.getElementById('iptFileUpload').files[0].name;
+        var txtInputFile = document.getElementById('lblFileUpload');
+        // console.log(txtInputFile.firstChild.data);
+        txtInputFile.firstChild.data = contInputFile;
+      }
+    });
+  }
 
   //validacion de select provinces
-  // myForm.addEventListener('submit', function(event){
-  //   if (selectProv.options[selectProv.selectedIndex].value === '') {
+  // myForm.addEventListener('click', function(event){
+  //   if (selectProv.options[selectProv.selectedIndex].value == '') {
   //     event.preventDefault();
   //     var errorProv = document.querySelector('.provHelp');
   //     if(errorProv){
@@ -613,9 +703,23 @@ fetch('https://apis.datos.gob.ar/georef/api/provincias?campos=id,nombre')
   myForm.addEventListener('submit', function(event){
         if (flag) {
           event.preventDefault();
-          console.log(flag);
           var alertSubmitRegister = document.querySelector('#alertSubmitRegister');
           alertSubmitRegister.innerText = "Please, complete all fields."
+        } else {
+          event.preventDefault();
+          Swal.fire({
+              title: 'Are you sure?',
+              text: "You are about to register in our system...",
+              icon: 'warning',
+              showCancelButton: true,
+              confirmButtonColor: '#e43f5a',
+              cancelButtonColor: '#393e46',
+              confirmButtonText: 'Yes, register me!'
+            }).then((result) => {
+              if (result.value) {
+                this.submit();
+              }
+            });
         }
   });
 
@@ -630,5 +734,47 @@ fetch('https://apis.datos.gob.ar/georef/api/provincias?campos=id,nombre')
   // }
 }
 /* **** VALIDACIONES DE Register **** */
+
+/* **** VALIDACIONES DE Management Users **** */
+  if (document.getElementById('tableManagementUsers')) {
+    var formStateUser = document.getElementById('formStateUser'); //change active/inactive
+    formStateUser.addEventListener('click', function(event){
+            event.preventDefault();
+            Swal.fire({
+                title: 'Are you sure?',
+                text: "You are about to CHANGE the STATE of this user...",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#e43f5a',
+                cancelButtonColor: '#393e46',
+                confirmButtonText: 'Yes, change it!'
+              }).then((result) => {
+                if (result.value) {
+                  this.submit();
+                }
+              });
+    });
+
+    var formRoleUser = document.querySelectorAll('#formRoleUser'); //change active/inactive
+    for (var form of Array.from(formRoleUser)) {
+    form.addEventListener('click', function(event){
+            event.preventDefault();
+            Swal.fire({
+                title: 'Are you sure?',
+                text: "You are about to CHANGE the ROLE of this user...",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#e43f5a',
+                cancelButtonColor: '#393e46',
+                confirmButtonText: 'Yes, change it!'
+              }).then((result) => {
+                if (result.value) {
+                  this.submit();
+                }
+              });
+    });
+}
+  }
+/* **** VALIDACIONES DE Management Users **** */
 
 });

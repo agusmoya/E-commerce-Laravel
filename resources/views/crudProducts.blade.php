@@ -54,12 +54,9 @@
           </tr>
         </thead>
         <tbody>
-          @php
-          $contador=1;
-          @endphp
           @forelse ($arrayProducts as $product)
             <tr class="text-center">
-              <th class="align-middle" scope="row"> {{$contador++}} </th>
+              <th class="align-middle" scope="row"> {{$product->id}} </th>
               <td class="align-middle" class="container-fluid text-center">
                 <img id="center" style="min-width:160px; max-width:160px;" class="img-fluid card-img" src="{{asset('/storage/imagenes/imgProductos/'.$product->photo)}}" alt="profile-photo">
               </td>

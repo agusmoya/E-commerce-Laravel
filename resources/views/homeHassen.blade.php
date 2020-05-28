@@ -22,18 +22,19 @@
         <div id="carouselExampleFade" class="carousel slide carousel-fade" data-ride="carousel">
           <div class="carousel-inner">
             <div class="carousel-item active">
-              <img src="{{asset('storage\imagenes\imgBannerHassen\pulsera-1.jpeg')}}" class="d-md-block w-100 mx-auto" alt="banner1">
+              <img src="{{asset('storage\imagenes\imgBanner\banner1.jpg')}}" class="d-block w-100 mx-auto" alt="banner1">
+            </div>
+            {{-- <div class="carousel-item">
+              <img src="{{asset('storage\imagenes\imgBanner\banner2.jpg')}}" class="d-block w-100 mx-auto" alt="banner2">
+            </div> --}}
+            <div class="carousel-item">
+              <img src="{{asset('storage\imagenes\imgBanner\banner3.jpg')}}" class="d-block w-100 mx-auto" alt="banner3">
             </div>
             <div class="carousel-item">
-              <img src="{{asset('storage\imagenes\imgBannerHassen\pulsera-2.jpeg')}}" class="d-md-block w-100 mx-auto" alt="banner2">
+              <img src="{{asset('storage\imagenes\imgBanner\banner4.jpg')}}" class="d-block w-100 mx-auto" alt="banner4">
             </div>
             <div class="carousel-item">
-              <img src="{{asset('storage\imagenes\imgBannerHassen\pulsera-3.jpeg')}}" class="d-md-block w-100 mx-auto" alt="banner3">
-            </div>
-            <div class="carousel-item">
-              <img src="{{asset('storage\imagenes\imgBannerHassen\banner1.png')}}" class="d-md-block w-100 mx-auto" alt="banner3">
-            </div><div class="carousel-item">
-              <img src="{{asset('storage\imagenes\imgBannerHassen\banner2.png')}}" class="d-md-block w-100 mx-auto" alt="banner3">
+              <img src="{{asset('storage\imagenes\imgBanner\banner5.jpg')}}" class="d-block w-100 mx-auto" alt="banner5">
             </div>
           </div>
           <a class="carousel-control-prev" href="#carouselExampleFade" role="button" data-slide="prev">

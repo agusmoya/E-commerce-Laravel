@@ -28,8 +28,10 @@ class RegisterController extends Controller
      *
      * @var string
      */
-    // protected $redirectTo = '/home';  Esta opcion es la que pone laravel despues de make:auth
-    protected $redirectTo = '/userProfile'; //modifico para que me redireccione a mi home
+    // protected $redirectTo = '/home';  //Esta opcion es la que pone laravel despues de make:auth
+    //modifico para que me redireccione a mi home
+    protected $redirectTo = '/myPurchase'; 
+
 
 
     /**

@@ -78,6 +78,9 @@
                       </div>
                     </div>
                   </form>
+                  <div class="text-center ml-3">
+                    <a class="text-dark" href="{{ route('register') }}" style="font-size: 0.9em">Don't have an account, i want to register.</a>
+                  </div>
                 </div>
               </div>
             </div>

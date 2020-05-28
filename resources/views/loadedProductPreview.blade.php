@@ -25,12 +25,12 @@
                 <div class="col-12 col-lg-6 col-xl-6">
                   <div class="card-body text-center text-lg-left">
                     <h4 class="card-title text-center mt-3"> <b> <i>{{$productForShow->name}}</i> </b> </h4>
-                    <p class="card-text">{{$productForShow->name_category}} {{"marca " . $productForShow->name_trademark}}.</p>
+                    <p class="card-text">{{$productForShow->name_category}} {{" / " . $productForShow->name_trademark}}</p>
                     <p class="card-text">{{"Descripción: " . $productForShow->description}}</p>
                     <p class="card-text">{{"Precio: $" . $productForShow->price}}</p>
                     <p class="card-text" style="font-weight:bold;"> Stock: Alto(<span id="stockProd">{{$productForShow->stock}}</span>) </p>
                     {{-- <p class="card-text">{{"Stock: " . $productId["objProduct"]["stock"] . " unidades"}}</p> --}}
-                    <p class="card-text">Material: Fantasía</p>
+                    <p class="card-text">Material: Acero Quirúrgico</p>
                     <p class="card-text">Efectivo/Mercado Pago</p>
                       @if (Auth::check() && Auth::user()->status == 1 && Auth::user()->role == 1)
                         <form action="/shoppingCart/addItem" method="get">

@@ -3,6 +3,7 @@
 namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
+use MercadoPago;
 
 class MercadoPagoProvider extends ServiceProvider
 {
@@ -13,7 +14,10 @@ class MercadoPagoProvider extends ServiceProvider
      */
     public function register()
     {
-        //
+        $this->app->singleton('MercadoPago', function ($app) {
+          MercadoPago\SDK::setAccessToken(config('mercadopago.test.token'));
+          return MercadoPago\SDK::class;
+        });
     }
 
     /**

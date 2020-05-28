@@ -49,17 +49,17 @@
           <table id="categoryTrademark" class="table table-hover table-bordered">
             <thead class="thead-dark">
               <tr class="text-center">
-                <th scope="col">ID</th> <th scope="col">Trademark</th> <th scope="col">Category</th>
+                {{-- <th scope="col">ID</th>  --}}
+                <th scope="col">Trademark</th> <th scope="col">Category</th>
                 <th scope="col">Created at</th> <th scope="col">Delete a relationship</th>
               </tr>
             </thead>
             <tbody>
-              @php
-              $contador=1;
-              @endphp
+
               @forelse ($arrayCategoryTrademark as $categoryTrademark)
                 <tr class="text-center">
-                  <th scope="row"> {{$contador++}} </th> <td>{{$categoryTrademark->name_trademark}}</td> <td>{{$categoryTrademark->name_category}}</td> <td>{{$categoryTrademark->created_at}}</td>
+                  {{-- <th scope="row"> {{$categoryTrademark->trademark_id}}/{{$categoryTrademark->category_id}} </th>  --}}
+                  <td>{{$categoryTrademark->name_trademark}}</td> <td>{{$categoryTrademark->name_category}}</td> <td>{{$categoryTrademark->created_at}}</td>
                   <td> <form class="mb-0" action="/productManagment/deleteCategoryTrademark" method="post">
                     @csrf
                     @method('delete')

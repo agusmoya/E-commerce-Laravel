@@ -21,7 +21,7 @@
             <table id="tableManagementUsers" class="table table-hover">
               <thead class="thead-dark">
                 <tr class="text-center">
-                  <th scope="col">N°</th>
+                  {{-- <th scope="col">N°</th> --}}
                   <th scope="col">ID</th>
                   <th scope="col">Photo</th>
                   <th scope="col">Name</th>
@@ -41,7 +41,7 @@
                 @endphp
                 @forelse ($arrayUsers as $user)
                   <tr class="text-center {{$user->status == 0 ? 'table-dark' :''}}">
-                    <th class="align-middle" scope="row"> {{$contador++}} </th>
+                    {{-- <th class="align-middle" scope="row"> {{$contador++}} </th> --}}
                     <td class="align-middle">{{$user->id}}</td>
                     <td class="align-middle">
                       <img id="center" style="min-width:160px; max-width:160px;" class="img-fluid card-img" src="{{asset('/storage/imagenes/imgUsers/'.$user->profilePhoto)}}" alt="profile-photo">
@@ -62,7 +62,7 @@
                         </button>
                         <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                           <a class="dropdown-item" href="#">
-                            <form class="" action="/homeHassen/editUserStatus" method="post">
+                            <form id="formStateUser" class="" action="/homeHassen/editUserStatus" method="post">
                               @csrf
                               <input type="hidden" name="userStatus" value="{{$user->status}}">
                               <input type="hidden" name="userId" value="{{$user->id}}">
@@ -71,7 +71,7 @@
                           </a>
                           <div class="dropdown-divider"></div>
                           <a class="dropdown-item" href="#">
-                            <form class="" action="/homeHassen/editPrivileges" method="post">
+                            <form id="formRoleUser" class="" action="/homeHassen/editPrivileges" method="post">
                               @csrf
                               <input type="hidden" name="roleUser" value="1">
                               <input type="hidden" name="userId" value="{{$user->id}}">
@@ -80,7 +80,7 @@
                           </a>
                           <div class="dropdown-divider"></div>
                           <a class="dropdown-item" href="#">
-                            <form class="" action="/homeHassen/editPrivileges" method="post">
+                            <form id="formRoleUser" class="" action="/homeHassen/editPrivileges" method="post">
                               @csrf
                               <input type="hidden" name="roleUser" value="0">
                               <input type="hidden" name="userId" value="{{$user->id}}">

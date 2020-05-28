@@ -3,9 +3,17 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use MercadoPago\Item;
+use MercadoPago\MerchantOrder;
+use MercadoPago\Payer;
+use MercadoPago\Payment;
+use MercadoPago\Preference;
+use MercadoPago\SDK;
 use App\Product;
 use App\ShoppingCart;
+use App\User;
 use Illuminate\Support\Facades\Auth;
+
 
 
 class ShoppingCartController extends Controller
@@ -119,22 +127,23 @@ class ShoppingCartController extends Controller
       return redirect('myPurchase');
     }
 
-    public function confirm(){
+    public function confirm(){ //Confirmacion de compra. Ya estamos en MercadoPago
       $itemsCart = session('shoppingCart');
 
       // Agrega credenciales
-      \MercadoPago\SDK::setAccessToken(env('MP_TEST_ACCESS_TOKEN'));
+      // \MercadoPago\SDK::setAccessToken(env('MP_TEST_ACCESS_TOKEN'));
+      SDK::setAccessToken(config('MercadoPago.test.token'));
 
       if (!empty($itemsCart)) {
         // Crea un objeto de preferencia
-        $preference = new \MercadoPago\Preference();
+        $preference = new Preference();
         $products = [];
         $cart = session('objCart')->fresh();
         $cart->subtotal=0;
         $cart->total=0;
         foreach ($cart->products as $product) {
           // Crea un ítem en la preferencia
-          $item = new \MercadoPago\Item();
+          $item = new Item();
           $item->id = $product->id;
           $item->title = $product->title;
           $item->currency_id = $product->currency_id;
@@ -153,11 +162,28 @@ class ShoppingCartController extends Controller
                        'total' => $cart->total
                       ]);
         $preference->items = $products;
+
+        $user = User::findOrFail($cart->user_id);
+        //Creamos objeto 'Pagador'
+        $payer = new Payer();
+        $payer->name = $user->name;
+        $payer->surname = $user->surname;
+        $payer->email = $user->email;
+        $payer->date_created = $user->created_at;
+
+        $preference->payer = $payer;
+        // $preference->notification_url = route('ipn');
+
         $preference->back_urls = [
           "success" => url("/MercadoPago/purchaseSuccess"),
           "failure" => url("/MercadoPago/purchaseFailure"),
           "pending" => url("/MercadoPago/purchasePending"),
         ];
+        $preference->auto_return = "approved";
+        // dd($preference);
+        // $preference->payment_methods = [
+        //
+        // ];
 
         $preference->save();
         return redirect($preference->init_point);

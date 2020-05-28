@@ -116,7 +116,7 @@ class ProductController extends Controller
     ->orderBy('name_trademark')
     ->paginate(4);
     $arrayCategoryTrademark = CategoryTrademark::all();
-    
+
     $arrayTrademarks = Trademark::where('status', 1)->orderBy('name')->get();
     $arrayCategories = Category::where('status', 1)->orderBy('name')->get();
     return view('crudProducts', compact('arrayProducts', 'arrayTrademarks', 'arrayCategories', 'arrayCategoryTrademark'));
@@ -130,7 +130,7 @@ class ProductController extends Controller
   public function createProduct(Request $form){
     $rules = [
       "trademarkId_categoryId" => "required",
-      "name_product" => "required|string|min:3|max:30|unique:categories,name",
+      "name_product" => "required|string|min:3|max:30|unique:products,name",
       "price" => "required|numeric",
       "description" => "required|string|min:3",
       "stock" => "required|integer",
@@ -208,7 +208,7 @@ class ProductController extends Controller
 
   public function updateProduct(Request $form){
     $rules = [
-      "name_product" => "required|alpha_dash|min:3|max:30|unique:categories,name",
+      "name_product" => "required|string|min:3|max:30",
       "price" => "required|numeric",
       "description" => "required|string|min:3",
       "stock" => "required|integer",

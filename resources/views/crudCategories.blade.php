@@ -43,12 +43,10 @@
               </tr>
             </thead>
             <tbody>
-              @php
-              $contador=1;
-              @endphp
+
               @forelse ($arrayCategories as $category)
                 <tr class="text-center">
-                  <th scope="row"> {{$contador++}} </th> <td>{{$category->name}}</td> <td>{{$category->created_at}}</td> <td>{{$category->updated_at}}</td>
+                  <th scope="row"> {{$category->id}} </th> <td>{{$category->name}}</td> <td>{{$category->created_at}}</td> <td>{{$category->updated_at}}</td>
                   <td>
                     <button type="button" class="btn btn-link">
                       <a href="/productManagment/updateCategory/{{$category->id}}" style="color:#12776f;font-size:1em;">
@@ -90,7 +88,7 @@
               <label for="name_category">Enter a Category to load in the system: </label>
               <input name="name_category" type="text" class="form-control @error('name_category') is-invalid @enderror" id="name_category" placeholder="Category name..." value="{{old('name_category')}}">
                 <small id="alertJsNameCategory" class="form-text " style="color:red">
-                  
+
                 </small>
                 @error('name_category')
                   <small id="alert" class="form-text " style="color:red">

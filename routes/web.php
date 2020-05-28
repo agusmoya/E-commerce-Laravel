@@ -11,13 +11,15 @@
 |
 */
 
-Route::get('/', function () {
-  return view('welcome');
-});
+// Route::get('/', function () {
+//   return view('home');
+// });
+// Route::get('/home', 'HomeController@index')->name('home')->middleware('verified');
 
-// Route::get('/home', 'HomeController@index')->name('home')->middleware('verified ');
+Route::get('/', 'HomeController@index')->name('home');
 
 Auth::routes(['verify' => true]);
+
 
 Route::get('/homeHassen', function () {
   return view('homeHassen');
@@ -62,7 +64,7 @@ Route::get('/productPreview/{productId}', 'ProductController@showProductPreview'
 
 // ****************FORMULARIO USER****************
 Route::get('/homeHassen/managmentUsers', 'UserHassenController@showAvailableUsers')->middleware('roleUser', 'verified');
-Route::post('/homeHassen/editPrivileges', 'UserHassenController@editPrivileges')->middleware('roleUser', 'verified');
+Route::post('/homeHassen/editPrivileges', 'UserHassenController@editPrivileges')->middleware('verified');;
 //suspendido Editar perfil de usuario desde panel de admin
 // Route::get('/managmentUsers/editManagmentProfile/{userId}', 'UserHassenController@editManagmentProfile');
 Route::post('/homeHassen/editUserStatus', 'UserHassenController@editStatus');
@@ -122,7 +124,7 @@ Route::delete('/productManagment/deleteProduct', 'ProductController@deleteProduc
 // Route::get('/myPurchase', 'ShoppingCartController@showMyCart')->middleware('auth');
 Route::get('/myPurchase', function () {
   return view('myPurchase');
-})->middleware('auth');
+})->middleware('auth', 'verified');
 Route::get('/shoppingCart/addItem', 'ShoppingCartController@addItem')->middleware('auth');
 Route::post('/shoppingCart/updateTotalAmountCart', 'ShoppingCartController@updateTotalAmountCart');
 Route::post('/shoppingCart/updateItemAmountCart', 'ShoppingCartController@updateItemAmountCart');
@@ -130,7 +132,7 @@ Route::post('myPurchase/removeItem', 'ShoppingCartController@removeItem');
 Route::post('myPurchase/confirm', 'ShoppingCartController@confirm')->middleware('auth');;
 
 /*Back urls MercadoPago*/
-Route::any('/mercadopago', 'MercadoPagoController@store');
+Route::any('/mercadopago/ipn', 'MercadoPagoController@store');
 Route::get('/MercadoPago/purchaseSuccess', 'MercadoPagoController@purchaseSuccess');
 Route::get('/MercadoPago/purchaseFailure', 'MercadoPagoController@purchaseFailure');
 Route::get('/MercadoPago/purchasePending', 'MercadoPagoController@purchasePending');

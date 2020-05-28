@@ -18,12 +18,12 @@
       <div class="form-group m-1">
         <select name="order" class="form-control" id="exampleFormControlSelect1">
           <option>Oreder by...</option>
-          <option value="1">Precio de Menor a Mayor</option>
-          <option value="2">Precio de Mayor a Menor</option>
+          <option value="1">Price from lowest to highest</option>
+          <option value="2">Price from highest to lowest</option>
           <option value="3">A - Z</option>
           <option value="4">Z - A</option>
-          <option value="5">Más nuevo al más viejo</option>
-          <option value="6">Más viejo al más nuevo</option>
+          <option value="5">Newest to oldest</option>
+          <option value="6">Oldest to newest</option>
         </select>
       </div>
       <button class="btn btn-outline-light m-1 font-weight-bold" type="submit">Search</button>

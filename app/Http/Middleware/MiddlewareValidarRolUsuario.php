@@ -18,7 +18,7 @@ class MiddlewareValidarRolUsuario
     {
         // echo "estoy en el middleware <br>";
         // dd(Auth::user());
-        if (Auth::check() && Auth::user()->role==1) {
+        if (Auth::check() && Auth::user()->role==1 && Auth::user()->status==1) {
           // echo "logueado y admin";
           return $next($request);
         } elseif (Auth::check() && Auth::user()->role==0) {

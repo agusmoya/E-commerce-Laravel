@@ -52,12 +52,12 @@
               $contador=0;
               @endphp
               @forelse ($arrayTrademarks as $trademark)
-                @php
+                {{-- @php
                 $contador++;
-                @endphp
+                @endphp --}}
 
                 <tr class="text-center">
-                  <th scope="row"> {{$contador}} </th> <td>{{$trademark->name}}</td> <td>{{$trademark->created_at}}</td> <td>{{$trademark->updated_at}}</td>
+                  <th scope="row"> {{$trademark->id}} </th> <td>{{$trademark->name}}</td> <td>{{$trademark->created_at}}</td> <td>{{$trademark->updated_at}}</td>
                   <td><button type="button" class="btn btn-link">
                     <a href="/productManagment/updateTrademark/{{$trademark->id}}" style="color:#12776f;font-size:1em;">
                       <i class="fas fa-pencil-alt" style="font-size:1.2em;"></i> Edit
